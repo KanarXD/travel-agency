@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  postgresql:
+    build:
+      context: ./postgresql
+    environment:
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+
+  phppgadmin:
+    image: bitnami/phppgadmin:7.13.0
+    ports:
+      - "1080:8080"
+      - "443:8443"
+    environment:
+      - POSTGRES_HOST=postgresql
+    depends_on:
+      - postgresql
