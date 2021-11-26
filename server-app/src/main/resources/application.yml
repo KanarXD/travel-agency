@@ -1,0 +1,5 @@
+# config parameters should be in docker-compose.yml in final release
+server:
+  port: 5000
+  servlet:
+    context-path: /server
