@@ -6,6 +6,8 @@ services:
       context: ./postgresql
     environment:
       POSTGRES_PASSWORD: root
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
@@ -18,3 +20,6 @@ services:
       - POSTGRES_HOST=postgresql
     depends_on:
       - postgresql
+
+volumes:
+  postgresql-data:
