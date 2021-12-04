@@ -14,7 +14,9 @@ CREATE TABLE customers
 CREATE TABLE offers
 (
     id    BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START 1 INCREMENT BY 1),
-    price NUMERIC(8, 2) NOT NULL
+    base_price NUMERIC(8, 2) NOT NULL,
+    start_date DATE,
+    end_date DATE
 );
 
 CREATE TABLE reservations
