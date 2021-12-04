@@ -1,11 +1,13 @@
 # travel-agency
 
-komenda uruchamiająca baze danych: `docker-compose up -d`
 
-## phppgadmin:
+### run database: 
+* `docker-compose up -d`
 
-http://localhost:1080
+### run web-app
+* `ng serve`
 
-login: postgres
-
-hasło: root
+### phppgadmin:
+* http://localhost:1080
+* login: postgres
+* hasło: root
