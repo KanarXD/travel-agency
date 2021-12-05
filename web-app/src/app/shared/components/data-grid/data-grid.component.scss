@@ -1,0 +1,13 @@
+$bgColor: #F5F5F5;
+
+table {
+  border: 1px solid #e0e0e0;
+
+  thead {
+    th {
+      background-color: $bgColor;
+      color: #757575;
+      font-size: 85%;
+    }
+  }
+}
