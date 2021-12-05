@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Date;
 
 
 @Getter
@@ -18,6 +19,8 @@ public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private BigDecimal price;
+    private BigDecimal basePrice;
+    private Date startDate;
+    private Date endDate;
 
 }
