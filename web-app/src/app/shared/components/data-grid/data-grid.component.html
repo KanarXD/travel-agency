@@ -1,0 +1,15 @@
+<table *ngIf="data" class="table table-hover">
+  <thead>
+  <tr>
+    <th>Nr.</th>
+    <th *ngFor="let header of config">
+      {{(header.header || header.key) | titlecase}}
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of data; let idx=index" [config]="config" [data]="item" app-data-grid-row>
+    {{idx + 1}}
+  </tr>
+  </tbody>
+</table>

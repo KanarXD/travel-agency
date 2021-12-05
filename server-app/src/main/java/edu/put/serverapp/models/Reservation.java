@@ -1,5 +1,6 @@
 package edu.put.serverapp.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class Reservation {
 
     @Id
     @Column(insertable = false, updatable = false)
+    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     private Timestamp reservationTimestamp;
 
     @Data

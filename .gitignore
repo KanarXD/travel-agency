@@ -1,5 +1,8 @@
 target/
 .idea/
 *.iml
+/.jpb/
 
+.angular/
 node_modules/
+

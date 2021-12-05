@@ -1,0 +1,7 @@
+<nav class="nav nav-pills">
+  <a *ngFor="let route of routeList" [routerLinkActiveOptions]="{exact: true}" [routerLink]="route.link"
+     class="nav-item nav-link"
+     routerLinkActive="active">
+    {{route.title}}
+  </a>
+</nav>
