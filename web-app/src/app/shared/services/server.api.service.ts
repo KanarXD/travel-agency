@@ -7,7 +7,7 @@ export abstract class ServerApiService<T> implements ApiService<T> {
   httpClient: HttpClient;
   serviceUrl: string;
 
-  constructor(httpClient: HttpClient, serviceUrl: string) {
+  protected constructor(httpClient: HttpClient, serviceUrl: string) {
     this.httpClient = httpClient;
     this.serviceUrl = serviceUrl;
   }
