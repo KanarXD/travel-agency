@@ -1,11 +1,12 @@
 import {ApiService} from "./api.models";
 import {Observable} from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 
 
 export abstract class ServerApiService<T> implements ApiService<T> {
   httpClient: HttpClient;
   serviceUrl: string;
+  resp: any;
 
   protected constructor(httpClient: HttpClient, serviceUrl: string) {
     this.httpClient = httpClient;
@@ -13,7 +14,7 @@ export abstract class ServerApiService<T> implements ApiService<T> {
   }
 
   fetch(): Observable<T> {
-    return this.httpClient.get<T & T[]>(this.serviceUrl);
+    return this.httpClient.get<T>(this.serviceUrl);
   }
 
   get(id: bigint): Observable<T> {

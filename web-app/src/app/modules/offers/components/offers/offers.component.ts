@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {OffersApiService} from "../../services/offers.api.service";
-import {OfferModel} from "../../models/offer.model";
 import {Observable} from "rxjs";
+import {OfferKeys, OfferModel} from "../../services/offers.models";
+import {DataGridRowConfig} from "../../../../shared/components/data-grid/data-grid-config";
 
 @Component({
   selector: 'app-offers',
@@ -9,11 +10,23 @@ import {Observable} from "rxjs";
   styleUrls: ['./offers.component.scss']
 })
 export class OffersComponent implements OnInit {
-  offers$: Observable<OfferModel> = this.offersApiService.fetch();
+  offers$: Observable<OfferModel | OfferModel[] | any> = this.offersApiService.fetch();
+  dataGridConfig!: DataGridRowConfig<OfferKeys>[];
 
-  constructor(private offersApiService: OffersApiService) { }
+  constructor(private offersApiService: OffersApiService) {
+  }
 
   ngOnInit(): void {
+    this.dataGridConfig = [
+      {key: 'id'},
+      {key: 'name'},
+      {key: 'basePrice'},
+      {key: 'startDate'},
+      {key: 'endDate'},
+      {key: 'basePrice'},
+
+    ]
   }
+
 
 }

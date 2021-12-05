@@ -1,4 +1,5 @@
 <p>offers works!</p>
-<div *ngIf="offers$ | async as offers">
-  {{offers}}
+<div *ngIf="offers$ | async as offers" class="col-sm-9 pl-0">
+  <!--  {{offers | json}}-->
+  <app-data-grid [config]="dataGridConfig" [data]="offers"></app-data-grid>
 </div>
