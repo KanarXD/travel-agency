@@ -19,6 +19,8 @@ jobs:
           node-version: '16.x'
           cache: 'npm'
       - name: Install dependencies
-        run: npm ci
+        run: |
+          cd ./web-app
+          npm ci
       - name: Build
         run: npm run build --if-present
