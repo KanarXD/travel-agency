@@ -20,10 +20,14 @@ public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private BigDecimal basePrice;
+
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date startDate;
+
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date endDate;
 
