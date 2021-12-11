@@ -1,6 +1,6 @@
 package edu.put.serverapp.repositories;
 
-import edu.put.serverapp.models.Reservation;
+import edu.put.serverapp.models.entities.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
