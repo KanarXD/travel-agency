@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 
@@ -21,9 +20,9 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Long offerId;
+    private Integer offerId;
 
-    private Long customerId;
+    private Integer customerId;
 
     @Column(insertable = false, updatable = false)
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
