@@ -20,4 +20,8 @@ public class CustomersService {
     public List<Customer> getCustomers() {
         return customersRepository.findAll();
     }
+
+    public void deleteCustomer(int id) {
+        customersRepository.deleteById(id);
+    }
 }
