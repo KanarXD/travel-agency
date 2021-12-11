@@ -1,8 +1,9 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {OffersApiService} from "../../services/offers.api.service";
-import {Observable, Subject} from "rxjs";
-import {OfferKeys, OfferModel} from "../../services/offers.models";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {OfferFilters, OfferKeys, OfferModel} from "../../services/offers.models";
 import {DataGridRowConfig, FieldType, ItemAction} from "../../../../shared/components/data-grid/data-grid.models";
+import {ResponseData} from "../../../../shared/services/api.models";
 
 @Component({
   selector: 'app-offers',
@@ -10,9 +11,11 @@ import {DataGridRowConfig, FieldType, ItemAction} from "../../../../shared/compo
   styleUrls: ['./offers.component.scss']
 })
 export class OffersComponent implements OnInit, AfterViewInit {
-  offers$: Observable<OfferModel | OfferModel[] | any> = this.offersApiService.fetch();
+  filters$: BehaviorSubject<OfferFilters> = new BehaviorSubject(new OfferFilters());
+  offers$: Observable<ResponseData<OfferModel>> = this.offersApiService.fetch(this.filters$.value);
   dataGridConfig!: DataGridRowConfig<OfferKeys>[];
   itemAction$: Subject<ItemAction<OfferModel>> = new Subject();
+
 
   constructor(private offersApiService: OffersApiService) {
   }
@@ -32,7 +35,7 @@ export class OffersComponent implements OnInit, AfterViewInit {
     this.itemAction$.subscribe((itemAction: ItemAction<OfferModel>) => {
       switch (itemAction.type) {
         case "remove":
-          this.offersApiService.remove(itemAction.item.id).subscribe(_ => this.offersApiService.fetch());
+          this.offersApiService.remove(itemAction.item.id).subscribe(_ => this.offers$ = this.offersApiService.fetch(this.filters$.value));
           break;
       }
     });
