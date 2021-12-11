@@ -15,27 +15,19 @@ import java.sql.Timestamp;
 @ToString
 @Entity
 @Table(name = "reservations")
-@IdClass(Reservation.ReservationPrimaryKey.class)
 public class Reservation {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private Long offerId;
 
-    @Id
     private Long customerId;
 
-    @Id
-    @Column(insertable = false, updatable = false)
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     private Timestamp reservationTimestamp;
 
-    @Data
-    public static class ReservationPrimaryKey implements Serializable {
-
-        private Long offerId;
-        private Long customerId;
-
-    }
 }
 
 
