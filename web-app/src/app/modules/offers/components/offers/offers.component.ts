@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {OffersApiService} from "../../services/offers.api.service";
-import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {BehaviorSubject, debounceTime, Observable, Subject} from "rxjs";
 import {OfferFilters, OfferKeys, OfferModel} from "../../services/offers.models";
 import {DataGridRowConfig, FieldType, ItemAction} from "../../../../shared/components/data-grid/data-grid.models";
 import {ResponseData} from "../../../../shared/services/api.models";
@@ -32,13 +32,24 @@ export class OffersComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.filters$
+      .pipe(debounceTime(500))
+      .subscribe(_ => this.fetch())
     this.itemAction$.subscribe((itemAction: ItemAction<OfferModel>) => {
       switch (itemAction.type) {
         case "remove":
-          this.offersApiService.remove(itemAction.item.id).subscribe(_ => this.offers$ = this.offersApiService.fetch(this.filters$.value));
+          this.offersApiService.remove(itemAction.item.id).subscribe(_ => this.fetch());
           break;
       }
     });
+  }
+
+  updateFilters(param: { currentPage: number }) {
+    this.filters$.next({...this.filters$.value, ...param});
+  }
+
+  fetch() {
+    this.offers$ = this.offersApiService.fetch(this.filters$.value)
   }
 
 }

@@ -11,6 +11,6 @@ export interface OfferModel {
 }
 
 export class OfferFilters implements ServerApiFilter {
-  currentPage: number = 0;
+  currentPage: number = 1;
   itemsPerPage: number = 5;
 }

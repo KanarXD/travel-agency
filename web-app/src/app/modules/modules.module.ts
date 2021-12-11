@@ -4,6 +4,7 @@ import {HomeComponent} from "./home/home.component";
 import {OffersComponent} from "./offers/components/offers/offers.component";
 import {EmployeesComponent} from "./employees/components/employees/employees.component";
 import {SharedModule} from "../shared/shared.module";
+import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 @NgModule({
@@ -12,10 +13,11 @@ import {SharedModule} from "../shared/shared.module";
     OffersComponent,
     EmployeesComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        NgbPaginationModule
+    ]
 })
 export class ContainersModule {
 }
