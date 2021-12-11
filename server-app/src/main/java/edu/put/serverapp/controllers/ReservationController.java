@@ -24,4 +24,9 @@ public class ReservationController {
         return reservationService.addReservation(Reservation);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteReservation(@PathVariable int id) {
+        reservationService.deleteReservation(id);
+    }
+
 }

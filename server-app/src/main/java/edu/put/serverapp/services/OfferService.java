@@ -21,4 +21,7 @@ public class OfferService {
         return offerRepository.save(offer);
     }
 
+    public void deleteOffer(int id) {
+        offerRepository.deleteById(id);
+    }
 }

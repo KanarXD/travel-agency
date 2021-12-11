@@ -24,4 +24,9 @@ public class OfferController {
         return offerService.addOffer(offer);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteOffer(@PathVariable int id) {
+        offerService.deleteOffer(id);
+    }
+
 }
