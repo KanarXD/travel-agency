@@ -1,6 +1,7 @@
 import {Component, Input} from "@angular/core";
-import {DataGridRowConfig} from "../data-grid-config";
+import {DataGridRowConfig, ItemAction} from "../data-grid.models";
 import {Subject} from "rxjs";
+import {HttpMethodName} from "../../../services/api.models";
 
 @Component({
   selector: '[app-data-grid-row]',
@@ -9,9 +10,11 @@ import {Subject} from "rxjs";
 export class DataGridRowComponent {
   @Input() data!: { [s: string]: string };
   @Input() config!: DataGridRowConfig<any>[];
-  @Input() itemAction!: Subject<any>;
+  @Input() itemAction!: Subject<ItemAction<any>>;
 
-  onAction(type: string | undefined, data: { [s: string]: any }) {
-    this.itemAction.next({type, data});
+  onAction(type: HttpMethodName | undefined, item: any) {
+    if (!!type) {
+      this.itemAction.next({type, item});
+    }
   }
 }

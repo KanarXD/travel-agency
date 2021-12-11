@@ -1,4 +1,4 @@
-export type OfferKeys = 'id' | 'name' | 'basePrice' | 'startDate' | 'endDate';
+export type OfferKeys = 'id' | 'name' | 'basePrice' | 'startDate' | 'endDate' | 'delete';
 
 export interface OfferModel {
   id: bigint,

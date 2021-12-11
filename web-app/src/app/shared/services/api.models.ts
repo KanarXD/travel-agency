@@ -1,5 +1,14 @@
 import {Observable} from "rxjs";
 
+export type HttpMethodName = 'add' | 'remove' | 'update' | 'more';
+
+export enum Action {
+  Add = 'add',
+  Remove = 'remove',
+  Update = 'update',
+  More = 'more'
+}
+
 export interface ApiService<T> {
   fetch(): Observable<T>;
 

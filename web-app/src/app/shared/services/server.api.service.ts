@@ -6,7 +6,6 @@ import {HttpClient} from "@angular/common/http";
 export abstract class ServerApiService<T> implements ApiService<T> {
   httpClient: HttpClient;
   serviceUrl: string;
-  resp: any;
 
   protected constructor(httpClient: HttpClient, serviceUrl: string) {
     this.httpClient = httpClient;
@@ -32,7 +31,6 @@ export abstract class ServerApiService<T> implements ApiService<T> {
   remove(id: bigint): Observable<T> {
     return this.httpClient.delete<T>(`${this.serviceUrl}/${id}`);
   }
-
 
 }
 
