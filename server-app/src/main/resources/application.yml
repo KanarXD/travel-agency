@@ -15,3 +15,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/travel_agency_db
     username: travel_agency
     password: prolog
+
+web-config:
+  front-app-url: http://localhost:5000
+  allowed-method-array: GET, POST, PUT, PATCH, DELETE, OPTIONS
