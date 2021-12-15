@@ -4,6 +4,36 @@ GRANT ALL PRIVILEGES ON DATABASE travel_agency_db TO travel_agency;
 
 \connect travel_agency_db travel_agency;
 
+CREATE TABLE privileges
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE roles
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE roles_privileges
+(
+    role      INTEGER NOT NULL REFERENCES roles,
+    privilege INTEGER NOT NULL REFERENCES roles,
+    PRIMARY KEY (role, privilege)
+);
+
+CREATE TABLE employees
+(
+    id              SERIAL PRIMARY KEY,
+    name            VARCHAR(20) NOT NULL,
+    surname         VARCHAR(20) NOT NULL,
+    employment_date DATE        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    login           VARCHAR(20) NOT NULL,
+    password        VARCHAR(20) NOT NULL,
+    role            INTEGER     NOT NULL REFERENCES roles
+);
+
 CREATE TABLE customers
 (
     id      SERIAL PRIMARY KEY,
