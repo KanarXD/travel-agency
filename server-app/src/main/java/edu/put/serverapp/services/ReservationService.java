@@ -1,6 +1,6 @@
 package edu.put.serverapp.services;
 
-import edu.put.serverapp.models.Reservation;
+import edu.put.serverapp.models.entities.Reservation;
 import edu.put.serverapp.repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,4 +21,7 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
+    public void deleteReservation(int id) {
+        reservationRepository.deleteById(id);
+    }
 }

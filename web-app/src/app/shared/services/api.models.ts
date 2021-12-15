@@ -1,13 +1,36 @@
 import {Observable} from "rxjs";
 
+export type HttpMethodName = 'add' | 'remove' | 'update' | 'more';
+
+export enum Action {
+  Add = 'add',
+  Remove = 'remove',
+  Update = 'update',
+  More = 'more'
+}
+
+export interface ServerApiFilter {
+  currentPage: number;
+  itemsPerPage: number;
+}
+
+export type ResponseData<T> = {
+  data: T[] & T & any;
+  total: number;
+  message: string;
+  error: string;
+}
+
 export interface ApiService<T> {
-  fetch(): Observable<T>;
 
-  get(id: bigint): Observable<T>;
+  fetch(): Observable<ResponseData<T>>;
 
-  add(item: T): Observable<T>;
+  get(id: number): Observable<ResponseData<T>>;
 
-  update(item: T): Observable<T>;
+  add(item: T): Observable<ResponseData<T>>;
 
-  remove(id: bigint): Observable<T>;
+  update(item: T): Observable<ResponseData<T>>;
+
+  remove(id: number): Observable<ResponseData<T>>;
+
 }

@@ -1,41 +1,35 @@
-package edu.put.serverapp.models;
+package edu.put.serverapp.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Entity
 @Table(name = "reservations")
-@IdClass(Reservation.ReservationPrimaryKey.class)
 public class Reservation {
 
     @Id
-    private Long offerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @Id
-    private Long customerId;
+    private Integer offerId;
 
-    @Id
+    private Integer customerId;
+
     @Column(insertable = false, updatable = false)
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     private Timestamp reservationTimestamp;
 
-    @Data
-    public static class ReservationPrimaryKey implements Serializable {
-
-        private Long offerId;
-        private Long customerId;
-
-    }
 }
 
 

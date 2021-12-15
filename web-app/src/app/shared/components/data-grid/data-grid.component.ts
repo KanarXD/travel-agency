@@ -1,5 +1,6 @@
 import {Component, Input} from "@angular/core";
-import {DataGridRowConfig} from "./data-grid-config";
+import {ItemAction, DataGridRowConfig} from "./data-grid.models";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-data-grid',
@@ -9,8 +10,7 @@ import {DataGridRowConfig} from "./data-grid-config";
 export class DataGridComponent {
   @Input() data!: any[];
   @Input() config!: DataGridRowConfig<any>[];
-
-  // @Input() itemAction!: Subject<any>;
+  @Input() itemAction!: Subject<ItemAction<any>>;
 
 
 }

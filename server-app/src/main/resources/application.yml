@@ -3,12 +3,19 @@ server:
   port: 4000
   servlet:
     context-path: /server
+  error:
+    include-message: always
 
 spring:
   jpa:
     hibernate:
       ddl-auto: none
+    open-in-view: false
   datasource:
     url: jdbc:postgresql://localhost:5432/travel_agency_db
     username: travel_agency
     password: prolog
+
+web-config:
+  front-app-url: http://localhost:5000
+  allowed-method-array: GET, POST, PUT, PATCH, DELETE, OPTIONS
