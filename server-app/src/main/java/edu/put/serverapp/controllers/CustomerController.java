@@ -1,7 +1,7 @@
 package edu.put.serverapp.controllers;
 
 import edu.put.serverapp.models.entities.Customer;
-import edu.put.serverapp.services.CustomersService;
+import edu.put.serverapp.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,20 +12,20 @@ import java.util.List;
 public class CustomerController {
 
     @Autowired
-    private CustomersService customersService;
+    private CustomerService customerService;
 
     @GetMapping
     public List<Customer> getCustomers() {
-        return customersService.getCustomers();
+        return customerService.getCustomers();
     }
 
     @PostMapping
     public Customer addCustomer(@RequestBody Customer customer) {
-        return customersService.addCustomer(customer);
+        return customerService.addCustomer(customer);
     }
 
     @DeleteMapping("/{id}")
     public void deleteCustomer(@PathVariable int id) {
-        customersService.deleteCustomer(id);
+        customerService.deleteCustomer(id);
     }
 }
