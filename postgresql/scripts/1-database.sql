@@ -19,7 +19,7 @@ CREATE TABLE roles
 CREATE TABLE roles_privileges
 (
     role      INTEGER NOT NULL REFERENCES roles,
-    privilege INTEGER NOT NULL REFERENCES roles,
+    privilege INTEGER NOT NULL REFERENCES privileges,
     PRIMARY KEY (role, privilege)
 );
 
