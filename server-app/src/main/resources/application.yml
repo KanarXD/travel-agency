@@ -19,3 +19,7 @@ spring:
 web-config:
   front-app-url: http://localhost:5000
   allowed-method-array: GET, POST, PUT, PATCH, DELETE, OPTIONS
+
+logging:
+  level:
+    edu.put.serverapp: debug

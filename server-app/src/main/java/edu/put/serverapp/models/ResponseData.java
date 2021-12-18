@@ -10,5 +10,6 @@ public class ResponseData<T> {
 
     private T data;
     private long total;
+    private String error;
 
 }
