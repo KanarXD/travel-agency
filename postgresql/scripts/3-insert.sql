@@ -8,3 +8,4 @@ VALUES ('SUPER OFERTA', 2235.50, '2022-01-01', '2022-01-06');
 
 INSERT INTO employees(name, surname, login, password, role)
 VALUES ('BOB', 'BOBOWSKI', 'bob', 'bobspassword', (SELECT id FROM roles WHERE name = 'AGENT'));
+
