@@ -1,0 +1,16 @@
+<ng-template #showForm>
+  <form #loginForm="ngForm" class="form-inline" id="login-form">
+    <input class="form-control form-control-sm mx-1" name="username" ngModel="admin" placeholder="username" required
+           type="email">
+    <input class="form-control form-control-sm mx-1" name="password" ngModel="adminspassword" placeholder="password"
+           required
+           type="password">
+    <button (click)="logIn(loginForm.value)" class="btn btn-sm btn-primary mx-1">
+      log in
+    </button>
+  </form>
+</ng-template>
+<button (click)="logOut()" *ngIf="isLogged$ | async; else showForm" class="btn btn-danger mr-2">
+  log out
+</button>
+
