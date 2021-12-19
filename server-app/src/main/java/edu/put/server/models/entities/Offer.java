@@ -1,4 +1,4 @@
-package edu.put.serverapp.models.entities;
+package edu.put.server.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -7,15 +7,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
+
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "employees")
-public class Employee {
+@Table(name = "offers")
+public class Offer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,16 +25,12 @@ public class Employee {
 
     private String name;
 
-    private String surname;
+    private BigDecimal basePrice;
 
-    @Column(insertable = false, updatable = false)
     @JsonFormat(pattern = "yyyy-mm-dd")
-    private Date employmentDate;
+    private Date startDate;
 
-    private String login;
-
-    private String password;
-
-    private Integer role;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date endDate;
 
 }

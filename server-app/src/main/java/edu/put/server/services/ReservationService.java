@@ -1,7 +1,7 @@
-package edu.put.serverapp.services;
+package edu.put.server.services;
 
-import edu.put.serverapp.models.entities.Reservation;
-import edu.put.serverapp.repositories.ReservationRepository;
+import edu.put.server.models.entities.Reservation;
+import edu.put.server.repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

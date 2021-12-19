@@ -1,4 +1,4 @@
-package edu.put.serverapp;
+package edu.put.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

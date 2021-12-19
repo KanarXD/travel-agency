@@ -1,9 +1,9 @@
-package edu.put.serverapp.services;
+package edu.put.server.services;
 
-import edu.put.serverapp.models.ResponseData;
-import edu.put.serverapp.models.entities.Offer;
-import edu.put.serverapp.models.filters.Filter;
-import edu.put.serverapp.repositories.OfferRepository;
+import edu.put.server.models.ResponseData;
+import edu.put.server.models.entities.Offer;
+import edu.put.server.models.filters.Filter;
+import edu.put.server.repositories.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;

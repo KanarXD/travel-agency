@@ -1,6 +1,6 @@
-package edu.put.serverapp.repositories;
+package edu.put.server.repositories;
 
-import edu.put.serverapp.models.entities.Customer;
+import edu.put.server.models.entities.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

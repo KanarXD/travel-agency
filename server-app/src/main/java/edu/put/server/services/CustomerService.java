@@ -1,7 +1,7 @@
-package edu.put.serverapp.services;
+package edu.put.server.services;
 
-import edu.put.serverapp.models.entities.Customer;
-import edu.put.serverapp.repositories.CustomerRepository;
+import edu.put.server.models.entities.Customer;
+import edu.put.server.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

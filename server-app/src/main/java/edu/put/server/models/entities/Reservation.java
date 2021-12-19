@@ -1,4 +1,4 @@
-package edu.put.serverapp.models.entities;
+package edu.put.server.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Timestamp;
 
 
 @Entity
@@ -16,21 +15,21 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "offers")
-public class Offer {
+@Table(name = "reservations")
+public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
+    private Integer offerId;
 
-    private BigDecimal basePrice;
+    private Integer customerId;
 
-    @JsonFormat(pattern = "yyyy-mm-dd")
-    private Date startDate;
-
-    @JsonFormat(pattern = "yyyy-mm-dd")
-    private Date endDate;
+    @Column(insertable = false, updatable = false)
+    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
+    private Timestamp reservationTimestamp;
 
 }
+
+

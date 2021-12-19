@@ -1,4 +1,4 @@
-package edu.put.serverapp.security;
+package edu.put.server.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,14 +22,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.anonymous().disable()
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
                 .and()
-                .csrf()
-                .disable();
+                .csrf().disable();
         http.cors();
     }
 

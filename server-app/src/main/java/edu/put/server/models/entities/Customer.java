@@ -1,4 +1,4 @@
-package edu.put.serverapp.models.entities;
+package edu.put.server.models.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

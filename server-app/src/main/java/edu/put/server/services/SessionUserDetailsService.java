@@ -1,8 +1,8 @@
-package edu.put.serverapp.services;
+package edu.put.server.services;
 
-import edu.put.serverapp.models.SessionUserDetails;
-import edu.put.serverapp.models.entities.Employee;
-import edu.put.serverapp.repositories.EmployeeRepository;
+import edu.put.server.models.SessionUserDetails;
+import edu.put.server.models.entities.Employee;
+import edu.put.server.repositories.EmployeeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

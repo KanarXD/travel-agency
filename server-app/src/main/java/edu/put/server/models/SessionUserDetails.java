@@ -1,6 +1,6 @@
-package edu.put.serverapp.models;
+package edu.put.server.models;
 
-import edu.put.serverapp.models.entities.Employee;
+import edu.put.server.models.entities.Employee;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

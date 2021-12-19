@@ -1,7 +1,7 @@
-package edu.put.serverapp.services;
+package edu.put.server.services;
 
 
-import edu.put.serverapp.models.SessionUserDetails;
+import edu.put.server.models.SessionUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;

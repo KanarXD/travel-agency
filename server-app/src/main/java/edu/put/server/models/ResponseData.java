@@ -1,4 +1,4 @@
-package edu.put.serverapp.models;
+package edu.put.server.models;
 
 import lombok.Builder;
 import lombok.Data;

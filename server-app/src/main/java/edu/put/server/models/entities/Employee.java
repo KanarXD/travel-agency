@@ -1,4 +1,4 @@
-package edu.put.serverapp.models.entities;
+package edu.put.server.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -7,29 +7,32 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-
+import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "reservations")
-public class Reservation {
+@Table(name = "employees")
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer offerId;
+    private String name;
 
-    private Integer customerId;
+    private String surname;
 
     @Column(insertable = false, updatable = false)
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
-    private Timestamp reservationTimestamp;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date employmentDate;
+
+    private String login;
+
+    private String password;
+
+    private Integer role;
 
 }
-
-

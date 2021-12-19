@@ -1,7 +1,7 @@
-package edu.put.serverapp.controllers;
+package edu.put.server.controllers;
 
-import edu.put.serverapp.models.entities.Customer;
-import edu.put.serverapp.services.CustomerService;
+import edu.put.server.models.entities.Customer;
+import edu.put.server.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

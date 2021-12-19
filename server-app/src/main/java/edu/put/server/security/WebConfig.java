@@ -1,4 +1,4 @@
-package edu.put.serverapp.security;
+package edu.put.server.security;
 
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,7 +1,7 @@
-package edu.put.serverapp.controllers;
+package edu.put.server.controllers;
 
-import edu.put.serverapp.models.entities.Reservation;
-import edu.put.serverapp.services.ReservationService;
+import edu.put.server.models.entities.Reservation;
+import edu.put.server.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

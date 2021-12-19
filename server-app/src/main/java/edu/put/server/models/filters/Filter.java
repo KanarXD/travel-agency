@@ -1,4 +1,4 @@
-package edu.put.serverapp.models.filters;
+package edu.put.server.models.filters;
 
 import lombok.Data;
 
