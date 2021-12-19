@@ -3,7 +3,7 @@ import {OffersApiService} from "../../services/offers.api.service";
 import {BehaviorSubject, debounceTime, Observable, Subject} from "rxjs";
 import {OfferFilters, OfferKeys, OfferModel} from "../../services/offers.models";
 import {DataGridRowConfig, FieldType, ItemAction} from "../../../../shared/components/data-grid/data-grid.models";
-import {ResponseData} from "../../../../shared/services/api.models";
+import {ResponseData, ServerApiAction} from "../../../../shared/services/api.models";
 
 @Component({
   selector: 'app-offers',
@@ -12,10 +12,9 @@ import {ResponseData} from "../../../../shared/services/api.models";
 })
 export class OffersComponent implements OnInit, AfterViewInit {
   filters$: BehaviorSubject<OfferFilters> = new BehaviorSubject(new OfferFilters());
-  offers$: Observable<ResponseData<OfferModel>> = this.offersApiService.fetch(this.filters$.value);
+  offers$!: Observable<ResponseData<OfferModel>>;
   dataGridConfig!: DataGridRowConfig<OfferKeys>[];
   itemAction$: Subject<ItemAction<OfferModel>> = new Subject();
-
 
   constructor(private offersApiService: OffersApiService) {
   }
@@ -27,7 +26,7 @@ export class OffersComponent implements OnInit, AfterViewInit {
       {key: 'basePrice'},
       {key: 'startDate'},
       {key: 'endDate'},
-      {header: 'Remove', type: FieldType.BUTTON, action: 'remove'},
+      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove},
     ];
   }
 

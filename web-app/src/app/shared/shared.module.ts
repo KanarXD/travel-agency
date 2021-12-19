@@ -14,10 +14,10 @@ import {FormsModule} from "@angular/forms";
     DataGridComponent,
     DataGridRowComponent
   ],
-    imports: [
-        CommonModule,
-        FormsModule
-    ]
+  imports: [
+    CommonModule,
+    FormsModule
+  ]
 })
 export class SharedModule {
 }

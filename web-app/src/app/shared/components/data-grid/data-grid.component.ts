@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {ItemAction, DataGridRowConfig} from "./data-grid.models";
+import {DataGridRowConfig, ItemAction} from "./data-grid.models";
 import {Subject} from "rxjs";
 
 @Component({

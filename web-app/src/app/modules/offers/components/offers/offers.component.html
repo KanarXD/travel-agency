@@ -1,8 +1,9 @@
 <div *ngIf="offers$ | async as offers" class="col-sm-9 pl-0">
-  <ngb-pagination [collectionSize]="offers.total" [maxSize]="5" size="sm"
-                  [pageSize]="(filters$|async)!.itemsPerPage" [rotate]="true"
-                  (pageChange)="updateFilters({currentPage: $event - 1 || 0})"
-                  [page]="(filters$|async)!.currentPage + 1">
+  <ngb-pagination (pageChange)="updateFilters({currentPage: $event - 1 || 0})" [collectionSize]="offers.total"
+                  [maxSize]="5"
+                  [pageSize]="(filters$|async)!.itemsPerPage" [page]="(filters$|async)!.currentPage + 1"
+                  [rotate]="true"
+                  size="sm">
   </ngb-pagination>
   <app-data-grid [config]="dataGridConfig" [data]="offers.data" [itemAction]="itemAction$"></app-data-grid>
 </div>
