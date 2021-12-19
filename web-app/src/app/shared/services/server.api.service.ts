@@ -13,15 +13,15 @@ export abstract class ServerApiService<T> implements ApiService<T> {
   }
 
   fetch(serverApiFilter?: any): Observable<ResponseData<T>> {
-    return this.httpClient.get<ResponseData<T>>(this.serviceUrl, {params: serverApiFilter});
+    return this.httpClient.get<ResponseData<T>>(this.serviceUrl, {params: serverApiFilter, withCredentials: true});
   }
 
   get(id: number): Observable<ResponseData<T>> {
-    return this.httpClient.get<ResponseData<T>>(`${this.serviceUrl}/${id}`);
+    return this.httpClient.get<ResponseData<T>>(`${this.serviceUrl}/${id}`, {withCredentials: true});
   }
 
   add(item: T): Observable<ResponseData<T>> {
-    return this.httpClient.post<ResponseData<T>>(this.serviceUrl, item);
+    return this.httpClient.post<ResponseData<T>>(this.serviceUrl, item, {withCredentials: true});
   }
 
   update(item: T): Observable<ResponseData<T>> {
@@ -29,7 +29,7 @@ export abstract class ServerApiService<T> implements ApiService<T> {
   }
 
   remove(id: number): Observable<ResponseData<T>> {
-    return this.httpClient.delete<ResponseData<T>>(`${this.serviceUrl}/${id}`);
+    return this.httpClient.delete<ResponseData<T>>(`${this.serviceUrl}/${id}`, {withCredentials: true});
   }
 
 }
