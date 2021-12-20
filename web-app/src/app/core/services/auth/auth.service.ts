@@ -1,21 +1,20 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {AuthDataModel} from './auth.service.models';
 import {ServerApi} from "../../../shared/utils/server.api";
+import {CoreService} from "../../../shared/services/core.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  isLogged$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private coreService: CoreService
   ) {
   }
 
   isLogged(): boolean {
-    return this.isLogged$.value;
+    return this.coreService.isLogged$.value;
   }
 
   logIn({username, password}: AuthDataModel) {
@@ -24,14 +23,16 @@ export class AuthService {
       .subscribe(
         (privilegeList: string[]) => {
           console.log('HTTP response', privilegeList)
-          this.isLogged$.next(true);
+          this.coreService.isLogged$.next(true);
+          this.coreService.privilegeList$.next(privilegeList);
         });
   }
 
   logOut() {
     if (this.isLogged()) {
       this.http.get(ServerApi.LOGOUT).subscribe();
-      this.isLogged$.next(false);
+      this.coreService.isLogged$.next(false);
+      this.coreService.privilegeList$.next([]);
     }
   }
 

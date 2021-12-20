@@ -12,5 +12,4 @@ export class NavComponent {
     {title: 'EMPLOYEES', link: 'employees', exact: false},
   ];
 
-
 }

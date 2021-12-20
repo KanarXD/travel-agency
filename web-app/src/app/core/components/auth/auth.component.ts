@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {AuthService} from "../../services/auth/auth.service";
 import {BehaviorSubject} from "rxjs";
+import {CoreService} from "../../../shared/services/core.service";
 
 @Component({
   selector: 'app-auth',
@@ -9,25 +10,14 @@ import {BehaviorSubject} from "rxjs";
 })
 export class AuthComponent {
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private coreService: CoreService
   ) {
   }
 
-  // constructor(
-  //   private authService: AuthService,
-  //   private coreService: CoreService
-  // ) {
-  //   this.logged();
-  // }
-  //
-  // get access$() {
-  //   return this.coreService.access$;
-  // }
-  //
   get isLogged$(): BehaviorSubject<boolean> {
-    return this.authService.isLogged$;
+    return this.coreService.isLogged$;
   }
-
 
   logIn(formValue: any) {
     this.authService.logIn(formValue);
