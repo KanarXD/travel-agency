@@ -17,6 +17,9 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    private WebConfig webConfig;
+
+    @Autowired
     private UserDetailsService userDetailsService;
 
     @Override
@@ -33,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 .and()
                 .logout().deleteCookies("JSESSIONID")
-                .addLogoutHandler(new RestLogoutHandler())
+                .addLogoutHandler(new RestLogoutHandler(webConfig.getFrontAppUrl()))
                 .logoutSuccessHandler(new RestLogoutSuccessHandler())
                 .and()
                 .csrf().disable();
