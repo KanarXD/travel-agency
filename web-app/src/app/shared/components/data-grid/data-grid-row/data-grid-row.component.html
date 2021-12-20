@@ -4,12 +4,13 @@
 <td *ngFor="let row of config; let idx=index" [ngSwitch]="row.type">
 
   <div *ngSwitchCase="'img'">
-    <img [src]="data[row.key]" height="30" alt="">
+    <img [src]="data[row.key]" alt="" height="30">
   </div>
 
   <div *ngSwitchCase="'input'" class="form-inline">
-    <input class="form-control form-control-sm" type="number" [(ngModel)]="data[row.key]"
-           [disabled]="row.access ? !(row.access | async) : false" (input)="onAction('update', data)">
+    <input (input)="onAction('update', data)" [(ngModel)]="data[row.key]"
+           [disabled]="row.access ? !(row.access | async) : false"
+           class="form-control form-control-sm" type="number">
   </div>
 
   <div *ngSwitchCase="'button'" class="form-inline">

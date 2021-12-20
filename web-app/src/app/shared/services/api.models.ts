@@ -2,7 +2,7 @@ import {Observable} from "rxjs";
 
 export type HttpMethodName = 'add' | 'remove' | 'update' | 'more';
 
-export enum Action {
+export enum ServerApiAction {
   Add = 'add',
   Remove = 'remove',
   Update = 'update',

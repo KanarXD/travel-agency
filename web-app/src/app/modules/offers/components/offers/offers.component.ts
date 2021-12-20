@@ -1,9 +1,10 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {OffersApiService} from "../../services/offers.api.service";
-import {BehaviorSubject, debounceTime, Observable, Subject} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {OfferFilters, OfferKeys, OfferModel} from "../../services/offers.models";
 import {DataGridRowConfig, FieldType, ItemAction} from "../../../../shared/components/data-grid/data-grid.models";
-import {ResponseData} from "../../../../shared/services/api.models";
+import {ResponseData, ServerApiAction} from "../../../../shared/services/api.models";
+import {AuthService} from "../../../../core/services/auth/auth.service";
 
 @Component({
   selector: 'app-offers',
@@ -12,12 +13,14 @@ import {ResponseData} from "../../../../shared/services/api.models";
 })
 export class OffersComponent implements OnInit, AfterViewInit {
   filters$: BehaviorSubject<OfferFilters> = new BehaviorSubject(new OfferFilters());
-  offers$: Observable<ResponseData<OfferModel>> = this.offersApiService.fetch(this.filters$.value);
+  offers$!: Observable<ResponseData<OfferModel>>;
   dataGridConfig!: DataGridRowConfig<OfferKeys>[];
   itemAction$: Subject<ItemAction<OfferModel>> = new Subject();
 
-
-  constructor(private offersApiService: OffersApiService) {
+  constructor(
+    private offersApiService: OffersApiService,
+    private authService: AuthService
+  ) {
   }
 
   ngOnInit(): void {
@@ -27,13 +30,12 @@ export class OffersComponent implements OnInit, AfterViewInit {
       {key: 'basePrice'},
       {key: 'startDate'},
       {key: 'endDate'},
-      {header: 'Remove', type: FieldType.BUTTON, action: 'remove'},
+      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove},
     ];
   }
 
   ngAfterViewInit(): void {
     this.filters$
-      .pipe(debounceTime(500))
       .subscribe(_ => this.fetch())
     this.itemAction$.subscribe((itemAction: ItemAction<OfferModel>) => {
       switch (itemAction.type) {
@@ -49,7 +51,11 @@ export class OffersComponent implements OnInit, AfterViewInit {
   }
 
   fetch() {
-    this.offers$ = this.offersApiService.fetch(this.filters$.value)
+    this.authService.isLogged$.subscribe((isLogged: boolean) => {
+      if (isLogged) {
+        this.offers$ = this.offersApiService.fetch(this.filters$.value)
+      }
+    });
   }
 
 }

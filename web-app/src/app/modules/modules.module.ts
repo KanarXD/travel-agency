@@ -13,11 +13,11 @@ import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
     OffersComponent,
     EmployeesComponent
   ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        NgbPaginationModule
-    ]
+  imports: [
+    CommonModule,
+    SharedModule,
+    NgbPaginationModule
+  ]
 })
 export class ContainersModule {
 }
