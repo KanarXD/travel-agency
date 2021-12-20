@@ -6,30 +6,33 @@ import {ServerApi} from "../../../shared/utils/server.api";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-    isLogged$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isLogged$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
 
-    constructor(
-        private http: HttpClient
-    ) {
+  constructor(
+    private http: HttpClient
+  ) {
+  }
+
+  isLogged(): boolean {
+    return this.isLogged$.value;
+  }
+
+  logIn({username, password}: AuthDataModel) {
+    let base64 = window.btoa(username + ':' + password);
+    this.http.get<string[]>(ServerApi.LOGIN, {headers: {Authorization: 'Basic ' + base64}})
+      .subscribe(
+        (privilegeList: string[]) => {
+          console.log('HTTP response', privilegeList)
+          this.isLogged$.next(true);
+        });
+  }
+
+  logOut() {
+    if (this.isLogged()) {
+      this.http.get(ServerApi.LOGOUT).subscribe();
+      this.isLogged$.next(false);
     }
-
-    // isLogged(): Observable<any> {
-    //   // return this.http.get(ServerApi.AUTH_IS_LOGGED);
-    // }
-
-    logIn({username, password}: AuthDataModel) {
-        let base64 = window.btoa(username + ':' + password);
-        this.http.get<string[]>(ServerApi.LOGIN, {headers: {Authorization: 'Basic ' + base64}, withCredentials: true})
-            .subscribe(
-                (privilegeList: string[]) => {
-                    console.log('HTTP response', privilegeList)
-                    this.isLogged$.next(true);
-                });
-    }
-
-    logOut() {
-        this.isLogged$.next(false);
-    }
+  }
 
 }

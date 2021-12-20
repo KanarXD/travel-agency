@@ -1,9 +1,10 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {OffersApiService} from "../../services/offers.api.service";
-import {BehaviorSubject, debounceTime, Observable, Subject} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {OfferFilters, OfferKeys, OfferModel} from "../../services/offers.models";
 import {DataGridRowConfig, FieldType, ItemAction} from "../../../../shared/components/data-grid/data-grid.models";
 import {ResponseData, ServerApiAction} from "../../../../shared/services/api.models";
+import {AuthService} from "../../../../core/services/auth/auth.service";
 
 @Component({
   selector: 'app-offers',
@@ -16,7 +17,10 @@ export class OffersComponent implements OnInit, AfterViewInit {
   dataGridConfig!: DataGridRowConfig<OfferKeys>[];
   itemAction$: Subject<ItemAction<OfferModel>> = new Subject();
 
-  constructor(private offersApiService: OffersApiService) {
+  constructor(
+    private offersApiService: OffersApiService,
+    private authService: AuthService
+  ) {
   }
 
   ngOnInit(): void {
@@ -32,7 +36,6 @@ export class OffersComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.filters$
-      .pipe(debounceTime(500))
       .subscribe(_ => this.fetch())
     this.itemAction$.subscribe((itemAction: ItemAction<OfferModel>) => {
       switch (itemAction.type) {
@@ -48,7 +51,11 @@ export class OffersComponent implements OnInit, AfterViewInit {
   }
 
   fetch() {
-    this.offers$ = this.offersApiService.fetch(this.filters$.value)
+    this.authService.isLogged$.subscribe((isLogged: boolean) => {
+      if (isLogged) {
+        this.offers$ = this.offersApiService.fetch(this.filters$.value)
+      }
+    });
   }
 
 }
