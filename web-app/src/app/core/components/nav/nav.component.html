@@ -1,7 +1,8 @@
 <nav class="nav nav-pills">
-  <a *ngFor="let route of routeList" [routerLinkActiveOptions]="{exact: true}" [routerLink]="route.link"
-     class="nav-item nav-link"
-     routerLinkActive="active">
-    {{route.title}}
-  </a>
+  <div *ngFor="let navRoute of navRoutes">
+    <a *ngIf="navRoute.inNavBar" [routerLinkActiveOptions]="{exact: true}" [routerLink]="navRoute.path"
+       class="nav-item nav-link" routerLinkActive="active">
+      {{navRoute.title}}
+    </a>
+  </div>
 </nav>

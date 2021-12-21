@@ -5,16 +5,17 @@ import {OffersComponent} from "./modules/offers/components/offers/offers.compone
 import {EmployeesComponent} from "./modules/employees/components/employees/employees.component";
 import {OffersGuard} from "./modules/offers/services/offers.guard";
 import {EmployeesGuard} from "./modules/employees/services/employees.guard";
+import {NavRoutes} from "./shared/utils/app.models";
 
-const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'offers', component: OffersComponent, canActivate: [OffersGuard]},
-  {path: 'employees', component: EmployeesComponent, canActivate: [EmployeesGuard]},
-  {path: '**', redirectTo: '/'}
+export const appNavRoutes: NavRoutes = [
+  {title: 'HOME', path: '', component: HomeComponent, inNavBar: true},
+  {title: 'OFFERS', path: 'offers', component: OffersComponent, canActivate: [OffersGuard], inNavBar: true},
+  {title: 'EMPLOYEES', path: 'employees', component: EmployeesComponent, canActivate: [EmployeesGuard], inNavBar: true},
+  {path: '**', redirectTo: '/', inNavBar: false}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(appNavRoutes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
