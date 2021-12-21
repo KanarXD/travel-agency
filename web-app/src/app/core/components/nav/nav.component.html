@@ -1,4 +1,4 @@
-<nav class="nav nav-pills">
+<nav *ngIf="navRoutes$ | async as navRoutes" class="nav nav-pills">
   <div *ngFor="let navRoute of navRoutes">
     <a *ngIf="navRoute.inNavBar" [routerLinkActiveOptions]="{exact: true}" [routerLink]="navRoute.path"
        class="nav-item nav-link" routerLinkActive="active">

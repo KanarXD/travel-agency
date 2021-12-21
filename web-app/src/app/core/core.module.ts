@@ -16,12 +16,12 @@ import {NgbNavModule} from "@ng-bootstrap/ng-bootstrap";
     NavComponent,
     AuthComponent
   ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        FormsModule,
-        NgbNavModule
-    ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    NgbNavModule
+  ],
   exports: [
     AppComponent,
     NavComponent,

@@ -14,7 +14,7 @@ export class AuthService {
   }
 
   isLogged(): boolean {
-    return this.coreService.isLogged$.value;
+    return this.coreService.userStatus$.getValue().isLogged;
   }
 
   logIn({username, password}: AuthDataModel) {
@@ -22,17 +22,15 @@ export class AuthService {
     this.http.get<string[]>(ServerApi.LOGIN, {headers: {Authorization: 'Basic ' + base64}})
       .subscribe(
         (privilegeList: string[]) => {
-          console.log('HTTP response', privilegeList)
-          this.coreService.isLogged$.next(true);
-          this.coreService.privilegeList$.next(privilegeList);
+          console.log('HTTP response', privilegeList);
+          this.coreService.userStatus$.next({isLogged: true, privilegeList: privilegeList});
         });
   }
 
   logOut() {
     if (this.isLogged()) {
       this.http.get(ServerApi.LOGOUT).subscribe();
-      this.coreService.isLogged$.next(false);
-      this.coreService.privilegeList$.next([]);
+      this.coreService.userStatus$.next({isLogged: false, privilegeList: []});
     }
   }
 

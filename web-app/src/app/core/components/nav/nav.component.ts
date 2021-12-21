@@ -1,38 +1,39 @@
-import {Component} from '@angular/core';
-import {NavRoutes} from "../../../shared/utils/app.models";
-import {Router, RouterStateSnapshot} from "@angular/router";
+import {AfterViewInit, Component} from '@angular/core';
+import {NavRoute, NavRoutes, RouteGuard} from "../../../shared/utils/app.models";
 import {appNavRoutes} from "../../../app-routing.module";
-import {interval, Observable} from "rxjs";
+import {BehaviorSubject} from "rxjs";
+import {CoreService} from "../../../shared/services/core.service";
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
-export class NavComponent {
-  navRoutes: NavRoutes = appNavRoutes;
-
-  routeList: { title: string, link: string, exact?: boolean }[] = [
-    {title: 'HOME', link: '', exact: true},
-    {title: 'OFFERS', link: 'offers', exact: false},
-    {title: 'EMPLOYEES', link: 'employees', exact: false},
-  ];
+export class NavComponent implements AfterViewInit {
+  navRoutes$: BehaviorSubject<NavRoutes> = new BehaviorSubject<NavRoutes>(appNavRoutes);
 
   constructor(
-    private router: Router
+    private coreService: CoreService
   ) {
-    interval().subscribe(() => {
-      console.log('interval');
-      let snapshot: RouterStateSnapshot = router.routerState.snapshot;
-      // if (this.navRoutes[0].canActivate != null) {
-        if (this.navRoutes[1]?.canActivate?.every((value: boolean) => value)) {
-          console.log(JSON.stringify(this.navRoutes));
-          // console.log(JSON.stringify(snapshot));
+  }
 
-        }
-      // }
-    });
+  ngAfterViewInit(): void {
+    // this.coreService.isLogged$.subscribe(()=>{
+    //   this.navRoutes$.next()
+    // })
+    appNavRoutes.forEach(navRoute => {
+      navRoute.canActivate?.forEach((guard: RouteGuard) => {
+        guard.isActive$?.subscribe((isActive: boolean) => {
+          debugger;
+          navRoute.inNavBar = isActive;
+          this.updateNavRoutes(navRoute);
+        });
+      });
+    })
+  }
 
+  updateNavRoutes(navRoute: NavRoute) {
+    this.navRoutes$.next({...this.navRoutes$.value, ...navRoute})
   }
 
 }

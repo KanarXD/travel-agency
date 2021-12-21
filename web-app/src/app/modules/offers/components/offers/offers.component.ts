@@ -51,7 +51,7 @@ export class OffersComponent implements OnInit, AfterViewInit {
   }
 
   fetch() {
-    this.coreService.isLogged$.subscribe((isLogged: boolean) => {
+    this.coreService.userStatus$.subscribe(({isLogged}) => {
       if (isLogged) {
         this.offers$ = this.offersApiService.fetch(this.filters$.value)
       }
