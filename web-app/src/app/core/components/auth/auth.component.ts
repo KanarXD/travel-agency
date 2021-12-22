@@ -1,6 +1,6 @@
 import {AfterViewInit, Component} from "@angular/core";
 import {AuthService} from "../../services/auth/auth.service";
-import {Subject} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {CoreService} from "../../../shared/services/core.service";
 import {UserStatus} from "../../../shared/utils/app.models";
 
@@ -10,7 +10,7 @@ import {UserStatus} from "../../../shared/utils/app.models";
   styleUrls: ['auth.component.scss']
 })
 export class AuthComponent implements AfterViewInit {
-  isLogged$!: Subject<boolean>;
+  isLogged$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private authService: AuthService,
@@ -18,6 +18,11 @@ export class AuthComponent implements AfterViewInit {
   ) {
   }
 
+  ngAfterViewInit(): void {
+    this.coreService.userStatus$.subscribe((userStatus: UserStatus) => {
+      this.isLogged$.next(userStatus.isLogged);
+    });
+  }
 
   logIn(formValue: any) {
     this.authService.logIn(formValue);
@@ -25,12 +30,6 @@ export class AuthComponent implements AfterViewInit {
 
   logOut() {
     this.authService.logOut();
-  }
-
-  ngAfterViewInit(): void {
-    this.coreService.userStatus$.subscribe((userStatus: UserStatus) => {
-      this.isLogged$.next(userStatus.isLogged);
-    })
   }
 
 }
