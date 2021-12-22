@@ -7,6 +7,7 @@ import {AuthComponent} from "./components/auth/auth.component";
 import {FormsModule} from "@angular/forms";
 import {AuthInterceptor} from "./services/auth/auth.interceptor";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {NgbNavModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    NgbNavModule
   ],
   exports: [
     AppComponent,

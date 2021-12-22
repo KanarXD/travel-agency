@@ -4,7 +4,7 @@ import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {OfferFilters, OfferKeys, OfferModel} from "../../services/offers.models";
 import {DataGridRowConfig, FieldType, ItemAction} from "../../../../shared/components/data-grid/data-grid.models";
 import {ResponseData, ServerApiAction} from "../../../../shared/services/api.models";
-import {AuthService} from "../../../../core/services/auth/auth.service";
+import {CoreService} from "../../../../shared/services/core.service";
 
 @Component({
   selector: 'app-offers',
@@ -19,7 +19,7 @@ export class OffersComponent implements OnInit, AfterViewInit {
 
   constructor(
     private offersApiService: OffersApiService,
-    private authService: AuthService
+    private coreService: CoreService
   ) {
   }
 
@@ -51,7 +51,7 @@ export class OffersComponent implements OnInit, AfterViewInit {
   }
 
   fetch() {
-    this.authService.isLogged$.subscribe((isLogged: boolean) => {
+    this.coreService.userStatus$.subscribe(({isLogged}) => {
       if (isLogged) {
         this.offers$ = this.offersApiService.fetch(this.filters$.value)
       }

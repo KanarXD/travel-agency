@@ -2,7 +2,6 @@ import {ApiService, ResponseData} from "./api.models";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
-
 export abstract class ServerApiService<T> implements ApiService<T> {
   httpClient: HttpClient;
   serviceUrl: string;

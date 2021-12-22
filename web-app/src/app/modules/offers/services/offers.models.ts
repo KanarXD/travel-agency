@@ -14,3 +14,10 @@ export class OfferFilters implements ServerApiFilter {
   currentPage: number = 0;
   itemsPerPage: number = 5;
 }
+
+export enum OfferPrivilege {
+  READ = 'OFFERS_READ',
+  UPDATE = 'OFFERS_UPDATE',
+  DELETE = 'OFFERS_DELETE'
+}
+
