@@ -10,7 +10,7 @@
     </button>
   </form>
 </ng-template>
-<a routerLink="" (click)="logOut()" *ngIf="isLogged$ | async; else showForm" class="btn btn-danger mr-2">
+<a (click)="logOut()" *ngIf="isLogged$ | async; else showForm" class="btn btn-danger mr-2" routerLink="">
   log out
 </a>
 

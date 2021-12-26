@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {Subject} from "rxjs";
+import {ItemAction} from "../../../../shared/utils/app.models";
+import {OfferModel} from "../../../offers/services/offers.models";
 
 @Component({
   selector: 'app-employees',
@@ -6,9 +9,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements OnInit {
+  itemAction$: Subject<ItemAction<OfferModel>> = new Subject();
 
-  constructor() {
-  }
 
   ngOnInit(): void {
   }

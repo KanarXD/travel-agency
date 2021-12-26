@@ -1,12 +1,12 @@
 <div>
-  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
 
     <div *ngFor="let question of questions" class="form-row">
-      <app-dynamic-form-question [question]="question" [form]="form"></app-dynamic-form-question>
+      <app-dynamic-form-question [formGroup]="formGroup" [question]="question"></app-dynamic-form-question>
     </div>
 
     <div class="form-row">
-      <button type="submit" [disabled]="!form.valid">Save</button>
+      <button [disabled]="!formGroup.valid" type="submit">Save</button>
     </div>
   </form>
 

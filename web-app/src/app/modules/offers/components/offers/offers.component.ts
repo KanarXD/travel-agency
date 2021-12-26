@@ -2,9 +2,12 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {OffersApiService} from "../../services/offers.api.service";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {OfferFilters, OfferKeys, OfferModel} from "../../services/offers.models";
-import {DataGridRowConfig, FieldType, ItemAction} from "../../../../shared/components/data-grid/data-grid.models";
+import {DataGridRowConfig, FieldType} from "../../../../shared/components/data-grid/data-grid.models";
 import {ResponseData, ServerApiAction} from "../../../../shared/services/api.models";
 import {CoreService} from "../../../../shared/services/core.service";
+import {ItemAction} from "../../../../shared/utils/app.models";
+import {OffersQuestionsService} from "../../services/offers.questions.service";
+import {Question} from "../../../../shared/components/dynamic-form/services/dynamic-form.models";
 
 @Component({
   selector: 'app-offers',
@@ -15,12 +18,15 @@ export class OffersComponent implements OnInit, AfterViewInit {
   filters$: BehaviorSubject<OfferFilters> = new BehaviorSubject(new OfferFilters());
   offers$!: Observable<ResponseData<OfferModel>>;
   dataGridConfig!: DataGridRowConfig<OfferKeys>[];
+  questions: Question[];
   itemAction$: Subject<ItemAction<OfferModel>> = new Subject();
 
   constructor(
     private offersApiService: OffersApiService,
-    private coreService: CoreService
+    private coreService: CoreService,
+    private offersQuestionService: OffersQuestionsService
   ) {
+    this.questions = offersQuestionService.getQuestions();
   }
 
   ngOnInit(): void {
@@ -35,12 +41,16 @@ export class OffersComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.filters$
-      .subscribe(_ => this.fetch())
+    this.filters$.subscribe(_ => this.fetch())
     this.itemAction$.subscribe((itemAction: ItemAction<OfferModel>) => {
       switch (itemAction.type) {
         case "remove":
           this.offersApiService.remove(itemAction.item.id).subscribe(_ => this.fetch());
+          break;
+        case "add":
+          let offer: any = itemAction.item;
+          console.log('add item');
+          console.log(offer);
           break;
       }
     });

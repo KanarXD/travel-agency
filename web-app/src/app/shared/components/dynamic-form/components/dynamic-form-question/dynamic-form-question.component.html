@@ -1,15 +1,24 @@
-<div [formGroup]="form">
-  <label [for]="question.key">{{question.label}}</label>
+<div [formGroup]="formGroup" class="form-control">
+  <label [for]="question.options.key">{{question.options.label}}</label>
   <div [ngSwitch]="question.controlType">
 
-    <input *ngSwitchCase="'textbox'" [formControlName]="question.key"
-           [id]="question.key" [type]="question.type">
+    <input *ngSwitchCase="'TextBox'" [formControlName]="question.options.key" [id]="question.options.key"
+           [type]="question.options.type">
 
-    <select [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key">
-      <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+    <select *ngSwitchCase="'Dropdown'" [formControlName]="question.options.key" [id]="question.options.key">
+      <option *ngFor="let opt of question.options.options" [value]="opt.key">{{opt.value}}</option>
     </select>
 
   </div>
-
-  <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div>
+  <div *ngIf="!isValid" class="alert alert-danger">
+    <div *ngIf="formControl?.errors?.['required']">
+      required
+    </div>
+    <div *ngIf="formControl?.errors?.['minlength']">
+      Name must be at least 4 characters long.
+    </div>
+    <div *ngIf="formControl?.errors?.['forbiddenName']">
+      Name cannot be Bob.
+    </div>
+  </div>
 </div>

@@ -1,7 +1,8 @@
 import {Component, Input} from "@angular/core";
-import {DataGridRowConfig, ItemAction} from "../data-grid.models";
+import {DataGridRowConfig} from "../data-grid.models";
 import {Subject} from "rxjs";
 import {HttpMethodName} from "../../../services/api.models";
+import {ItemAction} from "../../../utils/app.models";
 
 @Component({
   selector: '[app-data-grid-row]',
@@ -17,4 +18,5 @@ export class DataGridRowComponent {
       this.itemAction.next({type, item});
     }
   }
+
 }
