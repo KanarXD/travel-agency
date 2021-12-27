@@ -4,8 +4,7 @@ import {Question} from "../../services/dynamic-form.models";
 
 @Component({
   selector: 'app-dynamic-form-question',
-  templateUrl: './dynamic-form-question.component.html',
-  styleUrls: ['./dynamic-form-question.component.scss']
+  templateUrl: './dynamic-form-question.component.html'
 })
 export class DynamicFormQuestionComponent {
 

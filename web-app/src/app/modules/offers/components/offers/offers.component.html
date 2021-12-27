@@ -1,5 +1,5 @@
 <div *ngIf="offers$ | async as offers" class="col-sm-9 pl-0">
-  <app-add-item [itemAction$]="itemAction$" [itemQuestionBase]="questions" addItemButton="New Offer"></app-add-item>
+  <app-add-item [itemAction$]="itemAction$" [itemQuestionBase]="questions" title="New Offer"></app-add-item>
   <ngb-pagination (pageChange)="updateFilters({currentPage: $event - 1 || 0})" [collectionSize]="offers.total"
                   [maxSize]="5"
                   [pageSize]="(filters$|async)!.itemsPerPage" [page]="(filters$|async)!.currentPage + 1"

@@ -74,7 +74,7 @@ export class DropdownQuestion extends Question {
 
 export class DateQuestion extends Question {
   constructor(formControl: FormControl, options: QuestionOptions) {
-    super('date', formControl, {...options, type: 'date'});
+    super('Date', formControl, {...options, type: 'date'});
   }
 }
 

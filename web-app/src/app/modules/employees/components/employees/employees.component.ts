@@ -5,8 +5,7 @@ import {OfferModel} from "../../../offers/services/offers.models";
 
 @Component({
   selector: 'app-employees',
-  templateUrl: './employees.component.html',
-  styleUrls: ['./employees.component.scss']
+  templateUrl: './employees.component.html'
 })
 export class EmployeesComponent implements OnInit {
   itemAction$: Subject<ItemAction<OfferModel>> = new Subject();

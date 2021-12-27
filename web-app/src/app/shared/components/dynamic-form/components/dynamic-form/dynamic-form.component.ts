@@ -4,8 +4,7 @@ import {Question} from "../../services/dynamic-form.models";
 
 @Component({
   selector: 'app-dynamic-form',
-  templateUrl: './dynamic-form.component.html',
-  styleUrls: ['./dynamic-form.component.scss'],
+  templateUrl: './dynamic-form.component.html'
 })
 export class DynamicFormComponent implements OnInit {
 

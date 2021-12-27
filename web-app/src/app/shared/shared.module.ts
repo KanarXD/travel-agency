@@ -8,6 +8,9 @@ import {
   DynamicFormQuestionComponent
 } from "./components/dynamic-form/components/dynamic-form-question/dynamic-form-question.component";
 import {DynamicFormComponent} from "./components/dynamic-form/components/dynamic-form/dynamic-form.component";
+import {
+  DynamicFormErrorsComponent
+} from './components/dynamic-form/components/dynamic-form-errors/dynamic-form-errors.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,8 @@ import {DynamicFormComponent} from "./components/dynamic-form/components/dynamic
     DataGridRowComponent,
     AddItemComponent,
     DynamicFormQuestionComponent,
-    DynamicFormComponent
+    DynamicFormComponent,
+    DynamicFormErrorsComponent
   ],
   exports: [
     DataGridComponent,

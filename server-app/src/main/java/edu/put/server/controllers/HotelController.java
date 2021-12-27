@@ -2,12 +2,9 @@ package edu.put.server.controllers;
 
 import edu.put.server.models.ResponseData;
 import edu.put.server.models.entities.Hotel;
-import edu.put.server.models.entities.Offer;
 import edu.put.server.models.filters.Filter;
 import edu.put.server.services.HotelService;
-import edu.put.server.services.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

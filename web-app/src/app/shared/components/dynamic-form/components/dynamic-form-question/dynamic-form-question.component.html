@@ -9,16 +9,11 @@
       <option *ngFor="let opt of question.options.options" [value]="opt.key">{{opt.value}}</option>
     </select>
 
+    <input *ngSwitchCase="'Date'" [formControlName]="question.options.key" [id]="question.options.key"
+           [type]="question.options.type">
+
   </div>
-  <div *ngIf="!isValid" class="alert alert-danger">
-    <div *ngIf="formControl?.errors?.['required']">
-      required
-    </div>
-    <div *ngIf="formControl?.errors?.['minlength']">
-      Name must be at least 4 characters long.
-    </div>
-    <div *ngIf="formControl?.errors?.['forbiddenName']">
-      Name cannot be Bob.
-    </div>
+  <div *ngIf="formControl?.invalid && (formControl?.dirty || formControl?.touched)">
+    <app-dynamic-form-errors [errors]="formControl?.errors"></app-dynamic-form-errors>
   </div>
 </div>

@@ -11,8 +11,7 @@ import {Question} from "../../../../shared/components/dynamic-form/services/dyna
 
 @Component({
   selector: 'app-offers',
-  templateUrl: './offers.component.html',
-  styleUrls: ['./offers.component.scss']
+  templateUrl: './offers.component.html'
 })
 export class OffersComponent implements OnInit, AfterViewInit {
   filters$: BehaviorSubject<OfferFilters> = new BehaviorSubject(new OfferFilters());
