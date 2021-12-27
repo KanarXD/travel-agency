@@ -33,4 +33,8 @@ public class Offer {
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date endDate;
 
+    private Integer hotelId;
+
+    private Integer carrierId;
+
 }
