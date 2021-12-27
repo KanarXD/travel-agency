@@ -41,13 +41,28 @@ CREATE TABLE customers
     surname VARCHAR(20) NOT NULL
 );
 
+CREATE TABLE carriers
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE hotels
+(
+    id       SERIAL PRIMARY KEY,
+    name     VARCHAR(30) NOT NULL,
+    location VARCHAR(30) NOT NULL
+);
+
 CREATE TABLE offers
 (
     id         SERIAL PRIMARY KEY,
     name       VARCHAR(30)   NOT NULL,
     base_price NUMERIC(8, 2) NOT NULL,
     start_date DATE          NOT NULL,
-    end_date   DATE          NOT NULL
+    end_date   DATE          NOT NULL,
+    hotel_id   INTEGER       NULL REFERENCES hotels,
+    carrier_id INTEGER       NULL REFERENCES carriers
 );
 
 CREATE TABLE reservations
@@ -57,4 +72,3 @@ CREATE TABLE reservations
     customer_id           INTEGER   NOT NULL REFERENCES customers,
     reservation_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-
