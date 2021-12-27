@@ -7,13 +7,8 @@ import {Question} from "../../services/dynamic-form.models";
   templateUrl: './dynamic-form-question.component.html'
 })
 export class DynamicFormQuestionComponent {
-
   @Input() question!: Question;
   @Input() formGroup!: FormGroup;
-
-  get isValid() {
-    return this.formGroup.controls[this.question.options.key].valid;
-  }
 
   get formControl() {
     return this.formGroup.get(this.question.options.key);

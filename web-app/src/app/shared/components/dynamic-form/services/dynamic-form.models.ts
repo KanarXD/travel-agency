@@ -39,6 +39,7 @@
 // }
 
 import {FormControl} from "@angular/forms";
+import {Observable} from "rxjs";
 
 export interface QuestionOptions {
   initValue?: string;
@@ -79,5 +80,5 @@ export class DateQuestion extends Question {
 }
 
 export interface QuestionService {
-  getQuestions(): Question[];
+  getQuestions(): Observable<Question[]>;
 }

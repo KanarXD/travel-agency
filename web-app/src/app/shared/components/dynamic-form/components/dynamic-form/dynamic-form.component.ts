@@ -7,12 +7,9 @@ import {Question} from "../../services/dynamic-form.models";
   templateUrl: './dynamic-form.component.html'
 })
 export class DynamicFormComponent implements OnInit {
-
   @Input() questions: Question[] = [];
   @Output() submittedResult: EventEmitter<any> = new EventEmitter<any>();
-
   formGroup!: FormGroup;
-  payLoad = '';
 
   ngOnInit() {
     let formControlMap: { [key: string]: FormControl } = {};
@@ -23,7 +20,6 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.payLoad = JSON.stringify(this.formGroup.getRawValue());
     this.submittedResult.emit(this.formGroup.getRawValue());
   }
 

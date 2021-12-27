@@ -17,7 +17,7 @@ export class OffersComponent implements OnInit, AfterViewInit {
   filters$: BehaviorSubject<OfferFilters> = new BehaviorSubject(new OfferFilters());
   offers$!: Observable<ResponseData<OfferModel>>;
   dataGridConfig!: DataGridRowConfig<OfferKeys>[];
-  questions: Question[];
+  questions$: Observable<Question[]>;
   itemAction$: Subject<ItemAction<OfferModel>> = new Subject();
 
   constructor(
@@ -25,7 +25,7 @@ export class OffersComponent implements OnInit, AfterViewInit {
     private coreService: CoreService,
     private offersQuestionService: OffersQuestionsService
   ) {
-    this.questions = offersQuestionService.getQuestions();
+    this.questions$ = offersQuestionService.getQuestions();
   }
 
   ngOnInit(): void {

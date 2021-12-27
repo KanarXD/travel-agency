@@ -10,7 +10,7 @@ import {Question} from "../dynamic-form/services/dynamic-form.models";
 })
 export class AddItemComponent {
   @Input() itemAction$!: Subject<ItemAction<any>>;
-  @Input() itemQuestionBase!: Question[];
+  @Input() questions!: Question[] | null;
   @Input() title!: string;
 
   constructor(private modalService: NgbModal) {

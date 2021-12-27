@@ -1,11 +1,11 @@
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title">{{title}}</h4>
-    <button (click)="modal.dismiss('Cross click')" aria-label="Close" class="close" type="button">
+    <button (click)="modal.dismiss('Cross click')" aria-label="Close" class="btn btn-secondary" type="button">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <app-dynamic-form (submittedResult)="modal.close($event)" [questions]="itemQuestionBase"></app-dynamic-form>
+  <app-dynamic-form (submittedResult)="modal.close($event)" [questions]="questions || []"></app-dynamic-form>
 </ng-template>
 
 <button (click)="open(content)" class="btn btn-primary btn-sm mr-1">{{title}}</button>

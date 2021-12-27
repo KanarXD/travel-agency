@@ -1,16 +1,10 @@
 <div>
-  <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
-
-    <div *ngFor="let question of questions" class="form-row">
+  <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" class="modal-body">
+    <div *ngFor="let question of questions" class="mb-3">
       <app-dynamic-form-question [formGroup]="formGroup" [question]="question"></app-dynamic-form-question>
     </div>
-
-    <div class="form-row">
-      <button [disabled]="!formGroup.valid" type="submit">Save</button>
+    <div>
+      <button [disabled]="!formGroup.valid" type="submit" class="btn btn-secondary">Submit</button>
     </div>
   </form>
-
-  <div *ngIf="payLoad" class="form-row">
-    <strong>Saved the following values</strong><br>{{payLoad}}
-  </div>
 </div>
