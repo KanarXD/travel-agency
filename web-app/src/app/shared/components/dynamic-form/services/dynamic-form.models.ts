@@ -79,6 +79,6 @@ export class DateQuestion extends Question {
   }
 }
 
-export interface QuestionService {
-  getQuestions(): Observable<Question[]>;
+export abstract class QuestionService {
+  abstract getQuestions(): Observable<Question[]>;
 }

@@ -9,9 +9,9 @@ export enum ServerApiAction {
   More = 'more'
 }
 
-export interface ServerApiFilter {
-  currentPage: number;
-  itemsPerPage: number;
+export class ServerApiFilter {
+  currentPage: number = 0;
+  itemsPerPage: number = 5;
 }
 
 export type ResponseData<T> = {

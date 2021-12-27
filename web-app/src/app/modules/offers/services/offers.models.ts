@@ -10,9 +10,7 @@ export interface OfferModel {
   end_date: string
 }
 
-export class OfferFilters implements ServerApiFilter {
-  currentPage: number = 0;
-  itemsPerPage: number = 5;
+export class OfferFilters extends ServerApiFilter {
 }
 
 export enum OfferPrivilege {

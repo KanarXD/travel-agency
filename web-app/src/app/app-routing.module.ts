@@ -7,6 +7,8 @@ import {NavRoutes} from "./shared/utils/app.models";
 import {ServerGuard} from "./shared/services/server.guard";
 import {OfferPrivilege} from "./modules/offers/services/offers.models";
 import {EmployeePrivilege} from "./modules/employees/services/employees.models";
+import {HotelsComponent} from "./modules/hotels/components/hotels/hotels.component";
+import {CarriersComponent} from "./modules/carriers/components/carriers/carriers.component";
 
 export const appNavRoutes: NavRoutes = [
   {title: 'HOME', path: '', component: HomeComponent, inNavBar: true},
@@ -14,6 +16,22 @@ export const appNavRoutes: NavRoutes = [
     title: 'OFFERS',
     path: 'offers',
     component: OffersComponent,
+    canActivate: [ServerGuard],
+    data: {privilege: OfferPrivilege.READ},
+    inNavBar: true
+  },
+  {
+    title: 'HOTELS',
+    path: 'hotels',
+    component: HotelsComponent,
+    canActivate: [ServerGuard],
+    data: {privilege: OfferPrivilege.READ},
+    inNavBar: true
+  },
+  {
+    title: 'CARRIERS',
+    path: 'carriers',
+    component: CarriersComponent,
     canActivate: [ServerGuard],
     data: {privilege: OfferPrivilege.READ},
     inNavBar: true

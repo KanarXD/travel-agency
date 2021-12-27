@@ -11,11 +11,11 @@ import {ItemAction} from "../../../utils/app.models";
 export class DataGridRowComponent {
   @Input() data!: { [s: string]: string };
   @Input() config!: DataGridRowConfig<any>[];
-  @Input() itemAction!: Subject<ItemAction<any>>;
+  @Input() itemAction$!: Subject<ItemAction<any>>;
 
   onAction(type: HttpMethodName | undefined, item: any) {
     if (!!type) {
-      this.itemAction.next({type, item});
+      this.itemAction$.next({type, item});
     }
   }
 

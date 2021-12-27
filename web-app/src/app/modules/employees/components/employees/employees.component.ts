@@ -1,17 +1,29 @@
 import {Component, OnInit} from '@angular/core';
-import {Subject} from "rxjs";
-import {ItemAction} from "../../../../shared/utils/app.models";
-import {OfferModel} from "../../../offers/services/offers.models";
+import {EmployeesService} from "../../services/employees.service";
+import {DataGridRowConfig} from "../../../../shared/components/data-grid/data-grid.models";
+import {EmployeeKeys} from "../../services/employees.models";
 
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html'
 })
 export class EmployeesComponent implements OnInit {
-  itemAction$: Subject<ItemAction<OfferModel>> = new Subject();
+  dataGridConfig!: DataGridRowConfig<EmployeeKeys>[];
 
-
-  ngOnInit(): void {
+  constructor(
+    private _employeesService: EmployeesService
+  ) {
   }
 
+  ngOnInit(): void {
+    this.dataGridConfig = [
+      {key: 'id'},
+      {key: 'name'},
+    ];
+  }
+
+
+  get employeesService(): EmployeesService {
+    return this._employeesService;
+  }
 }

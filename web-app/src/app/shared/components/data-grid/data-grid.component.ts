@@ -11,6 +11,6 @@ import {ItemAction} from "../../utils/app.models";
 export class DataGridComponent {
   @Input() data!: any[];
   @Input() config!: DataGridRowConfig<any>[];
-  @Input() itemAction!: Subject<ItemAction<any>>;
+  @Input() itemAction$!: Subject<ItemAction<any>>;
 
 }

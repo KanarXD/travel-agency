@@ -13,7 +13,7 @@ import {Observable, of} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class OffersQuestionsService implements QuestionService {
+export class OffersQuestionsService extends QuestionService {
 
   getQuestions(): Observable<Question[]> {
     let questions: Question[] = [

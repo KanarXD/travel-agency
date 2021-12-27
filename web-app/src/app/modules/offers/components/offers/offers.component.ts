@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {OffersApiService} from "../../services/offers.api.service";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
-import {OfferFilters, OfferKeys, OfferModel} from "../../services/offers.models";
+import {OfferFilters, OfferKeys, OfferModel, OfferPrivilege} from "../../services/offers.models";
 import {DataGridRowConfig, FieldType} from "../../../../shared/components/data-grid/data-grid.models";
 import {ResponseData, ServerApiAction} from "../../../../shared/services/api.models";
 import {CoreService} from "../../../../shared/services/core.service";
@@ -17,7 +17,7 @@ export class OffersComponent implements OnInit, AfterViewInit {
   filters$: BehaviorSubject<OfferFilters> = new BehaviorSubject(new OfferFilters());
   offers$!: Observable<ResponseData<OfferModel>>;
   dataGridConfig!: DataGridRowConfig<OfferKeys>[];
-  questions$: Observable<Question[]>;
+  questions$!: Observable<Question[]>;
   itemAction$: Subject<ItemAction<OfferModel>> = new Subject();
 
   constructor(
@@ -25,18 +25,20 @@ export class OffersComponent implements OnInit, AfterViewInit {
     private coreService: CoreService,
     private offersQuestionService: OffersQuestionsService
   ) {
-    this.questions$ = offersQuestionService.getQuestions();
   }
 
   ngOnInit(): void {
+    this.questions$ = this.offersQuestionService.getQuestions();
     this.dataGridConfig = [
       {key: 'id'},
       {key: 'name'},
       {key: 'basePrice'},
       {key: 'startDate'},
-      {key: 'endDate'},
-      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove},
+      {key: 'endDate'}
     ];
+    if (this.coreService.userStatus$.getValue().privilegeList.includes(OfferPrivilege.DELETE)) {
+      this.dataGridConfig.push({header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove});
+    }
   }
 
   ngAfterViewInit(): void {
@@ -47,9 +49,10 @@ export class OffersComponent implements OnInit, AfterViewInit {
           this.offersApiService.remove(itemAction.item.id).subscribe(_ => this.fetch());
           break;
         case "add":
-          let offer: any = itemAction.item;
+          let offer: OfferModel = itemAction.item;
           console.log('add item');
           console.log(offer);
+          this.offersApiService.add(offer).subscribe(_ => this.fetch());
           break;
       }
     });
@@ -60,11 +63,9 @@ export class OffersComponent implements OnInit, AfterViewInit {
   }
 
   fetch() {
-    this.coreService.userStatus$.subscribe(({isLogged}) => {
-      if (isLogged) {
-        this.offers$ = this.offersApiService.fetch(this.filters$.value)
-      }
-    });
+    if (this.coreService.userStatus$.getValue().isLogged) {
+      this.offers$ = this.offersApiService.fetch(this.filters$.value);
+    }
   }
 
 }
