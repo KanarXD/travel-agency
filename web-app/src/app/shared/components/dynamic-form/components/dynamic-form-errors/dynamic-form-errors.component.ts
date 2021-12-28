@@ -9,7 +9,7 @@ import {ValidationErrors} from "@angular/forms";
 export class DynamicFormErrorsComponent {
   @Input() errors?: ValidationErrors | null;
 
-  // getErrors(): string {
-  //   return JSON.stringify(this.errors);
-  // }
+  getErrors(): string {
+    return JSON.stringify(this.errors);
+  }
 }

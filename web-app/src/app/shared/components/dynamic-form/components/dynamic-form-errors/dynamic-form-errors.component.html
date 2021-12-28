@@ -6,6 +6,9 @@
     <div *ngIf="errors?.['minlength'] as error">
       min length: {{error.requiredLength}}, actual length: {{error.actualLength}}
     </div>
+    <div *ngIf="errors?.['maxlength'] as error">
+      max length: {{error.requiredLength}}, actual length: {{error.actualLength}}
+    </div>
     <div *ngIf="errors?.['pattern']">
       wrong value
     </div>

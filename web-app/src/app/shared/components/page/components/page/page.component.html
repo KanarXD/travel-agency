@@ -1,11 +1,12 @@
 <div class="row">
   <div *ngIf="items$ | async as offers">
     <div class="row">
-      <div class="col-4">
+      <div *ngIf="coreService.hasPrivilege(pagePrivileges.read)" class="col-3">
         <app-add-item [itemAction$]="itemAction$" [questions]="questions$ | async" title="New"></app-add-item>
       </div>
-      <div class="col-8">
-        <ngb-pagination (pageChange)="updateFilters({currentPage: $event - 1 || 0})" [collectionSize]="offers.total"
+      <div class="col-9">
+        <ngb-pagination (pageChange)="updateFilters({currentPage: $event - 1 || 0})"
+                        [collectionSize]="offers.total"
                         [maxSize]="10"
                         [pageSize]="(filters$|async)!.itemsPerPage" [page]="(filters$|async)!.currentPage + 1"
                         [rotate]="true"

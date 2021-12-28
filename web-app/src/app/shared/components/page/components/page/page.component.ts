@@ -6,7 +6,7 @@ import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {ItemAction} from "../../../../utils/app.models";
 import {ResponseData, ServerApiFilter} from "../../../../services/api.models";
 import {DataGridRowConfig} from "../../../data-grid/data-grid.models";
-import {Item} from "../../services/page.models";
+import {Item, PagePrivileges} from "../../services/page.models";
 
 @Component({
   selector: 'app-page',
@@ -16,6 +16,7 @@ export class PageComponent implements OnInit, AfterViewInit {
   @Input() serverApiService!: ServerApiService<Item>;
   @Input() dataGridConfig!: DataGridRowConfig<unknown>[];
   @Input() questionService!: QuestionService;
+  @Input() pagePrivileges: PagePrivileges = {};
 
   questions$!: Observable<Question[]>;
   filters$: BehaviorSubject<ServerApiFilter> = new BehaviorSubject(new ServerApiFilter());
@@ -23,7 +24,7 @@ export class PageComponent implements OnInit, AfterViewInit {
   items$!: Observable<ResponseData<Item>>;
 
   constructor(
-    private coreService: CoreService
+    public coreService: CoreService
   ) {
   }
 
@@ -38,9 +39,17 @@ export class PageComponent implements OnInit, AfterViewInit {
     this.itemAction$.subscribe((itemAction: ItemAction<Item>) => {
       switch (itemAction.type) {
         case "remove":
+          if (!this.coreService.hasPrivilege(this.pagePrivileges.delete)) {
+            console.log(`Privilege: ${this.pagePrivileges.delete} required`);
+            break;
+          }
           this.serverApiService.remove(itemAction.item.id).subscribe(_ => this.fetch());
           break;
         case "add":
+          if (!this.coreService.hasPrivilege(this.pagePrivileges.update)) {
+            console.log(`Privilege: ${this.pagePrivileges.update} required`);
+            break;
+          }
           let item = itemAction.item;
           console.log('add item');
           console.log(item);

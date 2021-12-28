@@ -1,16 +1,19 @@
-<div [formGroup]="formGroup" class="form-control">
-  <label [for]="question.options.key">{{question.options.label}}</label>
+<div [formGroup]="formGroup" class="mb-3">
+  <label [for]="question.options.key" class="mb-1">{{question.options.label}}</label>
   <div [ngSwitch]="question.controlType">
 
     <input *ngSwitchCase="'TextBox'" [formControlName]="question.options.key" [id]="question.options.key"
-           [type]="question.options.type">
+           [placeholder]="question.options.label" [type]="question.options.type"
+           class="form-control">
 
-    <select *ngSwitchCase="'Dropdown'" [formControlName]="question.options.key" [id]="question.options.key">
+    <select *ngSwitchCase="'Dropdown'" [formControlName]="question.options.key" [id]="question.options.key"
+            class="form-control">
       <option *ngFor="let opt of question.options.options" [value]="opt.key">{{opt.value}}</option>
     </select>
 
     <input *ngSwitchCase="'Date'" [formControlName]="question.options.key" [id]="question.options.key"
-           [type]="question.options.type">
+           [placeholder]="question.options.label" [type]="question.options.type"
+           class="form-control">
 
   </div>
   <div *ngIf="formControl?.invalid && (formControl?.dirty || formControl?.touched)">

@@ -17,7 +17,8 @@ export class HotelsQuestionsService extends QuestionService {
       new TextBoxQuestion(
         new FormControl(null, [
           Validators.required,
-          Validators.minLength(3)
+          Validators.minLength(5),
+          Validators.maxLength(25)
         ]), {
           key: 'name',
           label: 'Name',
@@ -26,7 +27,8 @@ export class HotelsQuestionsService extends QuestionService {
       new TextBoxQuestion(
         new FormControl(null, [
           Validators.required,
-          Validators.minLength(5)
+          Validators.minLength(5),
+          Validators.maxLength(25)
         ]), {
           key: 'location',
           label: 'Location'

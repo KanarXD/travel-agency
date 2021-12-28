@@ -11,7 +11,7 @@ import {DynamicFormComponent} from "./components/dynamic-form/components/dynamic
 import {
   DynamicFormErrorsComponent
 } from './components/dynamic-form/components/dynamic-form-errors/dynamic-form-errors.component';
-import { PageComponent } from './components/page/components/page/page.component';
+import {PageComponent} from './components/page/components/page/page.component';
 import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
@@ -30,12 +30,12 @@ import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
     AddItemComponent,
     PageComponent,
   ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        NgbPaginationModule
-    ]
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbPaginationModule
+  ]
 })
 export class SharedModule {
 }

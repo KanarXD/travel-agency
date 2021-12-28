@@ -15,15 +15,14 @@ export class EmployeesComponent implements OnInit {
   ) {
   }
 
+  get employeesService(): EmployeesService {
+    return this._employeesService;
+  }
+
   ngOnInit(): void {
     this.dataGridConfig = [
       {key: 'id'},
       {key: 'name'},
     ];
-  }
-
-
-  get employeesService(): EmployeesService {
-    return this._employeesService;
   }
 }
