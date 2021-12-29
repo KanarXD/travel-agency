@@ -19,7 +19,6 @@ export class PageComponent implements OnInit, AfterViewInit {
   @Input() pagePrivileges: PagePrivileges = {};
 
   questions$!: Observable<Question[]>;
-
   filters$: BehaviorSubject<ServerApiFilter> = new BehaviorSubject(new ServerApiFilter());
   itemAction$: Subject<ItemAction<Item>> = new Subject();
   items$!: Observable<ResponseData<Item>>;
