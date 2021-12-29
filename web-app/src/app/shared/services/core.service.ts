@@ -15,4 +15,8 @@ export class CoreService {
     return this._userStatus$;
   }
 
+  hasPrivilege(privilege: string | undefined): boolean {
+    return privilege ? this.userStatus$.getValue().privilegeList.includes(privilege) : true;
+  }
+
 }

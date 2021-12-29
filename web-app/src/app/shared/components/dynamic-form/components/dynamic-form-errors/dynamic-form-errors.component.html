@@ -1,0 +1,19 @@
+<div *ngIf="errors">
+  <small class="badge bg-danger mr-1">
+    <div *ngIf="errors?.['required']">
+      required
+    </div>
+    <div *ngIf="errors?.['minlength'] as error">
+      min length: {{error.requiredLength}}, actual length: {{error.actualLength}}
+    </div>
+    <div *ngIf="errors?.['maxlength'] as error">
+      max length: {{error.requiredLength}}, actual length: {{error.actualLength}}
+    </div>
+    <div *ngIf="errors?.['pattern']">
+      wrong value
+    </div>
+    <!--    <div>-->
+    <!--      {{getErrors()}}-->
+    <!--    </div>-->
+  </small>
+</div>

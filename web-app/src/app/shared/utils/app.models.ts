@@ -1,4 +1,5 @@
 import {Route} from "@angular/router";
+import {HttpMethodName} from "../services/api.models";
 
 export type NavRoutes = NavRoute[];
 
@@ -11,5 +12,11 @@ export interface UserStatus {
   isLogged: boolean;
   privilegeList: string[];
 }
+
+export interface ItemAction<T> {
+  type: HttpMethodName,
+  item: T
+}
+
 
 

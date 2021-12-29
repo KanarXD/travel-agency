@@ -8,7 +8,7 @@
 
 ### database:
 
-* `docker-compose up -d`
+* run `docker-compose up -d`
 
 ### server-app:
 
@@ -16,6 +16,7 @@
 
 ### web-app:
 
+* download dependencies `npm install`
 * run `ng serve`
 * http://localhost:5000
 

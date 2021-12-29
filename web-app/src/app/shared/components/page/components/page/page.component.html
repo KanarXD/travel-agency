@@ -1,0 +1,26 @@
+<div class="row">
+  <div *ngIf="items$ | async as items">
+    <div class="row">
+      <div class="col-3">
+        <div *ngIf="questionService && coreService.hasPrivilege(pagePrivileges.update)">
+          <app-add-item *ngIf="questions$ | async as questions"
+                        [itemAction$]="itemAction$" [questions]="questions" title="New">
+
+          </app-add-item>
+        </div>
+      </div>
+      <div class="col-9">
+        <ngb-pagination (pageChange)="updateFilters({currentPage: $event - 1 || 0})"
+                        [collectionSize]="items.total"
+                        [maxSize]="10"
+                        [pageSize]="(filters$|async)!.itemsPerPage" [page]="(filters$|async)!.currentPage + 1"
+                        [rotate]="true"
+                        size="sm">
+        </ngb-pagination>
+      </div>
+    </div>
+    <div class="row">
+      <app-data-grid [config]="dataGridConfig" [data]="items.data" [itemAction$]="itemAction$"></app-data-grid>
+    </div>
+  </div>
+</div>

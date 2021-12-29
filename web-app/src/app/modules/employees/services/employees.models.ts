@@ -1,11 +1,11 @@
 import {ServerApiFilter} from "../../../shared/services/api.models";
+import {Item} from "../../../shared/components/page/services/page.models";
 
-export interface EmployeeModel {
-  id: number,
+export type EmployeeKeys = 'id' | 'name';
+
+export interface EmployeeModel extends Item {
   name: string,
-  base_price: number,
-  start_date: string,
-  end_date: string
+
 }
 
 export class EmployeeFilters implements ServerApiFilter {

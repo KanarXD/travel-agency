@@ -1,4 +1,4 @@
-import {HttpMethodName, ServerApiAction} from "../../services/api.models";
+import {ServerApiAction} from "../../services/api.models";
 
 export interface DataGridRowConfig<T> {
   key?: T;
@@ -13,9 +13,3 @@ export enum FieldType {
   IMAGE = 'img',
   BUTTON = 'button'
 }
-
-export interface ItemAction<T> {
-  type: HttpMethodName,
-  item: T
-}
-
