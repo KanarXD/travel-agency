@@ -30,9 +30,9 @@ export class OffersComponent implements OnInit {
     this.dataGridConfig = [
       {key: 'id'},
       {key: 'name'},
-      {key: 'basePrice'},
-      {key: 'startDate'},
-      {key: 'endDate'},
+      {key: 'basePrice', header: 'Base Price'},
+      {key: 'startDate', header: 'Start Date'},
+      {key: 'endDate', header: 'End Date'},
       {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove}
     ];
   }

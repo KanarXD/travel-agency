@@ -2,8 +2,12 @@
   <div *ngIf="items$ | async as items">
     <div class="row">
       <div class="col-3">
-        <app-add-item *ngIf="coreService.hasPrivilege(pagePrivileges.update)" [itemAction$]="itemAction$"
-                      [questions]="questions$ | async" title="New"></app-add-item>
+        <div *ngIf="questionService && coreService.hasPrivilege(pagePrivileges.update)">
+          <app-add-item *ngIf="questions$ | async as questions"
+                        [itemAction$]="itemAction$" [questions]="questions" title="New">
+
+          </app-add-item>
+        </div>
       </div>
       <div class="col-9">
         <ngb-pagination (pageChange)="updateFilters({currentPage: $event - 1 || 0})"

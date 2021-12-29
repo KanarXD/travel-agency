@@ -1,28 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {EmployeesService} from "../../services/employees.service";
-import {DataGridRowConfig} from "../../../../shared/components/data-grid/data-grid.models";
-import {EmployeeKeys} from "../../services/employees.models";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html'
 })
-export class EmployeesComponent implements OnInit {
-  dataGridConfig!: DataGridRowConfig<EmployeeKeys>[];
+export class EmployeesComponent {
 
-  constructor(
-    private _employeesService: EmployeesService
-  ) {
-  }
-
-  get employeesService(): EmployeesService {
-    return this._employeesService;
-  }
-
-  ngOnInit(): void {
-    this.dataGridConfig = [
-      {key: 'id'},
-      {key: 'name'},
-    ];
-  }
 }

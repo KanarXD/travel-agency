@@ -2,7 +2,7 @@ import {FormControl} from "@angular/forms";
 import {Observable} from "rxjs";
 
 export interface Option {
-  key: string;
+  key: string | number;
   value: string;
 }
 

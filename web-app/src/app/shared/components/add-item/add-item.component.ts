@@ -17,6 +17,7 @@ export class AddItemComponent {
   }
 
   async open(content: TemplateRef<NgbModal>) {
+    // debugger;
     this.modalService.open(content).result.then(
       (result) => {
         console.log("closed");

@@ -1,14 +1,3 @@
-<!--<app-add-item-->
-<!--              [itemAction$]="itemAction$" [questions]="questions$ | async" title="New Offer"></app-add-item>-->
-<!--<div *ngIf="offers$ | async as offers">-->
-<!--  <ngb-pagination (pageChange)="updateFilters({currentPage: $event - 1 || 0})" [collectionSize]="offers.total"-->
-<!--                  [maxSize]="5"-->
-<!--                  [pageSize]="(filters$|async)!.itemsPerPage" [page]="(filters$|async)!.currentPage + 1"-->
-<!--                  [rotate]="true"-->
-<!--                  size="sm">-->
-<!--  </ngb-pagination>-->
-<!--  <app-data-grid [config]="dataGridConfig" [data]="offers.data" [itemAction$]="itemAction$"></app-data-grid>-->
-<!--</div>-->
 <app-page
   [dataGridConfig]="dataGridConfig"
   [pagePrivileges]="pagePrivileges"
