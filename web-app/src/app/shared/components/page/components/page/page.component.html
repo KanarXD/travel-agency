@@ -3,9 +3,8 @@
     <div class="row">
       <div class="col-2">
         <div *ngIf="questionService && coreService.hasPrivilege(pagePrivileges.update)">
-          <app-add-item *ngIf="questions$ | async as questions"
-                        [itemAction$]="itemAction$" [questions]="questions" title="New">
-
+          <app-add-item *ngIf="questions$ | async as questions" [itemAction$]="itemAction$"
+                        [questions]="questions" title="New">
           </app-add-item>
         </div>
       </div>
