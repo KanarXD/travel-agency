@@ -59,8 +59,12 @@ export class PageComponent implements OnInit, AfterViewInit {
     });
   }
 
-  updateFilters(param: { currentPage: number }) {
-    this.filters$.next({...this.filters$.value, ...param});
+  updateFilters(params: any) {
+    this.filters$.next({
+      ...this.filters$.getValue(),
+      ...params
+    });
+    // this.filters$.next({...this.filters$.value, ...param});
   }
 
   fetch() {
