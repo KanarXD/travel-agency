@@ -11,7 +11,7 @@
       <div class="col-1">
         <select [ngModel]="filters$.getValue().itemsPerPage" class="form-control" #ipp
                 (change)="updateFilters({ itemsPerPage: ipp.value })">
-          <option *ngFor="let itemsPerPageOption of [2, 5, 10]">{{itemsPerPageOption}}</option>
+          <option *ngFor="let itemsPerPageOption of [5, 10, 20]">{{itemsPerPageOption}}</option>
         </select>
       </div>
       <div class="col-9">
