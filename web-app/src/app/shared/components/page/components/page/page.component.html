@@ -1,20 +1,20 @@
 <div class="row">
   <div *ngIf="items$ | async as items">
     <div class="row">
-      <div class="col-2">
+      <div class="col-1">
         <div *ngIf="questionService && coreService.hasPrivilege(pagePrivileges.update)">
           <app-add-item *ngIf="questions$ | async as questions" [itemAction$]="itemAction$"
-                        [questions]="questions" title="New">
+                        [questions]="questions" title="New {{itemName}}">
           </app-add-item>
         </div>
       </div>
       <div class="col-1">
-        <select [ngModel]="filters$.getValue().itemsPerPage" class="form-control" #ipp
+        <select [ngModel]="filters$.getValue().itemsPerPage" class="form-control text-center" #ipp
                 (change)="updateFilters({ itemsPerPage: ipp.value })">
           <option *ngFor="let itemsPerPageOption of [5, 10, 20]">{{itemsPerPageOption}}</option>
         </select>
       </div>
-      <div class="col-9">
+      <div class="col-10">
         <ngb-pagination (pageChange)="updateFilters({currentPage: $event - 1 || 0})"
                         [collectionSize]="items.total"
                         [maxSize]="10"

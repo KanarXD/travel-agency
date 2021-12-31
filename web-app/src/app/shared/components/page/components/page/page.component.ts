@@ -17,6 +17,7 @@ export class PageComponent implements OnInit, AfterViewInit {
   @Input() dataGridConfig!: DataGridRowConfig<unknown>[];
   @Input() questionService!: QuestionService;
   @Input() pagePrivileges: PagePrivileges = {};
+  @Input() itemName!: string;
 
   questions$!: Observable<Question[]>;
   filters$: BehaviorSubject<ServerApiFilter> = new BehaviorSubject(new ServerApiFilter());
