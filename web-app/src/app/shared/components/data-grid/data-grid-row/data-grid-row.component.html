@@ -9,13 +9,11 @@
 
   <div *ngSwitchCase="'input'" class="form-inline">
     <input (input)="onAction('update', data)" [(ngModel)]="data[row.key]"
-           [disabled]="row.access ? !(row.access | async) : false"
            class="form-control form-control-sm" type="number">
   </div>
 
   <div *ngSwitchCase="'button'" class="form-inline">
-    <button (click)="onAction(row.action, data)" [disabled]="row.access ? !(row.access | async) : false"
-            class="btn btn-secondary btn-sm">{{row.header}}</button>
+    <button (click)="onAction(row.action, data)" class="btn btn-secondary btn-sm">{{row.header}}</button>
   </div>
 
   <div *ngSwitchDefault>

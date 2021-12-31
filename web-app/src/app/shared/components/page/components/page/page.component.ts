@@ -32,6 +32,8 @@ export class PageComponent implements OnInit, AfterViewInit {
     if (this.questionService) {
       this.questions$ = this.questionService.getQuestions();
     }
+    this.dataGridConfig = this.dataGridConfig.filter((dataGridRowConfig: DataGridRowConfig<unknown>) =>
+      this.coreService.hasPrivilege(dataGridRowConfig.privilege));
   }
 
   ngAfterViewInit(): void {
@@ -64,7 +66,6 @@ export class PageComponent implements OnInit, AfterViewInit {
       ...this.filters$.getValue(),
       ...params
     });
-    // this.filters$.next({...this.filters$.value, ...param});
   }
 
   fetch() {

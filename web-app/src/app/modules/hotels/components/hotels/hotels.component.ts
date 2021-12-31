@@ -30,7 +30,7 @@ export class HotelsComponent implements OnInit {
       {key: 'id'},
       {key: 'name'},
       {key: 'location'},
-      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove}
+      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove, privilege: OfferPrivileges.DELETE}
     ];
   }
 

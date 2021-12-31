@@ -4,7 +4,7 @@ export interface DataGridRowConfig<T> {
   key?: T;
   type?: FieldType;
   header?: string;
-  access?: any;
+  privilege?: string;
   action?: ServerApiAction;
 }
 

@@ -33,7 +33,7 @@ export class OffersComponent implements OnInit {
       {key: 'basePrice', header: 'Base Price'},
       {key: 'startDate', header: 'Start Date'},
       {key: 'endDate', header: 'End Date'},
-      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove}
+      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove, privilege: OfferPrivileges.DELETE}
     ];
   }
 
