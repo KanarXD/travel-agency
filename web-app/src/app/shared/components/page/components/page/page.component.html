@@ -1,16 +1,20 @@
-<div class="row">
-  <div *ngIf="items$ | async as items">
-    <div class="row justify-content-start">
+<div *ngIf="items$ | async as items" class="row">
+  <div *ngIf="searchQuestions$ | async as questions" class="col-3">
+    <app-search (searchChange)="updateFilters($event)" [questions]="questions"></app-search>
+    <!--    <app-search [questions]="questions"></app-search>-->
+  </div>
+  <div [class]="searchQuestions$ ? 'col-9' : 'col-12'">
+    <div class="row">
       <div class="col-md-auto">
-        <div *ngIf="questionService && coreService.hasPrivilege(pagePrivileges.update)">
-          <app-add-item *ngIf="questions$ | async as questions" [itemAction$]="itemAction$"
+        <div *ngIf="addItemQuestions$ && coreService.hasPrivilege(pagePrivileges.update)">
+          <app-add-item *ngIf="addItemQuestions$ | async as questions" [itemAction$]="itemAction$"
                         [questions]="questions" title="New {{itemName}}">
           </app-add-item>
         </div>
       </div>
       <div class="col-md-auto">
-        <select [ngModel]="filters$.getValue().itemsPerPage" class="btn btn-light btn-group-vertical border" #ipp
-                (change)="updateFilters({ itemsPerPage: ipp.value })">
+        <select #ipp (change)="updateFilters({ itemsPerPage: ipp.value })" [ngModel]="filters$.getValue().itemsPerPage"
+                class="btn btn-light btn-group-vertical border">
           <option *ngFor="let itemsPerPageOption of [5, 10, 20]">{{itemsPerPageOption}}</option>
         </select>
       </div>

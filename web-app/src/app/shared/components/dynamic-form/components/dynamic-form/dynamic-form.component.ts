@@ -8,6 +8,7 @@ import {Question} from "../../services/dynamic-form.models";
 })
 export class DynamicFormComponent implements OnInit {
   @Input() questions: Question[] = [];
+  @Input() submitButton!: string;
   @Output() submittedResult: EventEmitter<any> = new EventEmitter<any>();
   @Output() @ViewChild('ngForm') ngForm!: NgForm;
   formGroup!: FormGroup;

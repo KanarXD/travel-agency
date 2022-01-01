@@ -13,6 +13,7 @@ import {
 } from './components/dynamic-form/components/dynamic-form-errors/dynamic-form-errors.component';
 import {PageComponent} from './components/page/components/page/page.component';
 import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
+import {SearchComponent} from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
     DynamicFormQuestionComponent,
     DynamicFormComponent,
     DynamicFormErrorsComponent,
-    PageComponent
+    PageComponent,
+    SearchComponent
   ],
   exports: [
     DataGridComponent,

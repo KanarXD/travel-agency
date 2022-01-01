@@ -3,9 +3,10 @@ import {OffersApiService} from "../../services/offers.api.service";
 import {OfferKeys} from "../../services/offers.models";
 import {DataGridRowConfig, FieldType} from "../../../../shared/components/data-grid/data-grid.models";
 import {ServerApiAction} from "../../../../shared/services/api.models";
-import {OffersQuestionsService} from "../../services/offers.questions.service";
+import {AddOffersQuestionsService} from "../../services/add-offers.questions.service";
 import {PagePrivileges} from "../../../../shared/components/page/services/page.models";
 import {OfferPrivileges} from "../../../hotels/services/hotels.models";
+import {SearchOffersQuestionsService} from "../../services/search-offers.questions.service";
 
 @Component({
   selector: 'app-offers',
@@ -17,7 +18,8 @@ export class OffersComponent implements OnInit {
 
   constructor(
     public offersApiService: OffersApiService,
-    public offersQuestionService: OffersQuestionsService
+    public addOffersQuestionService: AddOffersQuestionsService,
+    public searchOffersQuestionsService: SearchOffersQuestionsService
   ) {
   }
 

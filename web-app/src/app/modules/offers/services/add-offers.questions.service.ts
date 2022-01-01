@@ -17,13 +17,13 @@ import {ResponseData} from "../../../shared/services/api.models";
 @Injectable({
   providedIn: 'root'
 })
-export class OffersQuestionsService extends QuestionService {
+export class AddOffersQuestionsService extends QuestionService {
 
   constructor(
     private hotelsApiService: HotelsApiService
   ) {
     super();
-    console.log("OffersQuestionsService created")
+    console.log("AddOffersQuestionsService created")
   }
 
   override getQuestions(): Observable<Question[]> {
