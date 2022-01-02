@@ -28,8 +28,4 @@ export class DynamicFormComponent implements OnInit {
     this.submittedResult.emit(this.formGroup.getRawValue());
   }
 
-  track(id : number) {
-    return id;
-  }
-
 }
