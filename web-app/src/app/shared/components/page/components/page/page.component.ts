@@ -83,7 +83,7 @@ export class PageComponent implements OnInit, AfterViewInit {
       tap((responseData: ResponseData<Item>) => {
         responseData.data.forEach((item: Item) => {
           this.dataGridConfig.forEach((config: DataGridRowConfig<string>) => {
-            if (config.key && config.service) {
+            if (config.key && config.service && item[config.key]) {
               item[config.key] = config.service.get(item[config.key]).pipe(map((item: Item) => item.name));
             }
           });

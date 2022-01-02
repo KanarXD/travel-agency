@@ -49,41 +49,37 @@ export class AddOffersQuestionsService extends QuestionService {
 
   createQuestionList([hotelOptionList]: [Option[]]): Question[] {
     return [
-      new TextBoxQuestion(
-        new FormControl(null, [
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(25)
-        ]), {
-          key: 'name',
-          label: 'Name',
-          type: 'text'
-        }),
-      new TextBoxQuestion(
-        new FormControl(null, [
-          Validators.required,
-          Validators.pattern('[1-9]+[0-9]*')
-        ]), {
-          key: 'basePrice',
-          label: 'Base price',
-          type: 'number'
-        }),
-      new DateQuestion(
-        new FormControl(null, [
-          Validators.required
-        ]), {
-          key: 'startDate',
-          label: 'Start date'
-        }),
-      new DateQuestion(
-        new FormControl(null, [
-          Validators.required
-        ]), {
-          key: 'endDate',
-          label: 'End date'
-        }),
+      new TextBoxQuestion({
+        key: 'name',
+        label: 'Name',
+        type: 'text'
+      }, new FormControl(null, [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(25)
+      ])),
+      new TextBoxQuestion({
+        key: 'basePrice',
+        label: 'Base price',
+        type: 'number'
+      }, new FormControl(null, [
+        Validators.required,
+        Validators.pattern('[1-9]+[0-9]*')
+      ])),
+      new DateQuestion({
+        key: 'startDate',
+        label: 'Start date'
+      }, new FormControl(null, [
+        Validators.required
+      ])),
+      new DateQuestion({
+        key: 'endDate',
+        label: 'End date'
+      }, new FormControl(null, [
+        Validators.required
+      ])),
       new DropdownQuestion(
-        new FormControl(null), {
+        {
           key: 'hotelId',
           label: 'Hotel',
           options: hotelOptionList

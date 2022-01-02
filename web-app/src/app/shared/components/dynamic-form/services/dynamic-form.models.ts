@@ -16,31 +16,31 @@ export interface QuestionOptions {
 
 export class Question {
   controlType: string;
-  formControl: FormControl
   options: QuestionOptions;
+  formControl?: FormControl
 
-  constructor(controlType: string, formControl: FormControl, options: QuestionOptions) {
+  constructor(controlType: string, options: QuestionOptions, formControl?: FormControl) {
     this.controlType = controlType;
-    this.formControl = formControl;
     this.options = options;
+    this.formControl = formControl;
   }
 }
 
 export class TextBoxQuestion extends Question {
-  constructor(formControl: FormControl, options: QuestionOptions) {
-    super('TextBox', formControl, options);
+  constructor(options: QuestionOptions, formControl?: FormControl) {
+    super('TextBox', options, formControl);
   }
 }
 
 export class DropdownQuestion extends Question {
-  constructor(formControl: FormControl, options: QuestionOptions) {
-    super('Dropdown', formControl, options);
+  constructor(options: QuestionOptions, formControl?: FormControl) {
+    super('Dropdown', options, formControl);
   }
 }
 
 export class DateQuestion extends Question {
-  constructor(formControl: FormControl, options: QuestionOptions) {
-    super('Date', formControl, {...options, type: 'date'});
+  constructor(options: QuestionOptions, formControl?: FormControl) {
+    super('Date', {...options, type: 'date'}, formControl);
   }
 }
 

@@ -10,7 +10,6 @@ import {debounceTime, filter} from "rxjs";
 export class SearchComponent implements AfterViewInit {
   @Input() questions: Question[] = [];
   @Output() searchChange: EventEmitter<any> = new EventEmitter();
-  // @Input() filters$:
   @ViewChild('dynamicForm') dynamicForm!: DynamicFormComponent;
 
   ngAfterViewInit(): void {

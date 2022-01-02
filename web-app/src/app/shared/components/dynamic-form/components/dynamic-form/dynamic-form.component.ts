@@ -15,9 +15,9 @@ export class DynamicFormComponent implements OnInit {
 
   ngOnInit() {
     let formControlMap: { [key: string]: FormControl } = {};
-    this.questions.forEach(question => {
-      formControlMap[question.options.key] = question.formControl;
-    });
+    this.questions.forEach(question => question.formControl ?
+      formControlMap[question.options.key] = question.formControl :
+      formControlMap[question.options.key] = new FormControl());
     this.formGroup = new FormGroup(formControlMap);
   }
 
