@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/offers")
@@ -21,6 +22,12 @@ public class OfferController {
     @GetMapping
     public ResponseData<List<Offer>> getOffers(@ModelAttribute Filter filter) {
         return offerService.getOffers(filter);
+    }
+
+    @PreAuthorize("hasRole('OFFERS_READ')")
+    @GetMapping("/{id}")
+    public Optional<Offer> getOffer(@PathVariable Integer id) {
+        return offerService.getOffer(id);
     }
 
     @PreAuthorize("hasRole('OFFERS_UPDATE')")

@@ -2,10 +2,17 @@ package edu.put.server.models.filters;
 
 import lombok.Data;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 @Data
 public class Filter {
 
-    private int currentPage;
-    private int itemsPerPage;
+    @NotNull
+    private Integer currentPage;
+
+    @NotNull
+    @Min(1)
+    private Integer itemsPerPage;
 
 }
