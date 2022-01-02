@@ -15,6 +15,9 @@ VALUES ('Sheraton', 'Poznań');
 INSERT INTO hotels(name, location)
 VALUES ('Gołębieski', 'Mikołajki');
 
+INSERT INTO hotels(name, location)
+VALUES ('Super hotel', 'Antarktyda');
+
 INSERT INTO carriers(name)
 VALUES ('bus');
 
