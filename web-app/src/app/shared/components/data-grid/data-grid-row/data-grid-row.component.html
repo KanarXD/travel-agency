@@ -16,6 +16,10 @@
     <button (click)="onAction(row.action, data)" class="btn btn-secondary btn-sm">{{row.header}}</button>
   </div>
 
+  <div *ngSwitchCase="'reference'">
+    <ng-container *ngIf="data[row.key] | async as columnData">{{columnData}}</ng-container>
+  </div>
+
   <div *ngSwitchDefault>
     {{data[row.key]}}
   </div>

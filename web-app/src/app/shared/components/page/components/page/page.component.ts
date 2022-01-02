@@ -2,7 +2,7 @@ import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {ServerApiService} from "../../../../services/server.api.service";
 import {CoreService} from "../../../../services/core.service";
 import {Question, QuestionService} from "../../../dynamic-form/services/dynamic-form.models";
-import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {BehaviorSubject, map, Observable, Subject, tap} from "rxjs";
 import {ItemAction} from "../../../../utils/app.models";
 import {ResponseData, ServerApiFilter} from "../../../../services/api.models";
 import {DataGridRowConfig} from "../../../data-grid/data-grid.models";
@@ -14,7 +14,7 @@ import {Item, PagePrivileges} from "../../services/page.models";
 })
 export class PageComponent implements OnInit, AfterViewInit {
   @Input() serverApiService!: ServerApiService<Item>;
-  @Input() dataGridConfig!: DataGridRowConfig<unknown>[];
+  @Input() dataGridConfig!: DataGridRowConfig<string>[];
   @Input() addItemQuestionService!: QuestionService;
   @Input() searchQuestionService!: QuestionService;
   @Input() pagePrivileges: PagePrivileges = {};
@@ -38,7 +38,7 @@ export class PageComponent implements OnInit, AfterViewInit {
     if (this.searchQuestionService) {
       this.searchQuestions$ = this.searchQuestionService.getQuestions();
     }
-    this.dataGridConfig = this.dataGridConfig.filter((dataGridRowConfig: DataGridRowConfig<unknown>) =>
+    this.dataGridConfig = this.dataGridConfig.filter((dataGridRowConfig: DataGridRowConfig<string>) =>
       this.coreService.hasPrivilege(dataGridRowConfig.privilege));
   }
 
@@ -58,7 +58,7 @@ export class PageComponent implements OnInit, AfterViewInit {
             console.log(`Privilege: ${this.pagePrivileges.update} required`);
             break;
           }
-          let item = itemAction.item;
+          const item = itemAction.item;
           console.log('add item');
           console.log(item);
           this.serverApiService.add(item).subscribe(_ => this.fetch());
@@ -75,10 +75,20 @@ export class PageComponent implements OnInit, AfterViewInit {
     console.log(this.filters$.getValue());
   }
 
-  fetch() {
-    if (this.coreService.userStatus$.getValue().isLogged) {
-      this.items$ = this.serverApiService.fetch(this.filters$.value);
+  fetch(): void {
+    if (!this.coreService.userStatus$.getValue().isLogged) {
+      return;
     }
+    this.items$ = this.serverApiService.fetch(this.filters$.value).pipe(
+      tap((responseData: ResponseData<Item>) => {
+        responseData.data.forEach((item: Item) => {
+          this.dataGridConfig.forEach((config: DataGridRowConfig<string>) => {
+            if (config.key && config.service) {
+              item[config.key] = config.service.get(item[config.key]).pipe(map((item: Item) => item.name));
+            }
+          });
+        });
+      }));
   }
 
 }

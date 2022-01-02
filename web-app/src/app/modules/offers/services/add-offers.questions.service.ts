@@ -20,10 +20,9 @@ import {ResponseData} from "../../../shared/services/api.models";
 export class AddOffersQuestionsService extends QuestionService {
 
   constructor(
-    private hotelsApiService: HotelsApiService
+    public hotelsApiService: HotelsApiService
   ) {
     super();
-    console.log("AddOffersQuestionsService created")
   }
 
   override getQuestions(): Observable<Question[]> {
@@ -43,14 +42,13 @@ export class AddOffersQuestionsService extends QuestionService {
             hotelList.forEach(hotel => {
               hotelOptionList.push({key: hotel.id, value: hotel.name});
             })
-            console.log('hotelOptionList created')
             return hotelOptionList;
           }
         ));
   }
 
-  createQuestionList([hotelOptionList]: [Option[]]) {
-    let questionList: Question[] = [
+  createQuestionList([hotelOptionList]: [Option[]]): Question[] {
+    return [
       new TextBoxQuestion(
         new FormControl(null, [
           Validators.required,
@@ -67,7 +65,8 @@ export class AddOffersQuestionsService extends QuestionService {
           Validators.pattern('[1-9]+[0-9]*')
         ]), {
           key: 'basePrice',
-          label: 'Base price'
+          label: 'Base price',
+          type: 'number'
         }),
       new DateQuestion(
         new FormControl(null, [
@@ -85,13 +84,11 @@ export class AddOffersQuestionsService extends QuestionService {
         }),
       new DropdownQuestion(
         new FormControl(null), {
-          key: 'hotel',
+          key: 'hotelId',
           label: 'Hotel',
           options: hotelOptionList
         })
     ];
-    console.log('questions created');
-    return questionList;
   }
 
 }

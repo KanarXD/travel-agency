@@ -7,6 +7,7 @@ import {AddOffersQuestionsService} from "../../services/add-offers.questions.ser
 import {PagePrivileges} from "../../../../shared/components/page/services/page.models";
 import {OfferPrivileges} from "../../../hotels/services/hotels.models";
 import {SearchOffersQuestionsService} from "../../services/search-offers.questions.service";
+import {HotelsApiService} from "../../../hotels/services/hotels.api.service";
 
 @Component({
   selector: 'app-offers',
@@ -19,7 +20,8 @@ export class OffersComponent implements OnInit {
   constructor(
     public offersApiService: OffersApiService,
     public addOffersQuestionService: AddOffersQuestionsService,
-    public searchOffersQuestionsService: SearchOffersQuestionsService
+    public searchOffersQuestionsService: SearchOffersQuestionsService,
+    public hotelsApiService: HotelsApiService
   ) {
   }
 
@@ -35,6 +37,8 @@ export class OffersComponent implements OnInit {
       {key: 'basePrice', header: 'Base Price'},
       {key: 'startDate', header: 'Start Date'},
       {key: 'endDate', header: 'End Date'},
+      {key: 'hotelId', header: 'Hotel', type: FieldType.REFERENCE, service: this.hotelsApiService},
+      {key: 'carrierId', header: 'Carrier'},
       {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove, privilege: OfferPrivileges.DELETE}
     ];
   }

@@ -1,7 +1,6 @@
 <div *ngIf="items$ | async as items" class="row">
   <div *ngIf="searchQuestions$ | async as questions" class="col-3">
     <app-search (searchChange)="updateFilters($event)" [questions]="questions"></app-search>
-    <!--    <app-search [questions]="questions"></app-search>-->
   </div>
   <div [class]="searchQuestions$ ? 'col-9' : 'col-12'">
     <div class="row">

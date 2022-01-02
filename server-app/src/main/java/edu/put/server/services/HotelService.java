@@ -9,16 +9,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HotelService {
 
     @Autowired
     private HotelRepository hotelRepository;
-
-    public Hotel addHotel(Hotel hotel) {
-        return hotelRepository.save(hotel);
-    }
 
     public ResponseData<List<Hotel>> getHotels(Filter filter) {
         List<Hotel> hotelList;
@@ -31,8 +28,15 @@ public class HotelService {
         return ResponseData.<List<Hotel>>builder().data(hotelList).total(total).build();
     }
 
+    public Optional<Hotel> getHotel(Integer id) {
+        return hotelRepository.findById(id);
+    }
+
+    public Hotel addHotel(Hotel hotel) {
+        return hotelRepository.save(hotel);
+    }
+
     public void deleteHotel(int id) {
         hotelRepository.deleteById(id);
     }
-
 }

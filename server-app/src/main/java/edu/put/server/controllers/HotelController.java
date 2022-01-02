@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/hotels")
@@ -21,6 +22,12 @@ public class HotelController {
     @GetMapping
     public ResponseData<List<Hotel>> getHotels(@ModelAttribute Filter filter) {
         return hotelService.getHotels(filter);
+    }
+
+    @PreAuthorize("hasRole('OFFERS_READ')")
+    @GetMapping("/{id}")
+    public Optional<Hotel> getHotel(@PathVariable Integer id) {
+        return hotelService.getHotel(id);
     }
 
     @PreAuthorize("hasRole('OFFERS_UPDATE')")

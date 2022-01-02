@@ -9,7 +9,7 @@ import {ItemAction} from "../../utils/app.models";
   styleUrls: ['data-grid.component.scss']
 })
 export class DataGridComponent {
-  @Input() data!: any[];
+  @Input() data!: { [key: string]: any }[];
   @Input() config!: DataGridRowConfig<any>[];
   @Input() itemAction$!: Subject<ItemAction<any>>;
 
