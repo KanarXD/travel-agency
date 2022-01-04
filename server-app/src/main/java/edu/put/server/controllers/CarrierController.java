@@ -2,7 +2,7 @@ package edu.put.server.controllers;
 
 import edu.put.server.models.ResponseData;
 import edu.put.server.models.entities.Carrier;
-import edu.put.server.models.filters.Filter;
+import edu.put.server.models.filters.PageFilter;
 import edu.put.server.services.CarrierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,8 +19,8 @@ public class CarrierController {
 
     @PreAuthorize("hasRole('OFFERS_READ')")
     @GetMapping
-    public ResponseData<List<Carrier>> getCarriers(@ModelAttribute Filter filter) {
-        return carrierService.getCarriers(filter);
+    public ResponseData<List<Carrier>> getCarriers(@ModelAttribute PageFilter pageFilter) {
+        return carrierService.getCarriers(pageFilter);
     }
 
     @PreAuthorize("hasRole('OFFERS_UPDATE')")

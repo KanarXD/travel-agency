@@ -2,13 +2,14 @@ package edu.put.server.controllers;
 
 import edu.put.server.models.ResponseData;
 import edu.put.server.models.entities.Offer;
-import edu.put.server.models.filters.Filter;
+import edu.put.server.models.filters.PageFilter;
 import edu.put.server.services.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -20,8 +21,8 @@ public class OfferController {
 
     @PreAuthorize("hasRole('OFFERS_READ')")
     @GetMapping
-    public ResponseData<List<Offer>> getOffers(@ModelAttribute Filter filter) {
-        return offerService.getOffers(filter);
+    public ResponseData<List<Offer>> getOffers(@ModelAttribute PageFilter pageFilter, @RequestParam Map<String, String> paramMap) {
+        return offerService.getOffers(pageFilter, paramMap);
     }
 
     @PreAuthorize("hasRole('OFFERS_READ')")

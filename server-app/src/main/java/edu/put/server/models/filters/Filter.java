@@ -1,18 +1,22 @@
 package edu.put.server.models.filters;
 
+import lombok.Builder;
 import lombok.Data;
 
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
+@Builder
 public class Filter {
 
-    @NotNull
-    private Integer currentPage;
+    @NotBlank
+    private String field;
 
     @NotNull
-    @Min(1)
-    private Integer itemsPerPage;
+    private QueryOperator queryOperator;
+
+    @NotBlank
+    private String value;
 
 }
