@@ -26,9 +26,13 @@ public class SpecificationResolver {
     private static <T> Specification<T> createSpecification(Filter filter) {
         return switch (filter.getQueryOperator()) {
             case GREATER_THAN -> (root, query, criteriaBuilder) ->
-                    criteriaBuilder.greaterThanOrEqualTo(root.get(filter.getField()), filter.getValue());
+                    filter.getValue().matches("^[0-9]+$") ?
+                            criteriaBuilder.greaterThanOrEqualTo(root.get(filter.getField()), filter.getValue()) :
+                            criteriaBuilder.conjunction();
             case LESS_THAN -> (root, query, criteriaBuilder) ->
-                    criteriaBuilder.lessThanOrEqualTo(root.get(filter.getField()), filter.getValue());
+                    filter.getValue().matches("^[0-9]+$") ?
+                            criteriaBuilder.lessThanOrEqualTo(root.get(filter.getField()), filter.getValue()) :
+                            criteriaBuilder.conjunction();
             case ENDS_WITH -> (root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get(filter.getField())),
                     "%" + filter.getValue().toLowerCase());
             case STARTS_WITH -> (root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get(filter.getField())),
