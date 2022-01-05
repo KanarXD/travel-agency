@@ -20,7 +20,6 @@ export abstract class ServerApiService<T> implements ApiService<T> {
   }
 
   add(item: T): Observable<ResponseData<T>> {
-    debugger;
     return this.httpClient.post<ResponseData<T>>(this.serviceUrl, item);
   }
 
