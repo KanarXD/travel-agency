@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {FormControl, FormGroup, NgForm} from "@angular/forms";
 import {Question} from "../../services/dynamic-form.models";
 
 @Component({
@@ -8,12 +8,17 @@ import {Question} from "../../services/dynamic-form.models";
 })
 export class DynamicFormComponent implements OnInit {
   @Input() questions: Question[] = [];
+  @Input() submitButton!: string;
   @Output() submittedResult: EventEmitter<any> = new EventEmitter<any>();
+  @Output() @ViewChild('ngForm') ngForm!: NgForm;
   formGroup!: FormGroup;
 
   ngOnInit() {
     let formControlMap: { [key: string]: FormControl } = {};
     this.questions.forEach(question => {
+      if (!question.formControl) {
+        question.formControl = new FormControl();
+      }
       formControlMap[question.options.key] = question.formControl;
     });
     this.formGroup = new FormGroup(formControlMap);

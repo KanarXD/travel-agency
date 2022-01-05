@@ -15,8 +15,8 @@ export abstract class ServerApiService<T> implements ApiService<T> {
     return this.httpClient.get<ResponseData<T>>(this.serviceUrl, {params: serverApiFilter});
   }
 
-  get(id: number): Observable<ResponseData<T>> {
-    return this.httpClient.get<ResponseData<T>>(`${this.serviceUrl}/${id}`);
+  get(id: number): Observable<T> {
+    return this.httpClient.get<T>(`${this.serviceUrl}/${id}`);
   }
 
   add(item: T): Observable<ResponseData<T>> {

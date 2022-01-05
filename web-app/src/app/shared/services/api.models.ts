@@ -25,7 +25,7 @@ export interface ApiService<T> {
 
   fetch(): Observable<ResponseData<T>>;
 
-  get(id: number): Observable<ResponseData<T>>;
+  get(id: number): Observable<T>;
 
   add(item: T): Observable<ResponseData<T>>;
 

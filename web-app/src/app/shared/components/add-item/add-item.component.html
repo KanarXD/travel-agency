@@ -5,7 +5,8 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <app-dynamic-form (submittedResult)="modal.close($event)" [questions]="questions || []"></app-dynamic-form>
+  <app-dynamic-form (submittedResult)="modal.close($event)" [questions]="questions || []"
+                    submitButton="Create"></app-dynamic-form>
 </ng-template>
 
-<button (click)="open(content)" class="btn btn-primary btn-sm mr-1">{{title}}</button>
+<button (click)="open(content)" class="btn btn-primary">{{title}}</button>

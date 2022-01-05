@@ -3,9 +3,11 @@ import {OffersApiService} from "../../services/offers.api.service";
 import {OfferKeys} from "../../services/offers.models";
 import {DataGridRowConfig, FieldType} from "../../../../shared/components/data-grid/data-grid.models";
 import {ServerApiAction} from "../../../../shared/services/api.models";
-import {OffersQuestionsService} from "../../services/offers.questions.service";
+import {AddOffersQuestionsService} from "../../services/add-offers.questions.service";
 import {PagePrivileges} from "../../../../shared/components/page/services/page.models";
 import {OfferPrivileges} from "../../../hotels/services/hotels.models";
+import {SearchOffersQuestionsService} from "../../services/search-offers.questions.service";
+import {HotelsApiService} from "../../../hotels/services/hotels.api.service";
 
 @Component({
   selector: 'app-offers',
@@ -17,7 +19,9 @@ export class OffersComponent implements OnInit {
 
   constructor(
     public offersApiService: OffersApiService,
-    public offersQuestionService: OffersQuestionsService
+    public addOffersQuestionService: AddOffersQuestionsService,
+    public searchOffersQuestionsService: SearchOffersQuestionsService,
+    public hotelsApiService: HotelsApiService
   ) {
   }
 
@@ -33,7 +37,9 @@ export class OffersComponent implements OnInit {
       {key: 'basePrice', header: 'Base Price'},
       {key: 'startDate', header: 'Start Date'},
       {key: 'endDate', header: 'End Date'},
-      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove}
+      {key: 'hotelId', header: 'Hotel', type: FieldType.REFERENCE, service: this.hotelsApiService},
+      {key: 'carrierId', header: 'Carrier'},
+      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove, privilege: OfferPrivileges.DELETE}
     ];
   }
 
