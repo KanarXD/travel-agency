@@ -5,7 +5,7 @@ import {OffersComponent} from "./modules/offers/components/offers/offers.compone
 import {EmployeesComponent} from "./modules/employees/components/employees/employees.component";
 import {NavRoutes} from "./shared/utils/app.models";
 import {ServerGuard} from "./shared/services/server.guard";
-import {OfferPrivilege} from "./modules/offers/services/offers.models";
+import {OfferPrivileges} from "./modules/offers/services/offers.models";
 import {EmployeePrivilege} from "./modules/employees/services/employees.models";
 import {HotelsComponent} from "./modules/hotels/components/hotels/hotels.component";
 import {CarriersComponent} from "./modules/carriers/components/carriers/carriers.component";
@@ -17,7 +17,7 @@ export const appNavRoutes: NavRoutes = [
     path: 'offers',
     component: OffersComponent,
     canActivate: [ServerGuard],
-    data: {privilege: OfferPrivilege.READ},
+    data: {privilege: OfferPrivileges.READ},
     inNavBar: true
   },
   {
@@ -25,7 +25,7 @@ export const appNavRoutes: NavRoutes = [
     path: 'hotels',
     component: HotelsComponent,
     canActivate: [ServerGuard],
-    data: {privilege: OfferPrivilege.READ},
+    data: {privilege: OfferPrivileges.READ},
     inNavBar: true
   },
   {
@@ -33,7 +33,7 @@ export const appNavRoutes: NavRoutes = [
     path: 'carriers',
     component: CarriersComponent,
     canActivate: [ServerGuard],
-    data: {privilege: OfferPrivilege.READ},
+    data: {privilege: OfferPrivileges.READ},
     inNavBar: true
   },
   {

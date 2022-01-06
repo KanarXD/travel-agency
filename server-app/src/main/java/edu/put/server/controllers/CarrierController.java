@@ -9,6 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/carriers")
@@ -19,8 +21,14 @@ public class CarrierController {
 
     @PreAuthorize("hasRole('OFFERS_READ')")
     @GetMapping
-    public ResponseData<List<Carrier>> getCarriers(@ModelAttribute PageFilter pageFilter) {
-        return carrierService.getCarriers(pageFilter);
+    public ResponseData<List<Carrier>> getCarriers(@ModelAttribute PageFilter pageFilter, @RequestParam Map<String, String> paramMap) {
+        return carrierService.getCarriers(pageFilter, paramMap);
+    }
+
+    @PreAuthorize("hasRole('OFFERS_READ')")
+    @GetMapping("/{id}")
+    public Optional<Carrier> getHotel(@PathVariable Integer id) {
+        return carrierService.getCarrier(id);
     }
 
     @PreAuthorize("hasRole('OFFERS_UPDATE')")

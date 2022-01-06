@@ -15,7 +15,7 @@ export interface OfferModel {
 export class OfferFilters extends ServerApiFilter {
 }
 
-export enum OfferPrivilege {
+export enum OfferPrivileges {
   READ = 'OFFERS_READ',
   UPDATE = 'OFFERS_UPDATE',
   DELETE = 'OFFERS_DELETE'
