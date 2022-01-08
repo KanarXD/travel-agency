@@ -13,7 +13,7 @@ export class HotelFilters implements ServerApiFilter {
   itemsPerPage: number = 5;
 }
 
-export enum OfferPrivileges {
+export enum OfferPrivilege {
   READ = 'OFFERS_READ',
   UPDATE = 'OFFERS_UPDATE',
   DELETE = 'OFFERS_DELETE'

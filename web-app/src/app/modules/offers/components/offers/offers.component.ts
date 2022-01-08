@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {OffersApiService} from "../../services/offers.api.service";
-import {OfferKeys, OfferPrivileges} from "../../services/offers.models";
+import {OfferKeys, OfferPrivilege} from "../../services/offers.models";
 import {DataGridRowConfig, FieldType} from "../../../../shared/components/data-grid/data-grid.models";
 import {ServerApiAction} from "../../../../shared/services/api.models";
 import {AddOffersQuestionsService} from "../../services/add-offers.questions.service";
@@ -28,9 +28,9 @@ export class OffersComponent implements OnInit {
 
   ngOnInit(): void {
     this.pagePrivileges = {
-      read: OfferPrivileges.READ,
-      update: OfferPrivileges.UPDATE,
-      delete: OfferPrivileges.DELETE
+      read: OfferPrivilege.READ,
+      update: OfferPrivilege.UPDATE,
+      delete: OfferPrivilege.DELETE
     };
     this.dataGridConfig = [
       {key: 'id'},
@@ -40,7 +40,7 @@ export class OffersComponent implements OnInit {
       {key: 'endDate', header: 'End Date'},
       {key: 'hotelId', header: 'Hotel', type: FieldType.REFERENCE, service: this.hotelsApiService},
       {key: 'carrierId', header: 'Carrier', type: FieldType.REFERENCE, service: this.carriersApiService},
-      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove, privilege: OfferPrivileges.DELETE}
+      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove, privilege: OfferPrivilege.DELETE}
     ];
   }
 

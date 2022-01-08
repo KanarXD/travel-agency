@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataGridRowConfig, FieldType} from "../../../../shared/components/data-grid/data-grid.models";
 import {PagePrivileges} from "../../../../shared/components/page/services/page.models";
-import {CarrierKeys, OfferPrivileges} from "../../services/carriers.models";
+import {CarrierKeys, OfferPrivilege} from "../../services/carriers.models";
 import {ServerApiAction} from "../../../../shared/services/api.models";
 import {CarriersApiService} from "../../services/carriers.api.service";
 import {AddCarriersQuestionsService} from "../../services/add-carriers.questions.service";
@@ -24,14 +24,14 @@ export class CarriersComponent implements OnInit {
 
   ngOnInit(): void {
     this.pagePrivileges = {
-      read: OfferPrivileges.READ,
-      update: OfferPrivileges.UPDATE,
-      delete: OfferPrivileges.DELETE
+      read: OfferPrivilege.READ,
+      update: OfferPrivilege.UPDATE,
+      delete: OfferPrivilege.DELETE
     };
     this.dataGridConfig = [
       {key: 'id'},
       {key: 'name'},
-      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove, privilege: OfferPrivileges.DELETE}
+      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove, privilege: OfferPrivilege.DELETE}
     ];
   }
 

@@ -27,7 +27,7 @@ public class CarrierController {
 
     @PreAuthorize("hasRole('OFFERS_READ')")
     @GetMapping("/{id}")
-    public Optional<Carrier> getHotel(@PathVariable Integer id) {
+    public Optional<Carrier> getCarrier(@PathVariable Integer id) {
         return carrierService.getCarrier(id);
     }
 
