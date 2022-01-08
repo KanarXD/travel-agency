@@ -19,13 +19,16 @@ INSERT INTO hotels(name, location)
 VALUES ('Super hotel', 'Antarktyda');
 
 INSERT INTO carriers(name)
-VALUES ('bus');
+VALUES ('Bus');
 
 INSERT INTO carriers(name)
-VALUES ('plane');
+VALUES ('Plane');
 
 INSERT INTO carriers(name)
-VALUES ('taxi');
+VALUES ('Taxi');
+
+INSERT INTO carriers(name)
+VALUES ('Train');
 
 INSERT INTO offers(name, base_price, start_date, end_date, hotel_id, carrier_id)
 VALUES ('SUPER OFERTA', 2235.50, '2022-01-01', '2022-01-06', 1, 1);

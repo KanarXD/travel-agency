@@ -12,7 +12,8 @@ import {forkJoin, map, Observable} from "rxjs";
 import {HotelsApiService} from "../../hotels/services/hotels.api.service";
 import {HotelModel} from "../../hotels/services/hotels.models";
 import {ResponseData} from "../../../shared/services/api.models";
-
+import {CarrierModel} from "../../carriers/services/carriers.models";
+import {CarriersApiService} from "../../carriers/services/carriers.api.service";
 
 @Injectable({
   providedIn: 'root'
@@ -20,14 +21,16 @@ import {ResponseData} from "../../../shared/services/api.models";
 export class AddOffersQuestionsService extends QuestionService {
 
   constructor(
-    public hotelsApiService: HotelsApiService
+    public hotelsApiService: HotelsApiService,
+    public carriersApiService: CarriersApiService
   ) {
     super();
   }
 
   override getQuestions(): Observable<Question[]> {
     return forkJoin([
-      this.createHotelOptionList$()
+      this.createHotelOptionList$(),
+      this.createCarrierOptionList$()
     ]).pipe(
       map(this.createQuestionList)
     );
@@ -39,6 +42,7 @@ export class AddOffersQuestionsService extends QuestionService {
         map((response: ResponseData<HotelModel>) => {
             let hotelList: HotelModel[] = response.data;
             let hotelOptionList: Option[] = [];
+            hotelOptionList.push({key: '', value: '<brak>'})
             hotelList.forEach(hotel => {
               hotelOptionList.push({key: hotel.id, value: hotel.name});
             })
@@ -47,7 +51,22 @@ export class AddOffersQuestionsService extends QuestionService {
         ));
   }
 
-  createQuestionList([hotelOptionList]: [Option[]]): Question[] {
+  createCarrierOptionList$(): Observable<Option[]> {
+    return this.carriersApiService.fetch()
+      .pipe(
+        map((response: ResponseData<CarrierModel>) => {
+            let carrierList: CarrierModel[] = response.data;
+            let carrierOptionList: Option[] = [];
+            carrierOptionList.push({key: '', value: '<brak>'})
+            carrierList.forEach(carrier => {
+              carrierOptionList.push({key: carrier.id, value: carrier.name});
+            })
+            return carrierOptionList;
+          }
+        ));
+  }
+
+  createQuestionList([hotelOptionList, carrierOptionList]: [Option[], Option[]]): Question[] {
     return [
       new TextBoxQuestion({
         key: 'name',
@@ -83,6 +102,12 @@ export class AddOffersQuestionsService extends QuestionService {
           key: 'hotelId',
           label: 'Hotel',
           options: hotelOptionList
+        }),
+      new DropdownQuestion(
+        {
+          key: 'carrierId',
+          label: 'Carrier',
+          options: carrierOptionList
         })
     ];
   }

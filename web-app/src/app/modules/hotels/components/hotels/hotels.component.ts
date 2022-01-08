@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DataGridRowConfig, FieldType} from "../../../../shared/components/data-grid/data-grid.models";
-import {HotelKeys, OfferPrivileges} from "../../services/hotels.models";
+import {HotelKeys, OfferPrivilege} from "../../services/hotels.models";
 import {HotelsApiService} from "../../services/hotels.api.service";
 import {AddHotelsQuestionsService} from "../../services/add-hotels.questions.service";
 import {ServerApiAction} from "../../../../shared/services/api.models";
@@ -22,15 +22,15 @@ export class HotelsComponent implements OnInit {
 
   ngOnInit(): void {
     this.pagePrivileges = {
-      read: OfferPrivileges.READ,
-      update: OfferPrivileges.UPDATE,
-      delete: OfferPrivileges.DELETE
+      read: OfferPrivilege.READ,
+      update: OfferPrivilege.UPDATE,
+      delete: OfferPrivilege.DELETE
     };
     this.dataGridConfig = [
       {key: 'id'},
       {key: 'name'},
       {key: 'location'},
-      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove, privilege: OfferPrivileges.DELETE}
+      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove, privilege: OfferPrivilege.DELETE}
     ];
   }
 

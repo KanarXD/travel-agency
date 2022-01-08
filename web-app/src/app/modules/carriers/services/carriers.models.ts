@@ -1,14 +1,13 @@
 import {ServerApiFilter} from "../../../shared/services/api.models";
 import {Item} from "../../../shared/components/page/services/page.models";
 
-export type HotelKeys = 'id' | 'name' | 'location';
+export type CarrierKeys = 'id' | 'name';
 
-export interface HotelModel extends Item {
+export interface CarrierModel extends Item {
   name: string;
-  location: string;
 }
 
-export class HotelFilters implements ServerApiFilter {
+export class CarrierFilters implements ServerApiFilter {
   currentPage: number = 0;
   itemsPerPage: number = 5;
 }
