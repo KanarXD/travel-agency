@@ -42,7 +42,7 @@ export class AddOffersQuestionsService extends QuestionService {
         map((response: ResponseData<HotelModel>) => {
             let hotelList: HotelModel[] = response.data;
             let hotelOptionList: Option[] = [];
-            hotelOptionList.push({key: '', value: '<brak>'})
+            // hotelOptionList.push({key: '', value: '<brak>'})
             hotelList.forEach(hotel => {
               hotelOptionList.push({key: hotel.id, value: hotel.name});
             })
@@ -57,7 +57,7 @@ export class AddOffersQuestionsService extends QuestionService {
         map((response: ResponseData<CarrierModel>) => {
             let carrierList: CarrierModel[] = response.data;
             let carrierOptionList: Option[] = [];
-            carrierOptionList.push({key: '', value: '<brak>'})
+            // carrierOptionList.push({key: '', value: '<brak>'})
             carrierList.forEach(carrier => {
               carrierOptionList.push({key: carrier.id, value: carrier.name});
             })

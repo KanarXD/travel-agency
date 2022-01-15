@@ -8,6 +8,7 @@
 
     <select *ngSwitchCase="'Dropdown'" [formControlName]="question.options.key" [id]="question.options.key"
             class="form-control">
+      <option [value]="''">None</option>
       <option *ngFor="let opt of question.options.options" [value]="opt.key">{{opt.value}}</option>
     </select>
 
