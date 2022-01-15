@@ -31,7 +31,7 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submittedResult.emit(this.formGroup.getRawValue());
+    this.submittedResult.emit({...this.insertData, ...this.formGroup.getRawValue()});
   }
 
 }
