@@ -14,6 +14,7 @@ import {HotelModel} from "../../hotels/services/hotels.models";
 import {ResponseData} from "../../../shared/services/api.models";
 import {CarrierModel} from "../../carriers/services/carriers.models";
 import {CarriersApiService} from "../../carriers/services/carriers.api.service";
+import {FormValidators} from "../../../shared/utils/form-validators";
 
 @Injectable({
   providedIn: 'root'
@@ -87,13 +88,15 @@ export class AddOffersQuestionsService extends QuestionService {
         key: 'startDate',
         label: 'Start date'
       }, new FormControl('', [
-        Validators.required
+        Validators.required,
+        FormValidators.futureDate
       ])),
       new DateQuestion({
         key: 'endDate',
         label: 'End date'
       }, new FormControl('', [
-        Validators.required
+        Validators.required,
+        FormValidators.futureDate
       ])),
       new DropdownQuestion(
         {
