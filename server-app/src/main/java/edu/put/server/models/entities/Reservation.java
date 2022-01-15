@@ -27,7 +27,7 @@ public class Reservation {
     private Integer customerId;
 
     @Column(insertable = false, updatable = false)
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Poland")
     private Timestamp reservationTimestamp;
 
 }

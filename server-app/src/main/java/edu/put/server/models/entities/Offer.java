@@ -27,10 +27,10 @@ public class Offer {
 
     private BigDecimal basePrice;
 
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Poland")
     private Date startDate;
 
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Poland")
     private Date endDate;
 
     private Integer hotelId;
