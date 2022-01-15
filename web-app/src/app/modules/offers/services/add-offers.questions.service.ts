@@ -42,7 +42,6 @@ export class AddOffersQuestionsService extends QuestionService {
         map((response: ResponseData<HotelModel>) => {
             let hotelList: HotelModel[] = response.data;
             let hotelOptionList: Option[] = [];
-            // hotelOptionList.push({key: '', value: '<brak>'})
             hotelList.forEach(hotel => {
               hotelOptionList.push({key: hotel.id, value: hotel.name});
             })
@@ -57,7 +56,6 @@ export class AddOffersQuestionsService extends QuestionService {
         map((response: ResponseData<CarrierModel>) => {
             let carrierList: CarrierModel[] = response.data;
             let carrierOptionList: Option[] = [];
-            // carrierOptionList.push({key: '', value: '<brak>'})
             carrierList.forEach(carrier => {
               carrierOptionList.push({key: carrier.id, value: carrier.name});
             })
@@ -72,7 +70,7 @@ export class AddOffersQuestionsService extends QuestionService {
         key: 'name',
         label: 'Name',
         type: 'text'
-      }, new FormControl(null, [
+      }, new FormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(25)
@@ -81,20 +79,20 @@ export class AddOffersQuestionsService extends QuestionService {
         key: 'basePrice',
         label: 'Base price',
         type: 'number'
-      }, new FormControl(null, [
+      }, new FormControl('', [
         Validators.required,
         Validators.pattern('[1-9]+[0-9]*')
       ])),
       new DateQuestion({
         key: 'startDate',
         label: 'Start date'
-      }, new FormControl(null, [
+      }, new FormControl('', [
         Validators.required
       ])),
       new DateQuestion({
         key: 'endDate',
         label: 'End date'
-      }, new FormControl(null, [
+      }, new FormControl('', [
         Validators.required
       ])),
       new DropdownQuestion(
