@@ -40,6 +40,7 @@ export class OffersComponent implements OnInit {
       {key: 'endDate', header: 'End Date'},
       {key: 'hotelId', header: 'Hotel', type: FieldType.REFERENCE, service: this.hotelsApiService},
       {key: 'carrierId', header: 'Carrier', type: FieldType.REFERENCE, service: this.carriersApiService},
+      {header: 'Edit', type: FieldType.BUTTON, action: ServerApiAction.Update},
       {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove, privilege: OfferPrivilege.DELETE}
     ];
   }
