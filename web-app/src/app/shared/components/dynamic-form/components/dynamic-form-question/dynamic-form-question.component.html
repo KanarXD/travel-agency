@@ -1,23 +1,33 @@
-<div [formGroup]="formGroup" class="mb-3">
+<div [formGroup]="thisFormGroup ? thisFormGroup: formGroup" class="mb-3">
   <label [for]="question.options.key" class="mb-1">{{question.options.label}}</label>
   <div [ngSwitch]="question.controlType">
 
-    <input *ngSwitchCase="'TextBox'" [formControlName]="question.options.key" [id]="question.options.key"
+    <input *ngSwitchCase="'TextBox'"
+           [formControlName]="question.options.key"
            [placeholder]="question.options.label" [type]="question.options.type"
            class="form-control">
 
-    <select *ngSwitchCase="'Dropdown'" [formControlName]="question.options.key" [id]="question.options.key"
+    <select *ngSwitchCase="'Dropdown'"
+            [formControlName]="question.options.key"
             class="form-control">
       <option [value]="''">None</option>
       <option *ngFor="let opt of question.options.options" [value]="opt.key">{{opt.value}}</option>
     </select>
 
-    <input *ngSwitchCase="'Date'" [formControlName]="question.options.key" [id]="question.options.key"
-           [placeholder]="question.options.label" [type]="question.options.type"
+    <input *ngSwitchCase="'Date'"
+           [formControlName]="question.options.key"
+           [placeholder]="question.options.label"
+           [type]="question.options.type"
            class="form-control">
 
   </div>
-  <div *ngIf="formControl?.invalid && (formControl?.dirty || formControl?.touched)">
-    <app-dynamic-form-errors [errors]="formControl?.errors"></app-dynamic-form-errors>
+<!--  <div *ngIf="formControl?.invalid && (formControl?.dirty || formControl?.touched)">-->
+<!--    <app-dynamic-form-errors [errors]="formControl?.errors"></app-dynamic-form-errors>-->
+<!--  </div>-->
+<!--  <div *ngIf="formControl?.invalid ">-->
+<!--    <app-dynamic-form-errors [errors]="formControl?.errors"></app-dynamic-form-errors>-->
+<!--  </div>-->
+  <div *ngIf="(thisFormGroup?.invalid || formControl?.invalid) && (formControl?.dirty || formControl?.touched) ">
+    <app-dynamic-form-errors [errors]="errors"></app-dynamic-form-errors>
   </div>
 </div>

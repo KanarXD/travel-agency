@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, NgForm} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, NgForm} from "@angular/forms";
 import {Question} from "../../services/dynamic-form.models";
 
 @Component({
@@ -15,12 +15,18 @@ export class DynamicFormComponent implements OnInit {
   formGroup!: FormGroup;
 
   ngOnInit() {
-    let formControlMap: { [key: string]: FormControl } = {};
+    let formControlMap: { [key: string]: AbstractControl } = {};
     this.questions.forEach(question => {
-      if (!question.formControl) {
-        question.formControl = new FormControl();
+      if (!question.abstractControl) {
+        if (!question.options.formGroupName) {
+          formControlMap[question.options.key] = new FormControl();
+        }
+        return;
       }
-      formControlMap[question.options.key] = question.formControl;
+      formControlMap[question.options.key] = question.abstractControl;
+      if (!(question.abstractControl instanceof FormControl)) {
+        return;
+      }
       if (this.insertData && this.insertData[question.options.key]) {
         formControlMap[question.options.key].setValue(this.insertData[question.options.key]);
       } else {

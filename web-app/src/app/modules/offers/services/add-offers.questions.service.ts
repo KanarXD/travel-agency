@@ -2,12 +2,13 @@ import {Injectable} from '@angular/core';
 import {
   DateQuestion,
   DropdownQuestion,
+  FormGroupQuestion,
   Option,
   Question,
   QuestionService,
   TextBoxQuestion,
 } from "../../../shared/components/dynamic-form/services/dynamic-form.models";
-import {FormControl, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {forkJoin, map, Observable} from "rxjs";
 import {HotelsApiService} from "../../hotels/services/hotels.api.service";
 import {HotelModel} from "../../hotels/services/hotels.models";
@@ -66,6 +67,18 @@ export class AddOffersQuestionsService extends QuestionService {
   }
 
   createQuestionList([hotelOptionList, carrierOptionList]: [Option[], Option[]]): Question[] {
+    const datesFormGroup: FormGroup = new FormGroup({
+      startDate: new FormControl('', [
+        Validators.required,
+        FormValidators.futureDate
+      ]),
+      endDate: new FormControl('', [
+        Validators.required,
+        FormValidators.futureDate
+      ])
+    }, [
+      FormValidators.dateAfterDate
+    ]);
     return [
       new TextBoxQuestion({
         key: 'name',
@@ -86,18 +99,14 @@ export class AddOffersQuestionsService extends QuestionService {
       ])),
       new DateQuestion({
         key: 'startDate',
-        label: 'Start date'
-      }, new FormControl('', [
-        Validators.required,
-        FormValidators.futureDate
-      ])),
+        label: 'Start date',
+        formGroupName: 'datesFormGroup'
+      }),
       new DateQuestion({
         key: 'endDate',
-        label: 'End date'
-      }, new FormControl('', [
-        Validators.required,
-        FormValidators.futureDate
-      ])),
+        label: 'End date',
+        formGroupName: 'datesFormGroup'
+      }),
       new DropdownQuestion(
         {
           key: 'hotelId',
@@ -109,7 +118,8 @@ export class AddOffersQuestionsService extends QuestionService {
           key: 'carrierId',
           label: 'Carrier',
           options: carrierOptionList
-        })
+        }),
+      new FormGroupQuestion("datesFormGroup", datesFormGroup)
     ];
   }
 
