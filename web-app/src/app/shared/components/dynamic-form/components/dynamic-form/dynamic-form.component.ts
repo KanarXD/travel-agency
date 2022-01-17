@@ -18,27 +18,23 @@ export class DynamicFormComponent implements OnInit {
   ngOnInit() {
     let formControlMap: { [key: string]: AbstractControl } = {};
     this.questions.forEach(question => {
-      let formControl: AbstractControl | null | undefined;
       if (!question.abstractControl) {
         if (!question.options.formGroupName) {
-          formControl = new FormControl();
-          formControlMap[question.options.key] = formControl;
+          question.abstractControl = new FormControl();
         } else {
           const formGroupQuestion: FormGroupQuestion | undefined = this.questions
             .find((foundQuestion: Question) =>
               foundQuestion.controlType === 'formGroup' &&
               foundQuestion.options.key == question.options.formGroupName) as FormGroupQuestion;
-          formControl = formGroupQuestion?.abstractControl?.get(question?.options?.key);
+          question.abstractControl = formGroupQuestion?.abstractControl?.get(question?.options?.key) || new FormControl();
         }
-      } else {
-        formControl = question.abstractControl;
-        formControlMap[question.options.key] = formControl;
       }
-      if (!(formControl instanceof FormControl)) {
+      formControlMap[question.options.key] = question.abstractControl;
+      if (!(question.abstractControl instanceof FormControl)) {
         return;
       }
       if (this.insertData && this.insertData[question.options.key]) {
-        formControl.setValue(this.insertData[question.options.key]);
+        question.abstractControl.setValue(this.insertData[question.options.key]);
       }
     });
     this.formGroup = new FormGroup(formControlMap);
