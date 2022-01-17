@@ -12,8 +12,14 @@
     <div *ngIf="errors?.['pattern']">
       wrong value
     </div>
-    <!--    <div>-->
-    <!--      {{getErrors()}}-->
-    <!--    </div>-->
+    <div *ngIf="errors?.['oldDate']">
+      must be in future
+    </div>
+    <div *ngIf="errors?.['dateNotAfterDate']">
+      second date can't be before first date
+    </div>
+<!--    <div>-->
+<!--      {{getErrors()}}-->
+<!--    </div>-->
   </small>
 </div>

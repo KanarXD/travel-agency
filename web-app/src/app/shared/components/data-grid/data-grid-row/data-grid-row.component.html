@@ -17,7 +17,7 @@
   </div>
 
   <div *ngSwitchCase="'reference'">
-    <ng-container *ngIf="data[row.key] | async as columnData">{{columnData}}</ng-container>
+    <ng-container *ngIf="data[row.key + '-ref'] | async as columnData">{{columnData}}</ng-container>
   </div>
 
   <div *ngSwitchDefault>

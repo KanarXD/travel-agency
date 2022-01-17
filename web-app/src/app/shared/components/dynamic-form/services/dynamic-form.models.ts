@@ -1,4 +1,4 @@
-import {FormControl} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
 
 export interface Option {
@@ -11,18 +11,25 @@ export interface QuestionOptions {
   key: string;
   label: string;
   type?: string;
+  formGroupName?: string;
   options?: Option[];
 }
 
 export class Question {
   controlType: string;
   options: QuestionOptions;
-  formControl?: FormControl
+  abstractControl?: AbstractControl;
 
-  constructor(controlType: string, options: QuestionOptions, formControl?: FormControl) {
+  constructor(controlType: string, options: QuestionOptions, abstractControl?: AbstractControl) {
+    this.abstractControl = abstractControl;
     this.controlType = controlType;
     this.options = options;
-    this.formControl = formControl;
+  }
+}
+
+export class FormGroupQuestion extends Question {
+  constructor(key: string, formGroup: FormGroup) {
+    super('formGroup', {key: key, label: ''}, formGroup);
   }
 }
 

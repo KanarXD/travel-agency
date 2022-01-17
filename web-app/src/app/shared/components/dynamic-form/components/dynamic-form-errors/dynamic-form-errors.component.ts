@@ -3,8 +3,7 @@ import {ValidationErrors} from "@angular/forms";
 
 @Component({
   selector: 'app-dynamic-form-errors',
-  templateUrl: './dynamic-form-errors.component.html',
-  styleUrls: ['./dynamic-form-errors.component.scss']
+  templateUrl: './dynamic-form-errors.component.html'
 })
 export class DynamicFormErrorsComponent {
   @Input() errors?: ValidationErrors | null;

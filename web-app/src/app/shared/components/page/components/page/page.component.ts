@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ServerApiService} from "../../../../services/server.api.service";
 import {CoreService} from "../../../../services/core.service";
 import {Question, QuestionService} from "../../../dynamic-form/services/dynamic-form.models";
@@ -7,6 +7,7 @@ import {ItemAction} from "../../../../utils/app.models";
 import {ResponseData, ServerApiFilter} from "../../../../services/api.models";
 import {DataGridRowConfig} from "../../../data-grid/data-grid.models";
 import {Item, PagePrivileges} from "../../services/page.models";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-page',
@@ -19,15 +20,18 @@ export class PageComponent implements OnInit, AfterViewInit {
   @Input() searchQuestionService!: QuestionService;
   @Input() pagePrivileges: PagePrivileges = {};
   @Input() itemName!: string;
+  @ViewChild('modalTemplate') modalTemplate!: TemplateRef<NgbModal>;
 
   addItemQuestions$!: Observable<Question[]>;
   searchQuestions$!: Observable<Question[]>;
   filters$: BehaviorSubject<ServerApiFilter> = new BehaviorSubject(new ServerApiFilter());
   itemAction$: Subject<ItemAction<Item>> = new Subject();
   items$!: Observable<ResponseData<Item>>;
+  insertData!: { [key: string]: string };
 
   constructor(
-    public coreService: CoreService
+    public coreService: CoreService,
+    private modalService: NgbModal
   ) {
   }
 
@@ -43,25 +47,17 @@ export class PageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.filters$.subscribe(_ => this.fetch())
+    this.filters$.subscribe(_ => this.fetchItems())
     this.itemAction$.subscribe((itemAction: ItemAction<Item>) => {
       switch (itemAction.type) {
+        case "update":
+          this.updateItem(itemAction.item);
+          break;
         case "remove":
-          if (!this.coreService.hasPrivilege(this.pagePrivileges.delete)) {
-            console.log(`Privilege: ${this.pagePrivileges.delete} required`);
-            break;
-          }
-          this.serverApiService.remove(itemAction.item.id).subscribe(_ => this.fetch());
+          this.removeItem(itemAction.item.id);
           break;
         case "add":
-          if (!this.coreService.hasPrivilege(this.pagePrivileges.update)) {
-            console.log(`Privilege: ${this.pagePrivileges.update} required`);
-            break;
-          }
-          const item = itemAction.item;
-          console.log('add item');
-          console.log(item);
-          this.serverApiService.add(item).subscribe(_ => this.fetch());
+          this.addItem(itemAction.item);
           break;
       }
     });
@@ -75,7 +71,7 @@ export class PageComponent implements OnInit, AfterViewInit {
     console.log(this.filters$.getValue());
   }
 
-  fetch(): void {
+  fetchItems(): void {
     if (!this.coreService.userStatus$.getValue().isLogged) {
       return;
     }
@@ -84,11 +80,58 @@ export class PageComponent implements OnInit, AfterViewInit {
         responseData.data.forEach((item: Item) => {
           this.dataGridConfig.forEach((config: DataGridRowConfig<string>) => {
             if (config.key && config.service && item[config.key]) {
-              item[config.key] = config.service.get(item[config.key]).pipe(map((item: Item) => item.name));
+              item[config.key + '-ref'] = config.service.get(item[config.key]).pipe(map((item: Item) => item.name));
             }
           });
         });
-      }));
+      })
+    );
+  }
+
+  updateItem(item: Item): void {
+    if (!this.coreService.hasPrivilege(this.pagePrivileges.update)) {
+      console.log(`Privilege: ${this.pagePrivileges.update} required`);
+      return;
+    }
+    this.insertData = item;
+    this.modalService.open(this.modalTemplate).result.then(
+      (result) => {
+        console.log("closed");
+        this.serverApiService.add(result).subscribe(_ => this.fetchItems());
+      },
+      _ => {
+        console.log('dismissed');
+      });
+  }
+
+  private removeItem(id: number): void {
+    if (!this.coreService.hasPrivilege(this.pagePrivileges.delete)) {
+      console.log(`Privilege: ${this.pagePrivileges.delete} required`);
+      return;
+    }
+    this.serverApiService.remove(id).subscribe(_ => this.fetchItems());
+  }
+
+  private addItem(item: Item): void {
+    if (!this.coreService.hasPrivilege(this.pagePrivileges.update)) {
+      console.log(`Privilege: ${this.pagePrivileges.update} required`);
+      return;
+    }
+    console.log('add item');
+    console.log(item);
+    this.serverApiService.add(item).subscribe(_ => this.fetchItems());
+  }
+
+  async openModal() {
+    this.insertData = {};
+    this.modalService.open(this.modalTemplate).result.then(
+      (result) => {
+        console.log("closed");
+        this.addItem(result)
+      },
+      _ => {
+        console.log('dismissed');
+      });
   }
 
 }
