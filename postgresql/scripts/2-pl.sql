@@ -28,3 +28,18 @@ BEGIN
         END LOOP;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE FUNCTION reservations_to_loyalty_progran(client_id serial, threshold integer DEFAULT 10) RETURNS integer AS
+$$
+DECLARE
+    reservations_count INTEGER := (SELECT COUNT(*)
+                                   FROM reservations
+                                   WHERE id = client_id);
+BEGIN
+    IF reservations_count < threshold THEN
+        RETURN threshold - reservations_count;
+    ELSE
+        RETURN 0;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
