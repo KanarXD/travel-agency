@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, NgForm} from "@angular/forms";
-import {Question} from "../../services/dynamic-form.models";
+import {FormGroupQuestion, Question} from "../../services/dynamic-form.models";
 import {flattenObject} from "../../../../utils/functions";
 
 @Component({
@@ -18,20 +18,27 @@ export class DynamicFormComponent implements OnInit {
   ngOnInit() {
     let formControlMap: { [key: string]: AbstractControl } = {};
     this.questions.forEach(question => {
+      let formControl: AbstractControl | null | undefined;
       if (!question.abstractControl) {
         if (!question.options.formGroupName) {
-          formControlMap[question.options.key] = new FormControl();
+          formControl = new FormControl();
+          formControlMap[question.options.key] = formControl;
+        } else {
+          const formGroupQuestion: FormGroupQuestion | undefined = this.questions
+            .find((foundQuestion: Question) =>
+              foundQuestion.controlType === 'formGroup' &&
+              foundQuestion.options.key == question.options.formGroupName) as FormGroupQuestion;
+          formControl = formGroupQuestion?.abstractControl?.get(question?.options?.key);
         }
-        return;
+      } else {
+        formControl = question.abstractControl;
+        formControlMap[question.options.key] = formControl;
       }
-      formControlMap[question.options.key] = question.abstractControl;
-      if (!(question.abstractControl instanceof FormControl)) {
+      if (!(formControl instanceof FormControl)) {
         return;
       }
       if (this.insertData && this.insertData[question.options.key]) {
-        formControlMap[question.options.key].setValue(this.insertData[question.options.key]);
-      } else {
-        formControlMap[question.options.key].setValue('')
+        formControl.setValue(this.insertData[question.options.key]);
       }
     });
     this.formGroup = new FormGroup(formControlMap);
