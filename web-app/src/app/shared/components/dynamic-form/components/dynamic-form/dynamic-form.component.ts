@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, NgForm} from "@angular/forms";
 import {Question} from "../../services/dynamic-form.models";
+import {flattenObject} from "../../../../utils/functions";
 
 @Component({
   selector: 'app-dynamic-form',
@@ -37,7 +38,7 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submittedResult.emit({...this.insertData, ...this.formGroup.getRawValue()});
+    this.submittedResult.emit({...this.insertData, ...flattenObject(this.formGroup.getRawValue())});
   }
 
 }

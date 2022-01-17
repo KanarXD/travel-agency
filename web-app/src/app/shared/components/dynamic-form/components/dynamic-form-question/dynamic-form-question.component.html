@@ -21,13 +21,7 @@
            class="form-control">
 
   </div>
-<!--  <div *ngIf="formControl?.invalid && (formControl?.dirty || formControl?.touched)">-->
-<!--    <app-dynamic-form-errors [errors]="formControl?.errors"></app-dynamic-form-errors>-->
-<!--  </div>-->
-<!--  <div *ngIf="formControl?.invalid ">-->
-<!--    <app-dynamic-form-errors [errors]="formControl?.errors"></app-dynamic-form-errors>-->
-<!--  </div>-->
-  <div *ngIf="(thisFormGroup?.invalid || formControl?.invalid) && (formControl?.dirty || formControl?.touched) ">
+  <div *ngIf="hasErrors()">
     <app-dynamic-form-errors [errors]="errors"></app-dynamic-form-errors>
   </div>
 </div>

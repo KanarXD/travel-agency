@@ -15,8 +15,11 @@
     <div *ngIf="errors?.['oldDate']">
       must be in future
     </div>
-    <div>
-      {{getErrors()}}
+    <div *ngIf="errors?.['dateNotAfterDate']">
+      second date can't be before first date
     </div>
+<!--    <div>-->
+<!--      {{getErrors()}}-->
+<!--    </div>-->
   </small>
 </div>

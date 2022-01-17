@@ -12,22 +12,24 @@ export class DynamicFormQuestionComponent {
 
   get thisFormGroup(): FormGroup | null {
     if (this.question.options.formGroupName) {
-      let v = this.formGroup.get(this.question.options.formGroupName);
-      debugger;
-      return v as FormGroup;
+      return this.formGroup.get(this.question.options.formGroupName) as FormGroup;
     }
     return null;
   }
 
   get formControl(): FormControl | null {
-    let v = this.formGroup.get(this.question.options.key);
-    debugger;
-    return v as FormControl;
+    return this.formGroup.get(this.question.options.key) as FormControl;
   }
 
   get errors(): ValidationErrors {
-    const formControlErrors = this.formControl?.errors;
-    const formGroupErrors = this.thisFormGroup?.get(this.question?.options?.key)?.errors;
-    return {...formControlErrors, ...formGroupErrors};
+    const formControlErrors = this.formControl?.touched ? this.formControl?.errors : {};
+    const formGroupErrors = this.thisFormGroup?.touched ? this.thisFormGroup?.errors : {};
+    const formControlGroupErrors = this.thisFormGroup?.get(this.question?.options?.key)?.touched ?
+      this.thisFormGroup?.get(this.question?.options?.key)?.errors : {};
+    return {...formControlErrors, ...formGroupErrors, ...formControlGroupErrors};
+  }
+
+  hasErrors(): boolean {
+    return Object.keys(this.errors).length > 0;
   }
 }
