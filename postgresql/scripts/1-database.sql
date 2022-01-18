@@ -36,9 +36,10 @@ CREATE TABLE employees
 
 CREATE TABLE customers
 (
-    id      SERIAL PRIMARY KEY,
-    name    VARCHAR(20) NOT NULL,
-    surname VARCHAR(20) NOT NULL
+    id                 SERIAL PRIMARY KEY,
+    name               VARCHAR(20) NOT NULL,
+    surname            VARCHAR(20) NOT NULL,
+    loyalty_program_id INTEGER     NOT NULL REFERENCES loyalty_programs
 );
 
 CREATE TABLE carriers
@@ -71,4 +72,13 @@ CREATE TABLE reservations
     offer_id              INTEGER   NOT NULL REFERENCES offers,
     customer_id           INTEGER   NOT NULL REFERENCES customers,
     reservation_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE loyalty_programs
+(
+    id        SERIAL PRIMARY KEY,
+    name      VARCHAR(30) NOT NULL,
+    discount  INTEGER     NOT NULL,
+    threshold INTEGER     NOT NULL,
+    hierarchy INTEGER     NOT NULL UNIQUE
 );
