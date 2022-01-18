@@ -34,6 +34,14 @@ CREATE TABLE employees
     role            INTEGER     NOT NULL REFERENCES roles
 );
 
+CREATE TABLE loyalty_programs
+(
+    id        SERIAL PRIMARY KEY,
+    name      VARCHAR(30) NOT NULL,
+    discount  INTEGER     NOT NULL,
+    threshold INTEGER     NOT NULL
+);
+
 CREATE TABLE customers
 (
     id                 SERIAL PRIMARY KEY,
@@ -42,10 +50,13 @@ CREATE TABLE customers
     loyalty_program_id INTEGER     NOT NULL REFERENCES loyalty_programs
 );
 
-CREATE TABLE carriers
+CREATE TABLE promotions
 (
-    id   SERIAL PRIMARY KEY,
-    name VARCHAR(30) NOT NULL
+    id         SERIAL PRIMARY KEY,
+    name       VARCHAR(30) NOT NULL,
+    start_date DATE        NOT NULL,
+    end_date   DATE        NOT NULL,
+    discount   INTEGER     NOT NULL
 );
 
 CREATE TABLE hotels
@@ -55,15 +66,22 @@ CREATE TABLE hotels
     location VARCHAR(30) NOT NULL
 );
 
+CREATE TABLE carriers
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(30) NOT NULL
+);
+
 CREATE TABLE offers
 (
-    id         SERIAL PRIMARY KEY,
-    name       VARCHAR(30)   NOT NULL,
-    base_price NUMERIC(8, 2) NOT NULL,
-    start_date DATE          NOT NULL,
-    end_date   DATE          NOT NULL,
-    hotel_id   INTEGER       NULL REFERENCES hotels,
-    carrier_id INTEGER       NULL REFERENCES carriers
+    id           SERIAL PRIMARY KEY,
+    name         VARCHAR(30)   NOT NULL,
+    base_price   NUMERIC(8, 2) NOT NULL,
+    start_date   DATE          NOT NULL,
+    end_date     DATE          NOT NULL,
+    promotion_id INTEGER       NULL REFERENCES promotions,
+    hotel_id     INTEGER       NULL REFERENCES hotels,
+    carrier_id   INTEGER       NULL REFERENCES carriers
 );
 
 CREATE TABLE reservations
@@ -72,13 +90,4 @@ CREATE TABLE reservations
     offer_id              INTEGER   NOT NULL REFERENCES offers,
     customer_id           INTEGER   NOT NULL REFERENCES customers,
     reservation_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE loyalty_programs
-(
-    id        SERIAL PRIMARY KEY,
-    name      VARCHAR(30) NOT NULL,
-    discount  INTEGER     NOT NULL,
-    threshold INTEGER     NOT NULL,
-    hierarchy INTEGER     NOT NULL UNIQUE
 );

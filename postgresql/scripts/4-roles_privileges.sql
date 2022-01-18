@@ -18,6 +18,14 @@ VALUES ('EMPLOYEES_UPDATE');
 INSERT INTO privileges(name)
 VALUES ('EMPLOYEES_DELETE');
 
+-- PROMOTIONS PRIVILEGES
+INSERT INTO privileges(name)
+VALUES ('PROMOTIONS_READ');
+INSERT INTO privileges(name)
+VALUES ('PROMOTIONS_UPDATE');
+INSERT INTO privileges(name)
+VALUES ('PROMOTIONS_DELETE');
+
 -- OFFERS PRIVILEGES
 INSERT INTO privileges(name)
 VALUES ('OFFERS_READ');
@@ -60,6 +68,7 @@ CALL add_privilege_to_role('AGENT', 'RESERVATIONS_DELETE');
 CALL add_privilege_to_role('AGENT', 'CUSTOMERS_READ');
 CALL add_privilege_to_role('AGENT', 'CUSTOMERS_UPDATE');
 CALL add_privilege_to_role('AGENT', 'CUSTOMERS_DELETE');
+CALL add_privilege_to_role('AGENT', 'PROMOTIONS_READ');
 CALL add_privilege_to_role('AGENT', 'LOYALTY_PROG_READ');
 
 -- MANAGER PRIVILEGES
@@ -68,6 +77,8 @@ CALL transfer_role_privileges('AGENT', 'MANAGER');
 CALL add_privilege_to_role('MANAGER', 'OFFERS_UPDATE');
 CALL add_privilege_to_role('MANAGER', 'OFFERS_DELETE');
 CALL add_privilege_to_role('MANAGER', 'EMPLOYEES_READ');
+CALL add_privilege_to_role('MANAGER', 'PROMOTIONS_UPDATE');
+CALL add_privilege_to_role('MANAGER', 'PROMOTIONS_DELETE');
 CALL add_privilege_to_role('MANAGER', 'LOYALTY_PROG_UPDATE');
 CALL add_privilege_to_role('MANAGER', 'LOYALTY_PROG_DELETE');
 
