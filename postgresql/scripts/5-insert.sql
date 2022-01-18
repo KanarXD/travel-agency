@@ -1,13 +1,25 @@
 \connect travel_agency_db travel_agency;
 
-INSERT INTO customers(name, surname)
-VALUES ('TOMASZ', 'KOWALSKI');
+INSERT INTO loyalty_programs(name, discount, threshold, hierarchy)
+VALUES ('NONE', 0, 0, 0);
 
-INSERT INTO customers(name, surname)
-VALUES ('JAREK', 'PEPKO');
+INSERT INTO loyalty_programs(name, discount, threshold, hierarchy)
+VALUES ('BRONZE', 5, 5, 1);
 
-INSERT INTO customers(name, surname)
-VALUES ('ADAM', 'BEDNAREK');
+INSERT INTO loyalty_programs(name, discount, threshold, hierarchy)
+VALUES ('SILVER', 10, 10, 2);
+
+INSERT INTO loyalty_programs(name, discount, threshold, hierarchy)
+VALUES ('GOLD', 20, 20, 3);
+
+INSERT INTO customers(name, surname, loyalty_program_id)
+VALUES ('TOMASZ', 'KOWALSKI', (SELECT id FROM loyalty_programs WHERE hierarchy = 0));
+
+INSERT INTO customers(name, surname, loyalty_program_id)
+VALUES ('JAREK', 'PEPKO', (SELECT id FROM loyalty_programs WHERE hierarchy = 0));
+
+INSERT INTO customers(name, surname, loyalty_program_id)
+VALUES ('ADAM', 'BEDNAREK', (SELECT id FROM loyalty_programs WHERE hierarchy = 0));
 
 INSERT INTO hotels(name, location)
 VALUES ('Sheraton', 'Poznań');
