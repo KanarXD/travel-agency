@@ -32,20 +32,20 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION reservations_to_loyalty_program(customer_id INTEGER) RETURNS INTEGER AS
 $$
 DECLARE
-    next_hierarchy        INTEGER := (SELECT lp.hierarchy
+    next_program          INTEGER := (SELECT lp.id
                                       FROM customers c JOIN loyalty_programs lp ON c.loyalty_program_id = lp.id
                                       WHERE c.id = customer_id) + 1;
 
-    next_prog_exists      BOOLEAN := (SELECT COUNT(id) > 0
+    next_program_exists   BOOLEAN := (SELECT COUNT(id) > 0
                                       FROM loyalty_programs
-                                      WHERE hierarchy = next_hierarchy);
+                                      WHERE id = next_program);
 
     curr_num_reservations INTEGER := (SELECT COUNT(*)
                                       FROM customers c JOIN reservations r on c.id = r.customer_id);
 
 BEGIN
-    IF next_prog_exists = true THEN
-        RETURN (SELECT threshold FROM loyalty_programs WHERE hierarchy = next_hierarchy) - curr_num_reservations;
+    IF next_program_exists = true THEN
+        RETURN (SELECT threshold FROM loyalty_programs WHERE id = next_program) - curr_num_reservations;
     ELSE
         RETURN -1;
     END IF;
@@ -55,15 +55,13 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE PROCEDURE add_loyalty_program(customer_id INTEGER) AS
 $$
 DECLARE
-    next_hierarchy    INTEGER := (SELECT lp.hierarchy
-                                  FROM customers c JOIN loyalty_programs lp ON c.loyalty_program_id = lp.id
-                                  WHERE c.id = customer_id) + 1;
+    next_program INTEGER := (SELECT lp.id
+                             FROM customers c JOIN loyalty_programs lp ON c.loyalty_program_id = lp.id
+                             WHERE c.id = customer_id) + 1;
 
 BEGIN
     UPDATE customers
-    SET loyalty_program_id = (SELECT id
-                              FROM loyalty_programs
-                              WHERE hierarchy = next_hierarchy)
+    SET loyalty_program_id = next_program
     WHERE id = customer_id;
 END;
 $$ LANGUAGE plpgsql;

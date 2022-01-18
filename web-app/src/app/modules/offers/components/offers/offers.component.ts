@@ -8,6 +8,7 @@ import {PagePrivileges} from "../../../../shared/components/page/services/page.m
 import {SearchOffersQuestionsService} from "../../services/search-offers.questions.service";
 import {HotelsApiService} from "../../../hotels/services/hotels.api.service";
 import {CarriersApiService} from "../../../carriers/services/carriers.api.service";
+import {PromotionsApiService} from "../../../promotions/services/promotions.api.service";
 
 @Component({
   selector: 'app-offers',
@@ -21,6 +22,7 @@ export class OffersComponent implements OnInit {
     public offersApiService: OffersApiService,
     public addOffersQuestionService: AddOffersQuestionsService,
     public searchOffersQuestionsService: SearchOffersQuestionsService,
+    public promotionApiService: PromotionsApiService,
     public hotelsApiService: HotelsApiService,
     public carriersApiService: CarriersApiService
   ) {
@@ -38,6 +40,7 @@ export class OffersComponent implements OnInit {
       {key: 'basePrice', header: 'Base Price'},
       {key: 'startDate', header: 'Start Date'},
       {key: 'endDate', header: 'End Date'},
+      {key: 'promotionId', header: 'Promotion', type: FieldType.REFERENCE, service: this.promotionApiService},
       {key: 'hotelId', header: 'Hotel', type: FieldType.REFERENCE, service: this.hotelsApiService},
       {key: 'carrierId', header: 'Carrier', type: FieldType.REFERENCE, service: this.carriersApiService},
       {header: 'Edit', type: FieldType.BUTTON, action: ServerApiAction.Update, privilege: OfferPrivilege.UPDATE},
