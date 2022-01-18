@@ -7,6 +7,8 @@ import {SharedModule} from "../shared/shared.module";
 import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 import {CarriersComponent} from "./carriers/components/carriers/carriers.component";
 import {HotelsComponent} from "./hotels/components/hotels/hotels.component";
+import {PromotionsComponent} from "./promotions/components/promotions.component";
+import {LoyaltyProgramsComponent} from "./loyalty_programs/components/loyalty_programs.component";
 
 
 @NgModule({
@@ -14,8 +16,10 @@ import {HotelsComponent} from "./hotels/components/hotels/hotels.component";
     HomeComponent,
     OffersComponent,
     EmployeesComponent,
+    PromotionsComponent,
     HotelsComponent,
-    CarriersComponent
+    CarriersComponent,
+    LoyaltyProgramsComponent
   ],
   imports: [
     CommonModule,

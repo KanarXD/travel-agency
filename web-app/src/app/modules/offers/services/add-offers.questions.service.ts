@@ -16,6 +16,8 @@ import {ResponseData} from "../../../shared/services/api.models";
 import {CarrierModel} from "../../carriers/services/carriers.models";
 import {CarriersApiService} from "../../carriers/services/carriers.api.service";
 import {FormValidators} from "../../../shared/utils/form-validators";
+import {PromotionsApiService} from "../../promotions/services/promotions.api.service";
+import {PromotionModel} from "../../promotions/services/promotions.models";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +25,7 @@ import {FormValidators} from "../../../shared/utils/form-validators";
 export class AddOffersQuestionsService extends QuestionService {
 
   constructor(
+    public promotionApiService: PromotionsApiService,
     public hotelsApiService: HotelsApiService,
     public carriersApiService: CarriersApiService
   ) {
@@ -31,6 +34,7 @@ export class AddOffersQuestionsService extends QuestionService {
 
   override getQuestions(): Observable<Question[]> {
     return forkJoin([
+      this.createPromotionOptionList$(),
       this.createHotelOptionList$(),
       this.createCarrierOptionList$()
     ]).pipe(
@@ -66,7 +70,21 @@ export class AddOffersQuestionsService extends QuestionService {
         ));
   }
 
-  createQuestionList([hotelOptionList, carrierOptionList]: [Option[], Option[]]): Question[] {
+  createPromotionOptionList$(): Observable<Option[]> {
+    return this.promotionApiService.fetch()
+      .pipe(
+        map((response: ResponseData<CarrierModel>) => {
+            let promotionList: PromotionModel[] = response.data;
+            let carrierOptionList: Option[] = [];
+          promotionList.forEach(promotion => {
+              carrierOptionList.push({key: promotion.id, value: promotion.name});
+            })
+            return carrierOptionList;
+          }
+        ));
+  }
+
+  createQuestionList([promotionOptionList, hotelOptionList, carrierOptionList]: [Option[], Option[], Option[]]): Question[] {
     const datesFormGroup: FormGroup = new FormGroup({
       startDate: new FormControl('', [
         Validators.required,
@@ -107,6 +125,12 @@ export class AddOffersQuestionsService extends QuestionService {
         label: 'End date',
         formGroupName: 'datesFormGroup'
       }),
+      new DropdownQuestion(
+        {
+          key: 'promotionId',
+          label: 'Promotion',
+          options: promotionOptionList
+        }),
       new DropdownQuestion(
         {
           key: 'hotelId',

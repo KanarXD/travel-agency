@@ -1,6 +1,6 @@
 import {ServerApiFilter} from "../../../shared/services/api.models";
 
-export type OfferKeys = 'id' | 'name' | 'basePrice' | 'startDate' | 'endDate' | 'delete' | 'hotelId' | 'carrierId';
+export type OfferKeys = 'id' | 'name' | 'basePrice' | 'startDate' | 'endDate' | 'delete' | 'promotionId' | 'hotelId' | 'carrierId';
 
 export interface OfferModel {
   id: number,
@@ -8,6 +8,7 @@ export interface OfferModel {
   base_price: number,
   start_date: string,
   end_date: string,
+  promotionId: number,
   hotelId: number,
   carrierId: number
 }
