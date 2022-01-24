@@ -19,7 +19,8 @@ export class SearchOffersQuestionsService extends QuestionService {
       }),
       new TextBoxQuestion({
         key: 'basePrice',
-        label: 'Base price'
+        type: 'number',
+        label: 'Base price max value'
       }),
     ]);
   }

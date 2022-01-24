@@ -5,11 +5,11 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <app-dynamic-form *ngIf="addItemQuestions$ | async as questions"
-                    (submittedResult)="modal.close($event)"
-                    [questions]="questions"
+  <app-dynamic-form (submittedResult)="modal.close($event)"
+                    *ngIf="addItemQuestions$ | async as questions"
                     [insertData]="insertData"
-                    submitButton="Create"></app-dynamic-form>
+                    [questions]="questions"
+                    submitButton="Save"></app-dynamic-form>
 </ng-template>
 
 <div *ngIf="items$ | async as items" class="row">
@@ -21,9 +21,6 @@
       <div class="col-md-auto">
         <div *ngIf="addItemQuestions$ && coreService.hasPrivilege(pagePrivileges.update)">
           <button (click)="openModal()" class="btn btn-primary">New {{itemName}}</button>
-<!--          <app-add-item *ngIf="addItemQuestions$ | async as questions" [itemAction$]="itemAction$"-->
-<!--                        [questions]="questions" title="New {{itemName}}">-->
-<!--          </app-add-item>-->
         </div>
       </div>
       <div class="col-md-auto">

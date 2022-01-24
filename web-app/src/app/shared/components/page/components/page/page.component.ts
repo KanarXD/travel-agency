@@ -104,6 +104,18 @@ export class PageComponent implements OnInit, AfterViewInit {
       });
   }
 
+  async openModal() {
+    this.insertData = {};
+    this.modalService.open(this.modalTemplate).result.then(
+      (result) => {
+        console.log("closed");
+        this.addItem(result)
+      },
+      _ => {
+        console.log('dismissed');
+      });
+  }
+
   private removeItem(id: number): void {
     if (!this.coreService.hasPrivilege(this.pagePrivileges.delete)) {
       console.log(`Privilege: ${this.pagePrivileges.delete} required`);
@@ -120,18 +132,6 @@ export class PageComponent implements OnInit, AfterViewInit {
     console.log('add item');
     console.log(item);
     this.serverApiService.add(item).subscribe(_ => this.fetchItems());
-  }
-
-  async openModal() {
-    this.insertData = {};
-    this.modalService.open(this.modalTemplate).result.then(
-      (result) => {
-        console.log("closed");
-        this.addItem(result)
-      },
-      _ => {
-        console.log('dismissed');
-      });
   }
 
 }

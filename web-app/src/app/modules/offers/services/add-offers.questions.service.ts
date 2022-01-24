@@ -76,7 +76,7 @@ export class AddOffersQuestionsService extends QuestionService {
         map((response: ResponseData<CarrierModel>) => {
             let promotionList: PromotionModel[] = response.data;
             let carrierOptionList: Option[] = [];
-          promotionList.forEach(promotion => {
+            promotionList.forEach(promotion => {
               carrierOptionList.push({key: promotion.id, value: promotion.name});
             })
             return carrierOptionList;
@@ -113,7 +113,7 @@ export class AddOffersQuestionsService extends QuestionService {
         type: 'number'
       }, new FormControl('', [
         Validators.required,
-        Validators.pattern('[1-9]+[0-9]*')
+        Validators.pattern('(?!(^0+(\\.0+)?$))^\\d{1,6}(\\.\\d{1,2})?$')
       ])),
       new DateQuestion({
         key: 'startDate',

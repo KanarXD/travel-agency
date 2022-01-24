@@ -27,7 +27,6 @@ export class HotelsComponent implements OnInit {
       delete: OfferPrivilege.DELETE
     };
     this.dataGridConfig = [
-      {key: 'id'},
       {key: 'name'},
       {key: 'location'},
       {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove, privilege: OfferPrivilege.DELETE}

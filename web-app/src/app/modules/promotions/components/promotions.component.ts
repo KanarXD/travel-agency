@@ -29,7 +29,6 @@ export class PromotionsComponent implements OnInit {
       delete: PromotionPrivilege.DELETE
     };
     this.dataGridConfig = [
-      {key: 'id'},
       {key: 'name'},
       {key: 'startDate', header: 'Start Date'},
       {key: 'endDate', header: 'End Date'},

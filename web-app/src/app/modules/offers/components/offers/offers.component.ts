@@ -35,7 +35,6 @@ export class OffersComponent implements OnInit {
       delete: OfferPrivilege.DELETE
     };
     this.dataGridConfig = [
-      {key: 'id'},
       {key: 'name'},
       {key: 'basePrice', header: 'Base Price'},
       {key: 'startDate', header: 'Start Date'},
