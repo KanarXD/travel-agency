@@ -16,7 +16,7 @@ export class DynamicFormComponent implements OnInit {
   formGroup!: FormGroup;
 
   ngOnInit() {
-    let formControlMap: { [key: string]: AbstractControl } = {};
+    const abstractControlMap: { [key: string]: AbstractControl } = {};
     this.questions.forEach(question => {
       if (!question.abstractControl) {
         if (!question.options.formGroupName) {
@@ -27,21 +27,27 @@ export class DynamicFormComponent implements OnInit {
               foundQuestion.controlType === 'formGroup' &&
               foundQuestion.options.key == question.options.formGroupName) as FormGroupQuestion;
           question.abstractControl = formGroupQuestion?.abstractControl?.get(question?.options?.key) || new FormControl();
+          this.initDefaultValue(question);
+          return;
         }
       }
-      formControlMap[question.options.key] = question.abstractControl;
+      abstractControlMap[question.options.key] = question.abstractControl;
       if (!(question.abstractControl instanceof FormControl)) {
         return;
       }
-      if (this.insertData && this.insertData[question.options.key]) {
-        question.abstractControl.setValue(this.insertData[question.options.key]);
-      }
+      this.initDefaultValue(question);
     });
-    this.formGroup = new FormGroup(formControlMap);
+    this.formGroup = new FormGroup(abstractControlMap);
   }
 
   onSubmit() {
     this.submittedResult.emit({...this.insertData, ...flattenObject(this.formGroup.getRawValue())});
+  }
+
+  initDefaultValue(question: Question) {
+    if (this.insertData && this.insertData[question.options.key]) {
+      question.abstractControl?.setValue(this.insertData[question.options.key]);
+    }
   }
 
 }

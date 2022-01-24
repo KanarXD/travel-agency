@@ -113,7 +113,7 @@ export class AddOffersQuestionsService extends QuestionService {
         type: 'number'
       }, new FormControl('', [
         Validators.required,
-        Validators.pattern('[1-9]+[0-9]*')
+        Validators.pattern('(?!(^0+(\\.0+)?$))^\\d{1,6}(\\.\\d{1,2})?$')
       ])),
       new DateQuestion({
         key: 'startDate',

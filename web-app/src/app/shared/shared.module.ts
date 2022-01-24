@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DataGridComponent} from "./components/data-grid/data-grid.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {AddItemComponent} from './components/add-item/add-item.component';
 import {DataGridRowComponent} from "./components/data-grid/data-grid-row/data-grid-row.component";
 import {
   DynamicFormQuestionComponent
@@ -19,7 +18,6 @@ import {SearchComponent} from './components/search/search.component';
   declarations: [
     DataGridComponent,
     DataGridRowComponent,
-    AddItemComponent,
     DynamicFormQuestionComponent,
     DynamicFormComponent,
     DynamicFormErrorsComponent,
@@ -29,7 +27,6 @@ import {SearchComponent} from './components/search/search.component';
   exports: [
     DataGridComponent,
     DynamicFormComponent,
-    AddItemComponent,
     PageComponent,
   ],
   imports: [

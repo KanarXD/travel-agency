@@ -29,7 +29,6 @@ export class LoyaltyProgramsComponent implements OnInit {
       delete: LoyaltyProgramPrivilege.DELETE
     };
     this.dataGridConfig = [
-      {key: 'id'},
       {key: 'name'},
       {key: 'discount', header: 'Discount'},
       {key: 'threshold', header: 'Threshold'},

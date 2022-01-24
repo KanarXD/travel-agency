@@ -20,7 +20,7 @@ export class AddLoyaltyProgramsQuestionsService extends QuestionService {
         type: 'text'
       }, new FormControl(null, [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(3),
         Validators.maxLength(25)
       ])),
       new TextBoxQuestion({
