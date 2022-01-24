@@ -9,7 +9,7 @@ import {CarriersComponent} from "./carriers/components/carriers/carriers.compone
 import {HotelsComponent} from "./hotels/components/hotels/hotels.component";
 import {PromotionsComponent} from "./promotions/components/promotions.component";
 import {LoyaltyProgramsComponent} from "./loyalty_programs/components/loyalty_programs.component";
-import { CustomersComponent } from './customers/customers.component';
+import { CustomersComponent } from './customers/components/customers/customers.component';
 
 
 @NgModule({
