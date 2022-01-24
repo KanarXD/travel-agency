@@ -1,5 +1,3 @@
-import {ServerApiFilter} from "../../../shared/services/api.models";
-
 export type OfferKeys =
   'id'
   | 'name'
@@ -20,9 +18,6 @@ export interface OfferModel {
   promotionId: number,
   hotelId: number,
   carrierId: number
-}
-
-export class OfferFilters extends ServerApiFilter {
 }
 
 export enum OfferPrivilege {
