@@ -29,7 +29,6 @@ export class CarriersComponent implements OnInit {
       delete: OfferPrivilege.DELETE
     };
     this.dataGridConfig = [
-      {key: 'id'},
       {key: 'name'},
       {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove, privilege: OfferPrivilege.DELETE}
     ];
