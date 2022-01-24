@@ -76,7 +76,7 @@ export class AddOffersQuestionsService extends QuestionService {
         map((response: ResponseData<CarrierModel>) => {
             let promotionList: PromotionModel[] = response.data;
             let carrierOptionList: Option[] = [];
-          promotionList.forEach(promotion => {
+            promotionList.forEach(promotion => {
               carrierOptionList.push({key: promotion.id, value: promotion.name});
             })
             return carrierOptionList;

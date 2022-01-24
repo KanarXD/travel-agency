@@ -32,8 +32,18 @@ export class LoyaltyProgramsComponent implements OnInit {
       {key: 'name'},
       {key: 'discount', header: 'Discount'},
       {key: 'threshold', header: 'Threshold'},
-      {header: 'Edit', type: FieldType.BUTTON, action: ServerApiAction.Update, privilege: LoyaltyProgramPrivilege.UPDATE},
-      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove, privilege: LoyaltyProgramPrivilege.DELETE}
+      {
+        header: 'Edit',
+        type: FieldType.BUTTON,
+        action: ServerApiAction.Update,
+        privilege: LoyaltyProgramPrivilege.UPDATE
+      },
+      {
+        header: 'Remove',
+        type: FieldType.BUTTON,
+        action: ServerApiAction.Remove,
+        privilege: LoyaltyProgramPrivilege.DELETE
+      }
     ];
   }
 
