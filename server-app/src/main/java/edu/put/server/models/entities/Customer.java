@@ -24,5 +24,7 @@ public class Customer {
 
     private String surname;
 
+    private Integer loyaltyProgramId;
+
 }
 

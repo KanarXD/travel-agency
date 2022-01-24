@@ -15,19 +15,19 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @PreAuthorize("hasRole('EMPLOYEES_READ')")
+    @PreAuthorize("hasRole('CUSTOMERS_READ')")
     @GetMapping
     public List<Customer> getCustomers() {
         return customerService.getCustomers();
     }
 
-    @PreAuthorize("hasRole('EMPLOYEES_UPDATE')")
+    @PreAuthorize("hasRole('CUSTOMERS_UPDATE')")
     @PostMapping
     public Customer addCustomer(@RequestBody Customer customer) {
         return customerService.addCustomer(customer);
     }
 
-    @PreAuthorize("hasRole('EMPLOYEES_DELETE')")
+    @PreAuthorize("hasRole('CUSTOMERS_DELETE')")
     @DeleteMapping("/{id}")
     public void deleteCustomer(@PathVariable int id) {
         customerService.deleteCustomer(id);
