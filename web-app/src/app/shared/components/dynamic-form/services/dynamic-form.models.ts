@@ -57,13 +57,16 @@ export class DateQuestion extends Question {
 export abstract class QuestionService {
   abstract getQuestions(): Observable<Question[]>;
 
-  protected createItemOptionList$(serverApiService: ServerApiService<Item>): Observable<Option[]> {
+  protected createItemOptionList$<T extends Item>(serverApiService: ServerApiService<T>, valueAttributes?: string[]): Observable<Option[]> {
     return serverApiService.fetch()
       .pipe(
-        map((response: ResponseData<Item>) => {
+        map((response: ResponseData<T>) => {
             let itemOptionList: Option[] = [];
-            response.data.forEach((item: Item) => {
-              itemOptionList.push({key: item.id, value: item.name});
+            response.data.forEach((item: T) => {
+              let value: string = valueAttributes ? valueAttributes
+                  .flatMap((value: string) => item[value]).join(', ') :
+                item.name;
+              itemOptionList.push({key: item.id, value: value});
             })
             return itemOptionList;
           }

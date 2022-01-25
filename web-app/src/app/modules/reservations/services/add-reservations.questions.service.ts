@@ -26,7 +26,7 @@ export class AddReservationsQuestionsService extends QuestionService {
   override getQuestions(): Observable<Question[]> {
     return forkJoin([
       this.createItemOptionList$(this.customersApiService),
-      this.createItemOptionList$(this.offersApiService)
+      this.createItemOptionList$(this.offersApiService, ['name', 'basePrice'])
     ]).pipe(
       map(AddReservationsQuestionsService.createQuestionList)
     );

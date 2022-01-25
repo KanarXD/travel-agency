@@ -3,6 +3,9 @@ import {PageComponentPattern} from "../../../../shared/components/page/services/
 import {ReservationKeys, ReservationsPrivilege} from "../../services/reservations.models";
 import {ReservationsApiService} from "../../services/reservations.api.service";
 import {AddReservationsQuestionsService} from "../../services/add-reservations.questions.service";
+import {OffersApiService} from "../../../offers/services/offers.api.service";
+import {CustomersApiService} from "../../../customers/components/services/customers.api.service";
+import {FieldType} from "../../../../shared/components/data-grid/data-grid.models";
 
 @Component({
   selector: 'app-reservations',
@@ -12,7 +15,9 @@ export class ReservationsComponent extends PageComponentPattern<ReservationKeys>
 
   constructor(
     public reservationsApiService: ReservationsApiService,
-    public addReservationsQuestionsService: AddReservationsQuestionsService
+    public addReservationsQuestionsService: AddReservationsQuestionsService,
+    public offersApiService: OffersApiService,
+    public customersApiService: CustomersApiService
   ) {
     super();
   }
@@ -24,9 +29,9 @@ export class ReservationsComponent extends PageComponentPattern<ReservationKeys>
       delete: ReservationsPrivilege.DELETE
     };
     this.dataGridConfig = [
-      {key: 'offerId'},
-      {key: 'customerId'},
-      {key: 'reservationTimestamp'},
+      {key: 'offerId', header: 'offer', type: FieldType.REFERENCE, service: this.offersApiService},
+      {key: 'customerId', header: 'customer', type: FieldType.REFERENCE, service: this.customersApiService},
+      {key: 'reservationTimestamp', header: 'date and time'},
     ];
   }
 
