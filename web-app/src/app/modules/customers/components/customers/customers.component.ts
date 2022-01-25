@@ -4,6 +4,8 @@ import {CustomerKeys, CustomersPrivilege} from "../services/customers.models";
 import {CustomersApiService} from "../services/customers.api.service";
 import {LoyaltyProgramsApiService} from "../../../loyalty-programs/services/loyalty-programs.api.service";
 import {FieldType} from "../../../../shared/components/data-grid/data-grid.models";
+import {AddCustomersQuestionsService} from "../services/add-customers.questions.service";
+import {SearchCustomersQuestionService} from "../services/search-customers.question.service";
 
 @Component({
   selector: 'app-customers',
@@ -13,7 +15,9 @@ export class CustomersComponent extends PageComponentPattern<CustomerKeys> imple
 
   constructor(
     public customersApiService: CustomersApiService,
-    public loyaltyProgramsApiService: LoyaltyProgramsApiService
+    public loyaltyProgramsApiService: LoyaltyProgramsApiService,
+    public addCustomersQuestionsService: AddCustomersQuestionsService,
+    public searchCustomersQuestionService: SearchCustomersQuestionService
   ) {
     super();
   }

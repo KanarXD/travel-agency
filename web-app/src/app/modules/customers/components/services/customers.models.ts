@@ -11,6 +11,6 @@ export interface CustomerModel extends Item {
 
 export enum CustomersPrivilege {
   READ = 'CUSTOMERS_READ',
-  UPDATE = 'CUSTOMER_UPDATE',
+  UPDATE = 'CUSTOMERS_UPDATE',
   DELETE = 'CUSTOMERS_DELETE'
 }
