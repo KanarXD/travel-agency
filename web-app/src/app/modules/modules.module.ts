@@ -11,7 +11,7 @@ import {PromotionsComponent} from "./promotions/components/promotions.component"
 import {CustomersComponent} from './customers/components/customers/customers.component';
 import {CustomerDetailsComponent} from './customers/components/customer-details/customer-details.component';
 import {LoyaltyProgramsComponent} from './loyalty-programs/components/loyalty-programs.component';
-import { ReservationsComponent } from './reservations/components/reservations/reservations.component';
+import {ReservationsComponent} from './reservations/components/reservations/reservations.component';
 
 
 @NgModule({

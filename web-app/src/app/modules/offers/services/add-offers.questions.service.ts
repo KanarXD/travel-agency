@@ -28,16 +28,6 @@ export class AddOffersQuestionsService extends QuestionService {
     super();
   }
 
-  override getQuestions(): Observable<Question[]> {
-    return forkJoin([
-      this.createItemOptionList$(this.promotionApiService),
-      this.createItemOptionList$(this.hotelsApiService),
-      this.createItemOptionList$(this.carriersApiService),
-    ]).pipe(
-      map(AddOffersQuestionsService.createQuestionList)
-    );
-  }
-
   private static createQuestionList([promotionOptionList, hotelOptionList, carrierOptionList]: [Option[], Option[], Option[]]): Question[] {
     const datesFormGroup: FormGroup = new FormGroup({
       startDate: new FormControl('', [
@@ -99,6 +89,16 @@ export class AddOffersQuestionsService extends QuestionService {
         }),
       new FormGroupQuestion("datesFormGroup", datesFormGroup)
     ];
+  }
+
+  override getQuestions(): Observable<Question[]> {
+    return forkJoin([
+      this.createItemOptionList$(this.promotionApiService),
+      this.createItemOptionList$(this.hotelsApiService),
+      this.createItemOptionList$(this.carriersApiService),
+    ]).pipe(
+      map(AddOffersQuestionsService.createQuestionList)
+    );
   }
 
 }

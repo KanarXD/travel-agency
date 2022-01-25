@@ -23,15 +23,6 @@ export class AddReservationsQuestionsService extends QuestionService {
     super();
   }
 
-  override getQuestions(): Observable<Question[]> {
-    return forkJoin([
-      this.createItemOptionList$(this.customersApiService),
-      this.createItemOptionList$(this.offersApiService, ['name', 'basePrice'])
-    ]).pipe(
-      map(AddReservationsQuestionsService.createQuestionList)
-    );
-  }
-
   private static createQuestionList([customerOptionList, offerOptionList]: [Option[], Option[]]): Question[] {
     return [
       new DropdownQuestion(
@@ -51,5 +42,14 @@ export class AddReservationsQuestionsService extends QuestionService {
           FormValidators.notNull
         ]))
     ];
+  }
+
+  override getQuestions(): Observable<Question[]> {
+    return forkJoin([
+      this.createItemOptionList$(this.customersApiService),
+      this.createItemOptionList$(this.offersApiService, ['name', 'basePrice'])
+    ]).pipe(
+      map(AddReservationsQuestionsService.createQuestionList)
+    );
   }
 }
