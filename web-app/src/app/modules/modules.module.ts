@@ -8,9 +8,9 @@ import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 import {CarriersComponent} from "./carriers/components/carriers/carriers.component";
 import {HotelsComponent} from "./hotels/components/hotels/hotels.component";
 import {PromotionsComponent} from "./promotions/components/promotions.component";
-import {LoyaltyProgramsComponent} from "./loyalty_programs/components/loyalty_programs.component";
 import { CustomersComponent } from './customers/components/customers/customers.component';
 import { CustomerDetailsComponent } from './customers/components/customer-details/customer-details.component';
+import { LoyaltyProgramsComponent } from './loyalty-programs/components/loyalty-programs.component';
 
 
 @NgModule({

@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {DataGridRowConfig, FieldType} from "../../../shared/components/data-grid/data-grid.models";
 import {PagePrivileges} from "../../../shared/components/page/services/page.models";
-import {LoyaltyProgramKeys, LoyaltyProgramPrivilege} from "../services/loyalty_programs.models";
+import {LoyaltyProgramKeys, LoyaltyProgramPrivilege} from "../services/loyalty-programs.models";
 import {ServerApiAction} from "../../../shared/services/api.models";
-import {LoyaltyProgramsApiService} from "../services/loyalty_programs.api.service";
-import {AddLoyaltyProgramsQuestionsService} from "../services/add-loyalty_programs.questions.service";
-import {SearchLoyaltyProgramsQuestionsService} from "../services/search-loyalty_programs.questions.service";
+import {LoyaltyProgramsApiService} from "../services/loyalty-programs.api.service";
+import {AddLoyaltyProgramsQuestionsService} from "../services/add-loyalty-programs.questions.service";
+import {SearchLoyaltyProgramsQuestionsService} from "../services/search-loyalty-programs.questions.service";
 
 @Component({
   selector: 'app-loyalty_program',
-  templateUrl: './loyalty_programs.component.html'
+  templateUrl: './loyalty-programs.component.html'
 })
 export class LoyaltyProgramsComponent implements OnInit {
   dataGridConfig!: DataGridRowConfig<LoyaltyProgramKeys>[];
