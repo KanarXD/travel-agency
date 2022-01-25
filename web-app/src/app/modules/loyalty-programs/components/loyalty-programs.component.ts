@@ -1,25 +1,20 @@
 import {Component, OnInit} from '@angular/core';
-import {DataGridRowConfig, FieldType} from "../../../shared/components/data-grid/data-grid.models";
-import {PagePrivileges} from "../../../shared/components/page/services/page.models";
+import {PageComponentPattern} from "../../../shared/components/page/services/page.models";
 import {LoyaltyProgramKeys, LoyaltyProgramPrivilege} from "../services/loyalty-programs.models";
-import {ServerApiAction} from "../../../shared/services/api.models";
 import {LoyaltyProgramsApiService} from "../services/loyalty-programs.api.service";
-import {AddLoyaltyProgramsQuestionsService} from "../services/add-loyalty-programs.questions.service";
 import {SearchLoyaltyProgramsQuestionsService} from "../services/search-loyalty-programs.questions.service";
 
 @Component({
   selector: 'app-loyalty_program',
   templateUrl: './loyalty-programs.component.html'
 })
-export class LoyaltyProgramsComponent implements OnInit {
-  dataGridConfig!: DataGridRowConfig<LoyaltyProgramKeys>[];
-  pagePrivileges!: PagePrivileges;
+export class LoyaltyProgramsComponent extends PageComponentPattern<LoyaltyProgramKeys> implements OnInit {
 
   constructor(
     public loyaltyProgramsApiService: LoyaltyProgramsApiService,
-    public addLoyaltyProgramsQuestionsService: AddLoyaltyProgramsQuestionsService,
     public searchLoyaltyProgramsQuestionsService: SearchLoyaltyProgramsQuestionsService
   ) {
+    super();
   }
 
   ngOnInit(): void {
@@ -31,19 +26,7 @@ export class LoyaltyProgramsComponent implements OnInit {
     this.dataGridConfig = [
       {key: 'name'},
       {key: 'discount', header: 'Discount'},
-      {key: 'threshold', header: 'Threshold'},
-      {
-        header: 'Edit',
-        type: FieldType.BUTTON,
-        action: ServerApiAction.Update,
-        privilege: LoyaltyProgramPrivilege.UPDATE
-      },
-      {
-        header: 'Remove',
-        type: FieldType.BUTTON,
-        action: ServerApiAction.Remove,
-        privilege: LoyaltyProgramPrivilege.DELETE
-      }
+      {key: 'threshold', header: 'Threshold'}
     ];
   }
 

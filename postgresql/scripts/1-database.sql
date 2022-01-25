@@ -47,7 +47,7 @@ CREATE TABLE customers
     id                 SERIAL PRIMARY KEY,
     name               VARCHAR(20) NOT NULL,
     surname            VARCHAR(20) NOT NULL,
-    loyalty_program_id INTEGER     NOT NULL REFERENCES loyalty_programs
+    loyalty_program_id INTEGER     NULL REFERENCES loyalty_programs
 );
 
 CREATE TABLE promotions

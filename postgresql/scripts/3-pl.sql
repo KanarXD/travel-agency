@@ -29,21 +29,29 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION reservations_to_loyalty_program(customer_id INTEGER) RETURNS INTEGER AS
+CREATE OR REPLACE FUNCTION reservations_to_loyalty_program(c_id INTEGER) RETURNS INTEGER AS
 $$
 DECLARE
-    next_program          INTEGER := (SELECT lp.id
-                                      FROM customers c JOIN loyalty_programs lp ON c.loyalty_program_id = lp.id
-                                      WHERE c.id = customer_id) + 1;
+    curr_program          INTEGER := (SELECT COALESCE(loyalty_program_id, -1)
+                                      FROM customers
+                                      WHERE id = c_id);
+
+    next_program          INTEGER := curr_program + 1;
 
     next_program_exists   BOOLEAN := (SELECT COUNT(id) > 0
                                       FROM loyalty_programs
                                       WHERE id = next_program);
 
     curr_num_reservations INTEGER := (SELECT COUNT(*)
-                                      FROM customers c JOIN reservations r on c.id = r.customer_id);
+                                      FROM reservations
+                                      WHERE customer_id = c_id);
 
 BEGIN
+    IF curr_program = -1 THEN
+        next_program := (SELECT id FROM loyalty_programs ORDER BY id LIMIT 1);
+        RETURN (SELECT threshold FROM loyalty_programs WHERE id = next_program) - curr_num_reservations;
+    END IF;
+
     IF next_program_exists = true THEN
         RETURN (SELECT threshold FROM loyalty_programs WHERE id = next_program) - curr_num_reservations;
     ELSE
@@ -52,17 +60,23 @@ BEGIN
 end;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE add_loyalty_program(customer_id INTEGER) AS
+CREATE OR REPLACE PROCEDURE add_loyalty_program(c_id INTEGER) AS
 $$
 DECLARE
-    next_program INTEGER := (SELECT lp.id
-                             FROM customers c JOIN loyalty_programs lp ON c.loyalty_program_id = lp.id
-                             WHERE c.id = customer_id) + 1;
+    curr_program INTEGER := (SELECT COALESCE(loyalty_program_id, -1)
+                             FROM customers
+                             WHERE id = c_id);
+
+    next_program INTEGER := curr_program + 1;
 
 BEGIN
+    IF curr_program = -1 THEN
+        next_program := (SELECT id FROM loyalty_programs ORDER BY id LIMIT 1);
+    END IF;
+
     UPDATE customers
     SET loyalty_program_id = next_program
-    WHERE id = customer_id;
+    WHERE id = c_id;
 END;
 $$ LANGUAGE plpgsql;
 
