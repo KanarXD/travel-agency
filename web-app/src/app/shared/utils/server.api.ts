@@ -7,6 +7,7 @@ export class ServerApi {
   static OFFERS = environment.SERVER_API_URL + '/offers';
   static EMPLOYEES = environment.SERVER_API_URL + '/employees';
   static CUSTOMERS = environment.SERVER_API_URL + '/customers';
+  static RESERVATIONS = environment.SERVER_API_URL + '/reservations';
   static PROMOTIONS = environment.SERVER_API_URL + '/promotions';
   static HOTELS = environment.SERVER_API_URL + '/hotels';
   static CARRIERS = environment.SERVER_API_URL + '/carriers';

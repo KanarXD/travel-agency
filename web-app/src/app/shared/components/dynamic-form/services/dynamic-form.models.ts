@@ -1,5 +1,8 @@
 import {AbstractControl, FormControl, FormGroup} from "@angular/forms";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
+import {ResponseData} from "../../../services/api.models";
+import {ServerApiService} from "../../../services/server.api.service";
+import {Item} from "../../page/services/page.models";
 
 export interface Option {
   key: string | number;
@@ -53,4 +56,17 @@ export class DateQuestion extends Question {
 
 export abstract class QuestionService {
   abstract getQuestions(): Observable<Question[]>;
+
+  protected createItemOptionList$(serverApiService: ServerApiService<Item>): Observable<Option[]> {
+    return serverApiService.fetch()
+      .pipe(
+        map((response: ResponseData<Item>) => {
+            let itemOptionList: Option[] = [];
+            response.data.forEach((item: Item) => {
+              itemOptionList.push({key: item.id, value: item.name});
+            })
+            return itemOptionList;
+          }
+        ));
+  }
 }

@@ -38,11 +38,11 @@ export class AddOffersQuestionsService extends QuestionService {
       this.createHotelOptionList$(),
       this.createCarrierOptionList$()
     ]).pipe(
-      map(this.createQuestionList)
+      map(AddOffersQuestionsService.createQuestionList)
     );
   }
 
-  createHotelOptionList$(): Observable<Option[]> {
+  private createHotelOptionList$(): Observable<Option[]> {
     return this.hotelsApiService.fetch()
       .pipe(
         map((response: ResponseData<HotelModel>) => {
@@ -56,7 +56,7 @@ export class AddOffersQuestionsService extends QuestionService {
         ));
   }
 
-  createCarrierOptionList$(): Observable<Option[]> {
+  private createCarrierOptionList$(): Observable<Option[]> {
     return this.carriersApiService.fetch()
       .pipe(
         map((response: ResponseData<CarrierModel>) => {
@@ -70,7 +70,7 @@ export class AddOffersQuestionsService extends QuestionService {
         ));
   }
 
-  createPromotionOptionList$(): Observable<Option[]> {
+  private createPromotionOptionList$(): Observable<Option[]> {
     return this.promotionApiService.fetch()
       .pipe(
         map((response: ResponseData<CarrierModel>) => {
@@ -84,7 +84,7 @@ export class AddOffersQuestionsService extends QuestionService {
         ));
   }
 
-  createQuestionList([promotionOptionList, hotelOptionList, carrierOptionList]: [Option[], Option[], Option[]]): Question[] {
+  private static createQuestionList([promotionOptionList, hotelOptionList, carrierOptionList]: [Option[], Option[], Option[]]): Question[] {
     const datesFormGroup: FormGroup = new FormGroup({
       startDate: new FormControl('', [
         Validators.required,
