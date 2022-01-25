@@ -1,12 +1,15 @@
 package edu.put.server.controllers;
 
+import edu.put.server.models.ResponseData;
 import edu.put.server.models.entities.Reservation;
+import edu.put.server.models.filters.PageFilter;
 import edu.put.server.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/reservations")
@@ -17,8 +20,8 @@ public class ReservationController {
 
     @PreAuthorize("hasRole('RESERVATIONS_READ')")
     @GetMapping
-    public List<Reservation> getReservations() {
-        return reservationService.getReservations();
+    public ResponseData<List<Reservation>> getReservations(@ModelAttribute PageFilter pageFilter, @RequestParam Map<String, String> paramMap) {
+        return reservationService.getReservations(pageFilter, paramMap);
     }
 
     @PreAuthorize("hasRole('RESERVATIONS_UPDATE')")
