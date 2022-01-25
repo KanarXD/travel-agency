@@ -11,8 +11,9 @@ import {HotelsComponent} from "./modules/hotels/components/hotels/hotels.compone
 import {CarriersComponent} from "./modules/carriers/components/carriers/carriers.component";
 import {PromotionsComponent} from "./modules/promotions/components/promotions.component";
 import {PromotionPrivilege} from "./modules/promotions/services/promotions.models";
-import {LoyaltyProgramsComponent} from "./modules/loyalty_programs/components/loyalty_programs.component";
-import {LoyaltyProgramPrivilege} from "./modules/loyalty_programs/services/loyalty_programs.models";
+import {CustomersComponent} from "./modules/customers/components/customers/customers.component";
+import {LoyaltyProgramsComponent} from "./modules/loyalty-programs/components/loyalty-programs.component";
+import {LoyaltyProgramPrivilege} from "./modules/loyalty-programs/services/loyalty-programs.models";
 
 export const appNavRoutes: NavRoutes = [
   {title: 'HOME', path: '', component: HomeComponent, inNavBar: true},
@@ -20,6 +21,14 @@ export const appNavRoutes: NavRoutes = [
     title: 'OFFERS',
     path: 'offers',
     component: OffersComponent,
+    canActivate: [ServerGuard],
+    data: {privilege: OfferPrivilege.READ},
+    inNavBar: true
+  },
+  {
+    title: 'CUSTOMERS',
+    path: 'customers',
+    component: CustomersComponent,
     canActivate: [ServerGuard],
     data: {privilege: OfferPrivilege.READ},
     inNavBar: true

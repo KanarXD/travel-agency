@@ -1,17 +1,12 @@
-import {ServerApiFilter} from "../../../shared/services/api.models";
 import {Item} from "../../../shared/components/page/services/page.models";
 
 export type LoyaltyProgramKeys = 'id' | 'name' | 'discount' | 'threshold';
 
 export interface LoyaltyProgramModel extends Item {
+  id: number;
   name: string;
   discount: number,
   threshold: number
-}
-
-export class LoyaltyProgramFilters implements ServerApiFilter {
-  currentPage: number = 0;
-  itemsPerPage: number = 5;
 }
 
 export enum LoyaltyProgramPrivilege {
