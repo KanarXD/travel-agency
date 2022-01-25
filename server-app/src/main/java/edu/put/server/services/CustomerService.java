@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -35,4 +36,7 @@ public class CustomerService {
         customersRepository.deleteById(id);
     }
 
+    public Optional<Customer> getCustomer(int id) {
+        return customersRepository.findById(id);
+    }
 }
