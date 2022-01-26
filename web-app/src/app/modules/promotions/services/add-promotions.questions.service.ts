@@ -54,6 +54,7 @@ export class AddPromotionsQuestionsService extends QuestionService {
         type: 'number'
       }, new FormControl('', [
         Validators.required,
+        Validators.max(99),
         Validators.pattern('[1-9]+[0-9]*')
       ])),
       new FormGroupQuestion("datesFormGroup", datesFormGroup)

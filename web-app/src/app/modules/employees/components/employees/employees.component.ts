@@ -17,7 +17,7 @@ export class EmployeesComponent extends PageComponentPattern<EmployeeKeys> imple
 
   constructor(
     public employeesService: EmployeesApiService,
-    public addEmployeesQuestionsService : AddEmployeesQuestionsService,
+    public addEmployeesQuestionsService: AddEmployeesQuestionsService,
     public searchEmployeesQuestionService: SearchEmployeesQuestionService,
     public rolesApiService: RolesApiService
   ) {
