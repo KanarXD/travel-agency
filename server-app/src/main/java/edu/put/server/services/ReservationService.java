@@ -2,6 +2,7 @@ package edu.put.server.services;
 
 import edu.put.server.models.ResponseData;
 import edu.put.server.models.entities.LoyaltyProgram;
+import edu.put.server.models.entities.Offer;
 import edu.put.server.models.entities.Reservation;
 import edu.put.server.models.filters.PageFilter;
 import edu.put.server.repositories.ReservationRepository;
@@ -32,6 +33,11 @@ public class ReservationService {
     }
 
     public Reservation addReservation(Reservation reservation) {
+        Optional<BigDecimal> optionalPrice = getReservationPrice(reservation.getOfferId(), reservation.getCustomerId());
+        if (optionalPrice.isEmpty()) {
+            return null;
+        }
+        reservation.setPrice(optionalPrice.get());
         return reservationRepository.save(reservation);
     }
 
@@ -40,15 +46,15 @@ public class ReservationService {
     }
 
     public Optional<BigDecimal> getReservationPrice(int offerId, int customerId) {
-        Optional<BigDecimal> optionalOfferPrice = offerService.getPriceAfterPromotion(offerId);
-        if (optionalOfferPrice.isEmpty()) {
+        Optional<Offer> optionalOffer = offerService.getOffer(offerId);
+        if (optionalOffer.isEmpty()) {
             return Optional.empty();
         }
         Optional<LoyaltyProgram> optionalLoyaltyProgram = customerService.getCustomerDiscount(customerId);
         if (optionalLoyaltyProgram.isEmpty()) {
-            return optionalOfferPrice;
+            return Optional.of(optionalOffer.get().getPrice());
         }
-        return Optional.of(optionalOfferPrice.get().multiply(
+        return Optional.of(optionalOffer.get().getPrice().multiply(
                 BigDecimal.valueOf(1 - 0.01 * optionalLoyaltyProgram.get().getDiscount())));
     }
 }

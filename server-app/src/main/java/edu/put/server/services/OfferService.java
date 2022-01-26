@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -39,6 +38,7 @@ public class OfferService {
     }
 
     public Offer addOffer(Offer offer) {
+        offer.setPrice(getPriceAfterPromotion(offer));
         return offerRepository.save(offer);
     }
 
@@ -46,18 +46,16 @@ public class OfferService {
         offerRepository.deleteById(id);
     }
 
-    public Optional<BigDecimal> getPriceAfterPromotion(int id) {
-        Optional<Offer> optionalOffer = offerRepository.findById(id);
-        if (optionalOffer.isEmpty()) {
-            return Optional.empty();
+    public BigDecimal getPriceAfterPromotion(Offer offer) {
+        if (Optional.ofNullable(offer.getPromotionId()).isEmpty()) {
+            return offer.getBasePrice();
         }
-        if (Optional.ofNullable(optionalOffer.get().getPromotionId()).isEmpty()) {
-            return Optional.of(optionalOffer.get().getBasePrice());
+        Optional<Promotion> optionalPromotion = promotionService.getPromotion(offer.getPromotionId());
+        if (optionalPromotion.isEmpty() ||
+                optionalPromotion.get().getEndDate().before(offer.getStartDate()) ||
+                optionalPromotion.get().getStartDate().after(offer.getStartDate())) {
+            return offer.getBasePrice();
         }
-        Optional<Promotion> optionalPromotion = promotionService.getPromotion(optionalOffer.get().getPromotionId());
-        if (optionalPromotion.isEmpty() || optionalPromotion.get().getEndDate().after(new Date())) {
-            return Optional.empty();
-        }
-        return Optional.of(optionalOffer.get().getBasePrice().multiply(BigDecimal.valueOf((1 - 0.01 * optionalPromotion.get().getDiscount()))));
+        return offer.getBasePrice().multiply(BigDecimal.valueOf((1 - 0.01 * optionalPromotion.get().getDiscount())));
     }
 }

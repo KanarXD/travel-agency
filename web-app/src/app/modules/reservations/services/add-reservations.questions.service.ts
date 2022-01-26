@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {
   DropdownQuestion,
-  Option,
   Question,
+  QuestionOption,
   QuestionService
 } from "../../../shared/components/dynamic-form/services/dynamic-form.models";
 import {forkJoin, map, Observable} from "rxjs";
@@ -23,7 +23,7 @@ export class AddReservationsQuestionsService extends QuestionService {
     super();
   }
 
-  private static createQuestionList([customerOptionList, offerOptionList]: [Option[], Option[]]): Question[] {
+  private static createQuestionList([customerOptionList, offerOptionList]: [QuestionOption[], QuestionOption[]]): Question[] {
     return [
       new DropdownQuestion(
         {
@@ -47,7 +47,7 @@ export class AddReservationsQuestionsService extends QuestionService {
   override getQuestions(): Observable<Question[]> {
     return forkJoin([
       this.createItemOptionList$(this.customersApiService),
-      this.createItemOptionList$(this.offersApiService, ['name', 'basePrice'])
+      this.createItemOptionList$(this.offersApiService, ['name', 'price'])
     ]).pipe(
       map(AddReservationsQuestionsService.createQuestionList)
     );

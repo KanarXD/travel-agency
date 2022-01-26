@@ -77,6 +77,7 @@ CREATE TABLE offers
     id           SERIAL PRIMARY KEY,
     name         VARCHAR(30)   NOT NULL,
     base_price   NUMERIC(8, 2) NOT NULL,
+    price        NUMERIC(8, 2) NOT NULL,
     start_date   DATE          NOT NULL,
     end_date     DATE          NOT NULL,
     promotion_id INTEGER       NULL REFERENCES promotions,

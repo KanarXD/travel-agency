@@ -3,7 +3,7 @@ import {
   DateQuestion,
   DropdownQuestion,
   FormGroupQuestion,
-  Option,
+  QuestionOption,
   Question,
   QuestionService,
   TextBoxQuestion,
@@ -28,7 +28,7 @@ export class AddOffersQuestionsService extends QuestionService {
     super();
   }
 
-  private static createQuestionList([promotionOptionList, hotelOptionList, carrierOptionList]: [Option[], Option[], Option[]]): Question[] {
+  private static createQuestionList([promotionOptionList, hotelOptionList, carrierOptionList]: [QuestionOption[], QuestionOption[], QuestionOption[]]): Question[] {
     const datesFormGroup: FormGroup = new FormGroup({
       startDate: new FormControl('', [
         Validators.required,

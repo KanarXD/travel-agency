@@ -4,7 +4,7 @@ import {ResponseData} from "../../../services/api.models";
 import {ServerApiService} from "../../../services/server.api.service";
 import {Item} from "../../page/services/page.models";
 
-export interface Option {
+export interface QuestionOption {
   key: string | number;
   value: string;
 }
@@ -15,7 +15,7 @@ export interface QuestionOptions {
   label: string;
   type?: string;
   formGroupName?: string;
-  options?: Option[];
+  options?: QuestionOption[];
 }
 
 export class Question {
@@ -57,11 +57,11 @@ export class DateQuestion extends Question {
 export abstract class QuestionService {
   abstract getQuestions(): Observable<Question[]>;
 
-  protected createItemOptionList$<T extends Item>(serverApiService: ServerApiService<T>, valueAttributes?: string[]): Observable<Option[]> {
+  protected createItemOptionList$<T extends Item>(serverApiService: ServerApiService<T>, valueAttributes?: string[]): Observable<QuestionOption[]> {
     return serverApiService.fetch()
       .pipe(
         map((response: ResponseData<T>) => {
-            let itemOptionList: Option[] = [];
+            let itemOptionList: QuestionOption[] = [];
             response.data.forEach((item: T) => {
               let value: string = valueAttributes ? valueAttributes
                   .flatMap((value: string) => item[value]).join(', ') :

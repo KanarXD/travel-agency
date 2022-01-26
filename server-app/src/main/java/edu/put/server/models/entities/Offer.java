@@ -27,6 +27,8 @@ public class Offer {
 
     private BigDecimal basePrice;
 
+    private BigDecimal price;
+
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Poland")
     private Date startDate;
 

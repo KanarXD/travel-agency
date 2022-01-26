@@ -3,13 +3,12 @@ import {ServerApiService} from "../../services/server.api.service";
 import {Item} from "../page/services/page.models";
 
 export interface DataGridRowConfig<T extends string> {
-  key?: T | T[];
+  key?: T;
   type?: FieldType;
   header?: string;
   privilege?: string;
   action?: ServerApiAction;
   service?: ServerApiService<Item>;
-  endpoint?: string;
 }
 
 export enum FieldType {

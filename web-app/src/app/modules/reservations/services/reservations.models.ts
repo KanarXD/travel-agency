@@ -1,6 +1,6 @@
 import {Item} from "../../../shared/components/page/services/page.models";
 
-export type ReservationKeys = 'id' | 'offerId' | 'customerId' | 'reservationTimestamp';
+export type ReservationKeys = 'id' | 'offerId' | 'customerId' | 'reservationTimestamp' | 'price';
 
 export interface ReservationModel extends Item {
   offerId: number;
