@@ -2,16 +2,17 @@ package edu.put.server.services;
 
 import edu.put.server.models.ResponseData;
 import edu.put.server.models.entities.Offer;
+import edu.put.server.models.entities.Promotion;
 import edu.put.server.models.filters.Filter;
 import edu.put.server.models.filters.PageFilter;
 import edu.put.server.models.filters.QueryOperator;
 import edu.put.server.repositories.OfferRepository;
-import edu.put.server.utility.SpecificationResolver;
+import edu.put.server.utility.ServiceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -24,14 +25,13 @@ public class OfferService {
     );
 
     @Autowired
+    private PromotionService promotionService;
+
+    @Autowired
     private OfferRepository offerRepository;
 
     public ResponseData<List<Offer>> getOffers(PageFilter pageFilter, Map<String, String> paramMap) {
-        Specification<Offer> specification = SpecificationResolver.createSpecification(filterList, paramMap);
-        List<Offer> offerList = SpecificationResolver.getValidator().validate(pageFilter).isEmpty() ?
-                offerRepository.findAll(specification, PageRequest.of(pageFilter.getCurrentPage(), pageFilter.getItemsPerPage())).toList() :
-                offerRepository.findAll(specification);
-        return ResponseData.<List<Offer>>builder().data(offerList).total(offerRepository.count()).build();
+        return ServiceUtil.getResponseData(offerRepository, pageFilter, paramMap, filterList);
     }
 
     public Optional<Offer> getOffer(Integer id) {
@@ -44,5 +44,20 @@ public class OfferService {
 
     public void deleteOffer(int id) {
         offerRepository.deleteById(id);
+    }
+
+    public Optional<BigDecimal> getPriceAfterPromotion(int id) {
+        Optional<Offer> optionalOffer = offerRepository.findById(id);
+        if (optionalOffer.isEmpty()) {
+            return Optional.empty();
+        }
+        if (Optional.ofNullable(optionalOffer.get().getPromotionId()).isEmpty()) {
+            return Optional.of(optionalOffer.get().getBasePrice());
+        }
+        Optional<Promotion> optionalPromotion = promotionService.getPromotion(optionalOffer.get().getPromotionId());
+        if (optionalPromotion.isEmpty() || optionalPromotion.get().getEndDate().after(new Date())) {
+            return Optional.empty();
+        }
+        return Optional.of(optionalOffer.get().getBasePrice().multiply(BigDecimal.valueOf((1 - 0.01 * optionalPromotion.get().getDiscount()))));
     }
 }

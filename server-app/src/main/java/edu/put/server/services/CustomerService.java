@@ -2,6 +2,7 @@ package edu.put.server.services;
 
 import edu.put.server.models.ResponseData;
 import edu.put.server.models.entities.Customer;
+import edu.put.server.models.entities.LoyaltyProgram;
 import edu.put.server.models.filters.Filter;
 import edu.put.server.models.filters.PageFilter;
 import edu.put.server.models.filters.QueryOperator;
@@ -22,6 +23,9 @@ public class CustomerService {
     );
 
     @Autowired
+    private LoyaltyProgramService loyaltyProgramService;
+
+    @Autowired
     private CustomerRepository customersRepository;
 
     public ResponseData<List<Customer>> getCustomers(PageFilter pageFilter, Map<String, String> paramMap) {
@@ -38,5 +42,13 @@ public class CustomerService {
 
     public Optional<Customer> getCustomer(int id) {
         return customersRepository.findById(id);
+    }
+
+    public Optional<LoyaltyProgram> getCustomerDiscount(int id) {
+        Optional<Customer> optionalCustomer = customersRepository.findById(id);
+        if (optionalCustomer.isEmpty()) {
+            return Optional.empty();
+        }
+        return loyaltyProgramService.getLoyaltyProgram(optionalCustomer.get().getLoyaltyProgramId());
     }
 }

@@ -87,7 +87,8 @@ CREATE TABLE offers
 CREATE TABLE reservations
 (
     id                    SERIAL PRIMARY KEY,
-    offer_id              INTEGER   NOT NULL REFERENCES offers,
-    customer_id           INTEGER   NOT NULL REFERENCES customers,
-    reservation_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    offer_id              INTEGER       NOT NULL REFERENCES offers,
+    customer_id           INTEGER       NOT NULL REFERENCES customers,
+    reservation_timestamp TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    price                 NUMERIC(8, 2) NOT NULL
 );

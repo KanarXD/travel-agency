@@ -80,12 +80,3 @@ VALUES ('BOB', 'BOBOWSKI', 'bob', 'bobspassword', (SELECT id FROM roles WHERE na
 INSERT INTO employees(name, surname, login, password, role)
 VALUES ('ADMIN', 'ADMIN', 'admin', 'adminspassword', (SELECT id FROM roles WHERE name = 'ADMIN'));
 
--- RESERVATIONS
-INSERT INTO reservations(offer_id, customer_id)
-VALUES (1, 1);
-
-INSERT INTO reservations(offer_id, customer_id)
-VALUES (1, 2);
-
-INSERT INTO reservations(offer_id, customer_id)
-VALUES (2, 1);
