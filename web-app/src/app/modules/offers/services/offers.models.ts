@@ -2,6 +2,7 @@ export type OfferKeys =
   'id'
   | 'name'
   | 'basePrice'
+  | 'price'
   | 'startDate'
   | 'endDate'
   | 'delete'

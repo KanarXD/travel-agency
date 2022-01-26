@@ -19,6 +19,10 @@ export abstract class ServerApiService<T> implements ApiService<T> {
     return this.httpClient.get<T>(`${this.serviceUrl}/${id}`);
   }
 
+  getFromEndpoint(endpoint: string, params: { [key: string]: any }): Observable<T> {
+    return this.httpClient.get<T>(`${this.serviceUrl}/${endpoint}`, {params: params});
+  }
+
   add(item: T): Observable<ResponseData<T>> {
     return this.httpClient.post<ResponseData<T>>(this.serviceUrl, item);
   }

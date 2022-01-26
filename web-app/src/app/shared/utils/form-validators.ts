@@ -2,7 +2,14 @@ import {AbstractControl, ValidationErrors} from "@angular/forms";
 
 export class FormValidators {
 
-  static futureDate(control: AbstractControl): ValidationErrors | null {
+  public static notNull(control: AbstractControl): ValidationErrors | null {
+    if (control.value === null || control.value === 'null') {
+      return {nullValue: true};
+    }
+    return null;
+  }
+
+  public static futureDate(control: AbstractControl): ValidationErrors | null {
     const date: Date = new Date(new Date(control.value).toDateString());
     const currentDate: Date = new Date(new Date().toDateString());
     if (date >= currentDate) {
@@ -11,7 +18,7 @@ export class FormValidators {
     return {oldDate: true};
   }
 
-  static dateAfterDate(control: AbstractControl): ValidationErrors | null {
+  public static dateAfterDate(control: AbstractControl): ValidationErrors | null {
     const values: string[] = Object.values(control.value) as string[];
     if (!values[0] || !values[1]) {
       return null;

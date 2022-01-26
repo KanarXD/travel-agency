@@ -4,13 +4,13 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppComponent} from './core/components/app/app.component';
-import {ContainersModule} from "./modules/modules.module";
+import {ModulesModule} from "./modules/modules.module";
 import {CoreModule} from "./core/core.module";
 import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   imports: [
-    ContainersModule,
+    ModulesModule,
     CoreModule,
     BrowserModule,
     AppRoutingModule,

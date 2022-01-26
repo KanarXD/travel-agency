@@ -37,6 +37,7 @@ export class OffersComponent implements OnInit {
     this.dataGridConfig = [
       {key: 'name'},
       {key: 'basePrice', header: 'Base Price'},
+      {key: 'price'},
       {key: 'startDate', header: 'Start Date'},
       {key: 'endDate', header: 'End Date'},
       {key: 'promotionId', header: 'Promotion', type: FieldType.REFERENCE, service: this.promotionApiService},
