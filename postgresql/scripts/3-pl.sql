@@ -29,12 +29,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION reservations_to_loyalty_program(c_id INTEGER) RETURNS INTEGER AS
+CREATE OR REPLACE FUNCTION reservations_to_loyalty_program(customers_id INTEGER) RETURNS INTEGER AS
 $$
 DECLARE
     curr_program          INTEGER := (SELECT COALESCE(loyalty_program_id, -1)
                                       FROM customers
-                                      WHERE id = c_id);
+                                      WHERE id = customers_id);
 
     next_program          INTEGER := curr_program + 1;
 
@@ -44,7 +44,7 @@ DECLARE
 
     curr_num_reservations INTEGER := (SELECT COUNT(*)
                                       FROM reservations
-                                      WHERE customer_id = c_id);
+                                      WHERE customer_id = customers_id);
 
 BEGIN
     IF curr_program = -1 THEN
@@ -60,12 +60,12 @@ BEGIN
 end;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE add_loyalty_program(c_id INTEGER) AS
+CREATE OR REPLACE PROCEDURE add_loyalty_program(customers_id INTEGER) AS
 $$
 DECLARE
     curr_program INTEGER := (SELECT COALESCE(loyalty_program_id, -1)
                              FROM customers
-                             WHERE id = c_id);
+                             WHERE id = customers_id);
 
     next_program INTEGER := curr_program + 1;
 
@@ -76,7 +76,7 @@ BEGIN
 
     UPDATE customers
     SET loyalty_program_id = next_program
-    WHERE id = c_id;
+    WHERE id = customers_id;
 END;
 $$ LANGUAGE plpgsql;
 
