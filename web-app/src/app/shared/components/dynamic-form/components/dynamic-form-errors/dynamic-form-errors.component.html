@@ -21,6 +21,9 @@
     <div *ngIf="errors?.['nullValue']">
       can't be None
     </div>
+    <div *ngIf="errors?.['max'] as error">
+      max value: {{error.max}}, actual value: {{error.actual}}
+    </div>
     <!--    <div>-->
     <!--      {{getErrors()}}-->
     <!--    </div>-->

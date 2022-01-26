@@ -1,7 +1,6 @@
 package edu.put.server.controllers;
 
 import edu.put.server.models.ResponseData;
-import edu.put.server.models.entities.Offer;
 import edu.put.server.models.entities.Role;
 import edu.put.server.models.filters.PageFilter;
 import edu.put.server.services.RoleService;

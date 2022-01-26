@@ -46,7 +46,7 @@ public class CustomerService {
 
     public Optional<LoyaltyProgram> getCustomerDiscount(int id) {
         Optional<Customer> optionalCustomer = customersRepository.findById(id);
-        if (optionalCustomer.isEmpty()) {
+        if (optionalCustomer.isEmpty() || Optional.ofNullable(optionalCustomer.get().getLoyaltyProgramId()).isEmpty()) {
             return Optional.empty();
         }
         return loyaltyProgramService.getLoyaltyProgram(optionalCustomer.get().getLoyaltyProgramId());

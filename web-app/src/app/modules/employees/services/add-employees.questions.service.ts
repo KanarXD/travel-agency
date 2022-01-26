@@ -17,7 +17,7 @@ import {FormValidators} from "../../../shared/utils/form-validators";
 export class AddEmployeesQuestionsService extends QuestionService {
 
   constructor(
-    public rolesApiService : RolesApiService
+    public rolesApiService: RolesApiService
   ) {
     super();
   }
