@@ -32,6 +32,13 @@ export class ReservationsComponent extends PageComponentPattern<ReservationKeys>
       {key: 'offerId', header: 'offer', type: FieldType.REFERENCE, service: this.offersApiService},
       {key: 'customerId', header: 'customer', type: FieldType.REFERENCE, service: this.customersApiService},
       {key: 'reservationTimestamp', header: 'date and time'},
+      {
+        key: ['offerId', 'customerId'],
+        header: 'price',
+        type: FieldType.REFERENCE,
+        service: this.reservationsApiService,
+        endpoint: 'price'
+      },
     ];
   }
 
