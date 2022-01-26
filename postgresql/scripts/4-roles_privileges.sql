@@ -10,6 +10,10 @@ VALUES ('ADMIN');
 
 -- PRIVILEGES
 
+-- ROLES PRIVILEGES
+INSERT INTO privileges(name)
+VALUES ('ROLES_READ');
+
 -- EMPLOYEES PRIVILEGES
 INSERT INTO privileges(name)
 VALUES ('EMPLOYEES_READ');
@@ -87,3 +91,4 @@ CALL transfer_role_privileges('MANAGER', 'ADMIN');
 
 CALL add_privilege_to_role('ADMIN', 'EMPLOYEES_UPDATE');
 CALL add_privilege_to_role('ADMIN', 'EMPLOYEES_DELETE');
+CALL add_privilege_to_role('ADMIN', 'ROLES_READ');

@@ -26,7 +26,7 @@ public class Employee {
     private String surname;
 
     @Column(insertable = false, updatable = false)
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Poland")
     private Date employmentDate;
 
     private String login;

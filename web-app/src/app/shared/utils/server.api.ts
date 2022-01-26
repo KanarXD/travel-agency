@@ -4,6 +4,7 @@ export class ServerApi {
   static LOGIN = environment.SERVER_API_URL + '/login';
   static LOGOUT = environment.SERVER_API_URL + '/logout';
 
+  static ROLES = environment.SERVER_API_URL + '/roles';
   static OFFERS = environment.SERVER_API_URL + '/offers';
   static EMPLOYEES = environment.SERVER_API_URL + '/employees';
   static CUSTOMERS = environment.SERVER_API_URL + '/customers';
