@@ -2,9 +2,6 @@
 
 -- LOYALTY PROGRAMS
 INSERT INTO loyalty_programs(name, discount, threshold)
-VALUES ('NONE', 0, 0);
-
-INSERT INTO loyalty_programs(name, discount, threshold)
 VALUES ('BRONZE', 5, 5);
 
 INSERT INTO loyalty_programs(name, discount, threshold)
@@ -14,14 +11,14 @@ INSERT INTO loyalty_programs(name, discount, threshold)
 VALUES ('GOLD', 20, 20);
 
 -- CUSTOMERS
-INSERT INTO customers(name, surname, loyalty_program_id)
-VALUES ('TOMASZ', 'KOWALSKI', (SELECT id FROM loyalty_programs ORDER BY id LIMIT 1));
+INSERT INTO customers(name, surname)
+VALUES ('TOMASZ', 'KOWALSKI');
 
-INSERT INTO customers(name, surname, loyalty_program_id)
-VALUES ('JAREK', 'PEPKO', (SELECT id FROM loyalty_programs ORDER BY id LIMIT 1));
+INSERT INTO customers(name, surname)
+VALUES ('JAREK', 'PEPKO');
 
-INSERT INTO customers(name, surname, loyalty_program_id)
-VALUES ('ADAM', 'BEDNAREK', (SELECT id FROM loyalty_programs ORDER BY id LIMIT 1));
+INSERT INTO customers(name, surname)
+VALUES ('ADAM', 'BEDNAREK');
 
 -- PROMOTIONS
 INSERT INTO promotions(name, start_date, end_date, discount)
