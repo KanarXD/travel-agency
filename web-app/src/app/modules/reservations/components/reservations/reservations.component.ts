@@ -6,6 +6,7 @@ import {AddReservationsQuestionsService} from "../../services/add-reservations.q
 import {OffersApiService} from "../../../offers/services/offers.api.service";
 import {CustomersApiService} from "../../../customers/components/services/customers.api.service";
 import {FieldType} from "../../../../shared/components/data-grid/data-grid.models";
+import {ServerApiAction} from "../../../../shared/services/api.models";
 
 @Component({
   selector: 'app-reservations',
@@ -33,6 +34,8 @@ export class ReservationsComponent extends PageComponentPattern<ReservationKeys>
       {key: 'customerId', header: 'customer', type: FieldType.REFERENCE, service: this.customersApiService},
       {key: 'reservationTimestamp', header: 'date and time'},
       {key: 'price'},
+      {header: 'Edit', type: FieldType.BUTTON, action: ServerApiAction.Update, privilege: ReservationsPrivilege.UPDATE},
+      {header: 'Remove', type: FieldType.BUTTON, action: ServerApiAction.Remove, privilege: ReservationsPrivilege.DELETE}
     ];
   }
 
