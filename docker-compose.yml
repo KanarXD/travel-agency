@@ -11,6 +11,17 @@ services:
     ports:
       - "5432:5432"
 
+  server-app:
+    image: server-app:0.0.1
+    ports:
+      - "4000:4000"
+    environment:
+      - POSTGRESQL_HOST=jdbc:postgresql://postgresql:5432/travel_agency_db
+      - POSTGRESQL_USERNAME=travel_agency
+      - POSTGRESQL_PASSWORD=prolog
+    depends_on:
+      - postgresql
+
   phppgadmin:
     image: bitnami/phppgadmin:7.13.0
     ports:

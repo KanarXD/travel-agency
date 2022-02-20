@@ -12,9 +12,9 @@ spring:
       ddl-auto: none
     open-in-view: false
   datasource:
-    url: jdbc:postgresql://localhost:5432/travel_agency_db
-    username: travel_agency
-    password: prolog
+    url: ${POSTGRESQL_HOST}
+    username: ${POSTGRESQL_USERNAME}
+    password: ${POSTGRESQL_PASSWORD}
 
 web-config:
   front-app-url: http://localhost:5000
