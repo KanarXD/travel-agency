@@ -1,6 +1,5 @@
 package edu.put.server.security;
 
-import edu.put.server.security.handlers.RestLogoutHandler;
 import edu.put.server.security.handlers.RestLogoutSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,9 +14,6 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private WebConfig webConfig;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -36,7 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 .and()
                 .logout().deleteCookies("JSESSIONID")
-                .addLogoutHandler(new RestLogoutHandler(webConfig.getFrontAppUrl()))
                 .logoutSuccessHandler(new RestLogoutSuccessHandler())
                 .and()
                 .csrf().disable();
