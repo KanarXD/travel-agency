@@ -12,13 +12,9 @@ spring:
       ddl-auto: none
     open-in-view: false
   datasource:
-    url: ${POSTGRESQL_HOST}
-    username: ${POSTGRESQL_USERNAME}
-    password: ${POSTGRESQL_PASSWORD}
-
-web-config:
-  front-app-url: http://localhost:5000
-  allowed-method-array: GET, POST, PUT, PATCH, DELETE, OPTIONS
+    url: ${POSTGRESQL_HOST:jdbc:postgresql://localhost:5432/travel_agency_db}
+    username: ${POSTGRESQL_USERNAME:travel_agency}
+    password: ${POSTGRESQL_PASSWORD:prolog}
 
 logging:
   level:
